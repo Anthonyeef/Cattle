@@ -1,4 +1,4 @@
-package io.github.anthonyeef.cattle.Oauth;
+package io.github.anthonyeef.cattle.oauth;
 
 import android.os.Parcel;
 import android.os.Parcelable;

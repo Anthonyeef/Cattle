@@ -1,4 +1,4 @@
-package io.github.anthonyeef.cattle.Oauth;
+package io.github.anthonyeef.cattle.oauth;
 
 import android.util.Log;
 
@@ -17,7 +17,7 @@ import java.net.URLEncoder;
 import java.util.concurrent.TimeUnit;
 
 import io.github.anthonyeef.cattle.BuildConfig;
-import io.github.anthonyeef.cattle.Exception.ApiException;
+import io.github.anthonyeef.cattle.exception.ApiException;
 
 
 

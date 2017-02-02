@@ -4,8 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.widget.TextView
-import io.github.anthonyeef.cattle.Oauth.Api
-import io.github.anthonyeef.cattle.Oauth.ApiFactory
+import io.github.anthonyeef.cattle.repo.AccountRepo
 import org.jetbrains.anko.*
 import org.oauthsimple.model.OAuthToken
 

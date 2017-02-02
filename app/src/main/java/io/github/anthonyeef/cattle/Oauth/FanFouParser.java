@@ -1,4 +1,4 @@
-package io.github.anthonyeef.cattle.Oauth;
+package io.github.anthonyeef.cattle.oauth;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,7 +17,7 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import io.github.anthonyeef.cattle.Exception.ApiException;
+import io.github.anthonyeef.cattle.exception.ApiException;
 
 /**
  * @author mcxiaoke

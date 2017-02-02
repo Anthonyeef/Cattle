@@ -1,4 +1,4 @@
-package io.github.anthonyeef.cattle.Exception;
+package io.github.anthonyeef.cattle.exception;
 
 /**
  * @author mcxiaoke

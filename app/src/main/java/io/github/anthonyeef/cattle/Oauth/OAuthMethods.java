@@ -1,10 +1,10 @@
-package io.github.anthonyeef.cattle.Oauth;
+package io.github.anthonyeef.cattle.oauth;
 
 import org.oauthsimple.model.OAuthToken;
 
 import java.io.IOException;
 
-import io.github.anthonyeef.cattle.Exception.ApiException;
+import io.github.anthonyeef.cattle.exception.ApiException;
 
 /**
  * @author mcxiaoke

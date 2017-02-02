@@ -1,8 +1,8 @@
-package io.github.anthonyeef.cattle.Oauth;
+package io.github.anthonyeef.cattle.oauth;
 
 import java.util.List;
 
-import io.github.anthonyeef.cattle.Exception.ApiException;
+import io.github.anthonyeef.cattle.exception.ApiException;
 
 /**
  * @author mcxiaoke

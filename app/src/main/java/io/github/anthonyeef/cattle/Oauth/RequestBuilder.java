@@ -1,4 +1,4 @@
-package io.github.anthonyeef.cattle.Oauth;
+package io.github.anthonyeef.cattle.oauth;
 
 import android.text.TextUtils;
 
