@@ -24,10 +24,9 @@ class BaseActivity : AppCompatActivity() {
 
     private fun initBtn() {
         btn.onClick {
-            val api: Api = ApiFactory.getDefaultApi()
-            var token: OAuthToken? = null
+            var token: OAuthToken?
             doAsync(exceptionHandler = { Log.e(TAG, it.toString())}) {
-                token = api.getOAuthAccessToken("test", "test")
+                token = AccountRepo.getOAuthAccessToken("test", "test")
                 uiThread {
                     Log.e(TAG, token?.token)
                 }
