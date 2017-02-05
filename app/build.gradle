@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'jacoco-android'
 apply plugin: 'kotlin-android'
 
 def ankoLibraryVersion = '0.9'
@@ -21,10 +22,20 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            testCoverageEnabled true
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            testCoverageEnabled true
         }
     }
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
+    }
+
+    productFlavors {
+        free {}
     }
 }
 
