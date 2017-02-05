@@ -1,5 +1,5 @@
 language: android
-jdk: oraclejdk7
+jdk: oraclejdk8
 env:
     global:
         - ANDROID_TARGET=android-15
@@ -8,8 +8,8 @@ env:
         components:
             - tools
             - platform-tools
-            - build-tools-25.0.2
-            - android-25
+            - build-tools-23.0.1
+            - android-23
             - extra-android-m2repository
             - sys-img-${ANDROID_ABI}-${ANDROID_TARGET}
         script:
