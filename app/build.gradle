@@ -15,8 +15,13 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "API_KEY", API_KEY)
-        buildConfigField("String", "API_SECRET", API_SECRET)
+        if (System.getenv("TRAVIS")) {
+            buildConfigField("String", "API_KEY", "API_KEY")
+            buildConfigField("String", "API_SECRET", "API_SECRET")
+        } else {
+            buildConfigField("String", "API_KEY", API_KEY)
+            buildConfigField("String", "API_SECRET", API_SECRET)
+        }
     }
     buildTypes {
         release {
@@ -32,10 +37,6 @@ android {
     }
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
-    }
-
-    productFlavors {
-        free {}
     }
 }
 
