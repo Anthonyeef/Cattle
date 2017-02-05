@@ -2,12 +2,11 @@ package io.github.anthonyeef.cattle
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.widget.TextView
-import io.github.anthonyeef.cattle.Oauth.Api
-import io.github.anthonyeef.cattle.Oauth.ApiFactory
-import org.jetbrains.anko.*
-import org.oauthsimple.model.OAuthToken
+import org.jetbrains.anko.matchParent
+import org.jetbrains.anko.onClick
+import org.jetbrains.anko.textView
+import org.jetbrains.anko.verticalLayout
 
 class BaseActivity : AppCompatActivity() {
     val TAG = "CattleBaseActivity"
@@ -25,14 +24,7 @@ class BaseActivity : AppCompatActivity() {
 
     private fun initBtn() {
         btn.onClick {
-            val api: Api = ApiFactory.getDefaultApi()
-            var token: OAuthToken? = null
-            doAsync(exceptionHandler = { Log.e(TAG, it.toString())}) {
-                token = api.getOAuthAccessToken("test", "test")
-                uiThread {
-                    Log.e(TAG, token?.token)
-                }
-            }
+
         }
     }
 }
