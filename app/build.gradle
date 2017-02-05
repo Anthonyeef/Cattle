@@ -16,8 +16,8 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         if (System.getenv("TRAVIS")) {
-            buildConfigField("String", "API_KEY", "API_KEY")
-            buildConfigField("String", "API_SECRET", "API_SECRET")
+            buildConfigField "String", "API_KEY", "\"yourapikeyhere\""
+            buildConfigField "String", "API_SECRET", "\"yourapisecrethere\""
         } else {
             buildConfigField("String", "API_KEY", API_KEY)
             buildConfigField("String", "API_SECRET", API_SECRET)
