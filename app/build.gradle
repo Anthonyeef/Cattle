@@ -14,8 +14,13 @@ android {
         versionCode 1
         versionName "1.0"
 
-        buildConfigField("String", "API_KEY", API_KEY)
-        buildConfigField("String", "API_SECRET", API_SECRET)
+        if (System.getenv("TRAVIS")) {
+            buildConfigField "String", "API_KEY", "\"YOUAPI_KEYHERE\""
+            buildConfigField "String", "API_SECRET", "\"YOUAPI_SECRETHERE\""
+        } else {
+            buildConfigField("String", "API_KEY", API_KEY)
+            buildConfigField("String", "API_SECRET", API_SECRET)
+        }
     }
     buildTypes {
         release {
@@ -31,10 +36,6 @@ android {
     }
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
-    }
-
-    productFlavors {
-        free {}
     }
 }
 
