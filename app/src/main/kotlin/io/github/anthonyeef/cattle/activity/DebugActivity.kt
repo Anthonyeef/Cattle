@@ -1,30 +1,37 @@
 package io.github.anthonyeef.cattle.activity
 
+import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import io.github.anthonyeef.cattle.constant.pageHorizontalPadding
-import io.github.anthonyeef.cattle.constant.verticalPaddingNormal
-import io.github.anthonyeef.cattle.extension.TAG
-import io.github.anthonyeef.cattle.fragment.LoginFragment
-import org.jetbrains.anko.*
+import io.github.anthonyeef.cattle.constant.CONTAINER_ID
+import io.github.anthonyeef.cattle.event.LoginSuccessEvent
+import io.github.anthonyeef.cattle.event.RxBus
+import io.github.anthonyeef.cattle.extension.bindFragment
+import io.github.anthonyeef.cattle.fragment.DebugFragment
+import org.jetbrains.anko.matchParent
+import org.jetbrains.anko.verticalLayout
 
 class DebugActivity : BaseActivity() {
-    val CONTAINER_ID = 110
+
+    private lateinit var _rxBus: RxBus
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         title = "Debug activity"
 
         verticalLayout {
             id = CONTAINER_ID
-            horizontalPadding = pageHorizontalPadding
-            verticalPadding = verticalPaddingNormal
-            button("Go to authorize activity") {
-                onClick {
-                    val loginFragment: Fragment = LoginFragment()
-                    supportFragmentManager.beginTransaction()
-                            .addToBackStack(loginFragment.TAG)
-                            .replace(CONTAINER_ID, loginFragment).commit()
-                }
+            lparams(width = matchParent, height = matchParent)
+        }
+
+        bindFragment(DebugFragment())
+        _rxBus = getRxBusSingleton()
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        if (intent?.dataString?.contains("cat") ?: false) {
+            if (_rxBus.hasObservers()) {
+                _rxBus.send(LoginSuccessEvent())
             }
         }
     }
