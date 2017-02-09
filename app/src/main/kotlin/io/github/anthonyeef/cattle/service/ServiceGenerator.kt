@@ -45,41 +45,21 @@ object ServiceGenerator {
      *
      * @return service
      */
-    fun <S> createService(serviceClass: Class<S>, token: String, secret: String): S {
-        if (token.isNotEmpty().and(secret.isNotEmpty())) {
-            val signingInterceptor = Oauth1SigningInterceptor.Builder()
-                    .consumerKey(BuildConfig.API_KEY)
-                    .consumerSecret(BuildConfig.API_SECRET)
-                    .accessToken(token)
-                    .accessSecret(secret)
-                    .build()
-            if (!httpClient.networkInterceptors().contains(signingInterceptor)) {
-                httpClient.addNetworkInterceptor(signingInterceptor)
+    fun <S> createService(serviceClass: Class<S>, token: String = "", secret: String = ""): S {
+        val signingList = httpClient.networkInterceptors().filterIsInstance(Oauth1SigningInterceptor::class.java)
+        when (signingList.size) {
+            0 -> {
+                addNewSigningInterceptor(token, secret)
             }
-            return createService(serviceClass)
-        } else {
-            val signingInterceptor = Oauth1SigningInterceptor.Builder()
-                .consumerKey(BuildConfig.API_KEY)
-                .consumerSecret(BuildConfig.API_SECRET)
-                .build()
-            val tempClient = OkHttpClient.Builder()
-                    .addNetworkInterceptor(logging)
-                    .addNetworkInterceptor(signingInterceptor).build()
-            return createService(serviceClass, tempClient)
+            else -> {
+                val interceptor = signingList.last()
+                if (interceptor.needUpdate(token, secret)) {
+                    clearSigningInterceptor()
+                    addNewSigningInterceptor(token, secret)
+                }
+            }
         }
-    }
-
-    /**
-     * Method to create a service for given service class
-     * with customize client.
-     *
-     * @param serviceClass
-     * @param client
-     *
-     * @return service
-     */
-    fun <S> createService(serviceClass: Class<S>, client: OkHttpClient): S {
-        return sBuilder.client(client).build().create(serviceClass)
+        return createService(serviceClass)
     }
 
     /**
@@ -95,5 +75,22 @@ object ServiceGenerator {
         sBuilder.client(httpClient.build())
         val retrofit = sBuilder.build()
         return retrofit.create(serviceClass)
+    }
+
+    // TODO: create NewBuilder() method for it
+    private fun addNewSigningInterceptor(token: String, secret: String) {
+        val signingInterceptor = Oauth1SigningInterceptor.Builder()
+                .consumerKey(BuildConfig.API_KEY)
+                .consumerSecret(BuildConfig.API_SECRET)
+                .accessToken(token)
+                .accessSecret(secret)
+                .build()
+        httpClient.addNetworkInterceptor(signingInterceptor)
+    }
+
+    private fun clearSigningInterceptor() {
+        httpClient.networkInterceptors()
+                .filterIsInstance<Oauth1SigningInterceptor>()
+                .forEach { httpClient.networkInterceptors().remove(it) }
     }
 }

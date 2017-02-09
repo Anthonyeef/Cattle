@@ -168,6 +168,22 @@ public final class Oauth1SigningInterceptor implements Interceptor {
         return request.newBuilder().addHeader("Authorization", authorization).build();
     }
 
+    public boolean needUpdate(String token, String secret) {
+        return !Objects.equals(accessToken, token) || !Objects.equals(accessSecret, secret);
+    }
+
+    public Oauth1SigningInterceptor update(String token, String secret) {
+        if (!Objects.equals(accessToken, token)) {
+             return new Builder()
+                    .consumerKey(consumerKey)
+                    .consumerSecret(consumerSecret)
+                    .accessToken(token)
+                    .accessSecret(secret)
+                    .build();
+        }
+        return this;
+    }
+
     public static final class Builder {
         private String consumerKey;
         private String consumerSecret;
@@ -228,15 +244,5 @@ public final class Oauth1SigningInterceptor implements Interceptor {
         public String millis() {
             return Long.toString(System.currentTimeMillis() / 1000L);
         }
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (!(obj instanceof Oauth1SigningInterceptor)) {
-            return false;
-        }
-
-        return Objects.equals(accessToken, ((Oauth1SigningInterceptor) obj).accessToken) &&
-                Objects.equals(accessSecret, ((Oauth1SigningInterceptor) obj).accessSecret);
     }
 }
