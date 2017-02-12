@@ -6,12 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import io.github.anthonyeef.cattle.activity.BaseActivity
+import com.jakewharton.retrofit2.adapter.rxjava2.HttpException
+import io.github.anthonyeef.cattle.constant.bus
 import io.github.anthonyeef.cattle.constant.pageHorizontalPadding
 import io.github.anthonyeef.cattle.constant.verticalPaddingNormal
 import io.github.anthonyeef.cattle.contract.LoginContract
 import io.github.anthonyeef.cattle.event.LoginSuccessEvent
-import io.github.anthonyeef.cattle.event.RxBus
+import io.github.anthonyeef.cattle.exception.ApiException
 import io.github.anthonyeef.cattle.presenter.LoginPresenter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -29,15 +30,9 @@ class LoginFragment : BaseFragment(), LoginContract.View {
     lateinit var checkCredential: Button
     lateinit var mLoginPresenter: LoginContract.Presenter
     lateinit var _disposables: CompositeDisposable
-    lateinit var _rxBus: RxBus
 
     override fun isActive(): Boolean {
         return isAdded
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        _rxBus = (activity as BaseActivity).getRxBusSingleton()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,11 +40,14 @@ class LoginFragment : BaseFragment(), LoginContract.View {
         LoginPresenter(this@LoginFragment)
     }
 
+    override fun setPresenter(presenter: LoginContract.Presenter) {
+        mLoginPresenter = presenter
+    }
+
     override fun onStart() {
         super.onStart()
         _disposables = CompositeDisposable()
-        _disposables.add(_rxBus
-                .asFlowable()
+        _disposables.add(bus.asFlowable()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { event ->
                     if (event is LoginSuccessEvent) {
@@ -60,12 +58,23 @@ class LoginFragment : BaseFragment(), LoginContract.View {
         )
     }
 
+    override fun onResume() {
+        super.onResume()
+        mLoginPresenter.subscribe()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mLoginPresenter.unSubscribe()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         _disposables.clear()
     }
 
     override fun onError(e: Throwable?) {
+        toast(e.toString())
         onUiThread {
             toast(e.toString())
         }
@@ -78,12 +87,8 @@ class LoginFragment : BaseFragment(), LoginContract.View {
         }
     }
 
-    override fun setPresenter(presenter: LoginContract.Presenter) {
-        mLoginPresenter = presenter
-    }
-
     override fun goAuthorizeRequestToken() {
-        info("YEAHHH I am ready to jump to browser!")
+        info("jump to browser to login.")
         mLoginPresenter.getLoginAddress()?.let {
             browse(it.toString(), false)
         }
