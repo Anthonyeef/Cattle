@@ -74,7 +74,7 @@ class LoginPresenter() : LoginContract.Presenter, CatLogger {
                 .doOnNext { saveUserInfo(it) }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe{ loginView.showLoginSuccess() })
+                .subscribe({ loginView.showLoginSuccess() }, { error -> loginView.onError(error) }))
     }
 
     override fun getLoginAddress(): Uri? {
