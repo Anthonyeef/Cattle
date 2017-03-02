@@ -47,39 +47,39 @@ class LoginPresenter() : LoginContract.Presenter, CatLogger {
     override fun login() {
         loginService = ServiceGenerator.createService(LoginService::class.java,
                 token = "", secret = "")
-        _disposable.add(loginService.oauthRequestToken(FanfouRequestTokenUrl)
-                .subscribeOn(Schedulers.io())
+        _disposable.add(loginService.oauthRequestToken(FanfouRequestTokenUrl).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnComplete { loginView.goAuthorizeRequestToken() }
-                .subscribe({ result -> saveToken(result) }, { error ->
-                    if (error is HttpException) {
-                        loginView.onError(ApiException(error.code(), error.message()))
-                    } else {
-                        loginView.onError(error)
-                    }
-                }))
+                .subscribe(
+                        { result -> saveToken(result) },
+                        { error -> loginView.showError(error) }
+                ))
     }
 
     override fun fetchAccessToken() {
-        _disposable.add(ServiceGenerator.createDefaultService(AccountService::class.java)
-                .oauthAccessToken(FanfouAccessTokenUrl)
+        _disposable.add(ServiceGenerator.createDefaultService(AccountService::class.java).oauthAccessToken(FanfouAccessTokenUrl)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ response -> saveToken(response) }, { error -> loginView.onError(error) }))
+                .subscribe(
+                        { response -> saveToken(response) },
+                        { error -> loginView.showError(error) }
+                ))
     }
 
     override fun checkCredential() {
-        _disposable.add(ServiceGenerator.createDefaultService(AccountService::class.java)
-                .verifyCredential()
+        _disposable.add(ServiceGenerator.createDefaultService(AccountService::class.java).verifyCredential()
                 .doOnNext { saveUserInfo(it) }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ loginView.showLoginSuccess() }, { error -> loginView.onError(error) }))
+                .subscribe(
+                        { loginView.showLoginSuccess() },
+                        { error -> loginView.showError(error) }
+                ))
     }
 
     override fun getLoginAddress(): Uri? {
         if (accessToken.isNullOrBlank()) {
-            loginView.onError(DataNotFoundException("Token not found"))
+            loginView.showError(DataNotFoundException("Token not found"))
             return null
         } else {
             return Uri.parse(FanfouLoginBaseUrl)

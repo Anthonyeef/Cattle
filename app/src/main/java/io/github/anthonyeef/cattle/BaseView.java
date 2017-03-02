@@ -17,5 +17,4 @@ package io.github.anthonyeef.cattle;
 
 public interface BaseView<T> {
     void setPresenter(T presenter);
-    void onError(Throwable e);
 }

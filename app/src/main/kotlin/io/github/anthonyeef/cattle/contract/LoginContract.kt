@@ -14,6 +14,7 @@ interface LoginContract {
         fun goAuthorizeRequestToken()
         fun isActive(): Boolean
         fun showLoginSuccess()
+        fun showError(e: Throwable)
     }
 
     interface Presenter : BasePresenter {

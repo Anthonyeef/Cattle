@@ -14,6 +14,7 @@ import io.github.anthonyeef.cattle.extension.realm.query
 import io.github.anthonyeef.cattle.service.model.UserInfo
 import io.github.anthonyeef.cattle.utils.SharedPreferenceUtils
 import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.find
 import org.jetbrains.anko.findOptional
 import org.jetbrains.anko.uiThread
 
@@ -21,17 +22,31 @@ import org.jetbrains.anko.uiThread
  * HomeActivity.
  */
 class HomeActivity : BaseActivity() {
+    lateinit var drawerLayout: DrawerLayout
+    lateinit var navigation: NavigationView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_home)
         setTitle("Cattle")
 
+        drawerLayout = find<DrawerLayout>(R.id.drawer_layout)
+        navigation = find(R.id.nav_view)
+
         setupProfileInDrawer()
+        setupDrawerContent(navigation)
+    }
+
+    private fun setupDrawerContent(navigation: NavigationView) {
+        navigation.setNavigationItemSelectedListener { menuItem ->
+            drawerLayout.closeDrawer(Gravity.START)
+            false
+        }
     }
 
     private fun setupProfileInDrawer() {
-        val navHeader = findOptional<NavigationView>(R.id.nav_view)?.getHeaderView(0)
+        val navHeader = navigation.getHeaderView(0)
         val avatar = navHeader?.findOptional<CircleImageView>(R.id.nav_avatar)
         val userName = navHeader?.findOptional<TextView>(R.id.nav_user_name)
         val navBg = navHeader?.findOptional<ImageView>(R.id.nav_header_bg)
@@ -45,13 +60,13 @@ class HomeActivity : BaseActivity() {
             }
         }
 
+        // TODO: add more background image
         Glide.with(navBg?.context).load(R.raw.drawer_bg_4).into(navBg)
     }
 
     override fun onBackPressed() {
-        val drawerLayout = findOptional<DrawerLayout>(R.id.drawer_layout)
-        if (drawerLayout?.isDrawerOpen(Gravity.START) ?: false) {
-            drawerLayout?.closeDrawer(Gravity.START)
+        if (drawerLayout.isDrawerOpen(Gravity.START)) {
+            drawerLayout.closeDrawer(Gravity.START)
         } else {
             super.onBackPressed()
         }

@@ -13,8 +13,6 @@ import io.github.anthonyeef.cattle.extension.show
 import io.github.anthonyeef.cattle.presenter.DebugPresenter
 import org.jetbrains.anko.*
 import org.jetbrains.anko.support.v4.UI
-import org.jetbrains.anko.support.v4.onUiThread
-import org.jetbrains.anko.support.v4.toast
 
 /**
  * DebugFragment for easy debug or test usage.
@@ -37,13 +35,6 @@ class DebugFragment : BaseFragment(), DebugContract.View {
 
     override fun goHome() {
         navigateTo<HomeActivity>()
-    }
-
-    override fun onError(e: Throwable?) {
-        onUiThread {
-            toast(e.toString())
-        }
-        error(e.toString())
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
