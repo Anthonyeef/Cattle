@@ -16,5 +16,6 @@
 package io.github.anthonyeef.cattle;
 
 public interface BasePresenter {
-    void start();
+    void subscribe();
+    void unSubscribe();
 }

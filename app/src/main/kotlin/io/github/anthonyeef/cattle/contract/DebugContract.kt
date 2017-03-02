@@ -9,9 +9,8 @@ import io.github.anthonyeef.cattle.BaseView
 interface DebugContract {
     interface View : BaseView<Presenter> {
         fun goLogin()
+        fun goHome()
     }
 
-    interface Presenter : BasePresenter {
-        fun isTokenGranted(): Boolean
-    }
+    interface Presenter : BasePresenter
 }

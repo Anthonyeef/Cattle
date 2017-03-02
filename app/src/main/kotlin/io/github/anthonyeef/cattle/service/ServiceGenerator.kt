@@ -1,5 +1,8 @@
 package io.github.anthonyeef.cattle.service
 
+import com.google.gson.FieldNamingPolicy
+import com.google.gson.GsonBuilder
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import io.github.anthonyeef.cattle.BuildConfig
 import io.github.anthonyeef.cattle.constant.FanfouApiBaseUrl
 import io.github.anthonyeef.cattle.constant.KEY_ACCESS_TOKEN
@@ -16,12 +19,18 @@ import retrofit2.converter.scalars.ScalarsConverterFactory
  * Network service generator
  */
 object ServiceGenerator {
+    private val gson = GsonBuilder()
+            .enableComplexMapKeySerialization()
+            .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+            .create()
+
     private var logging = HttpLoggingInterceptor()
             .setLevel(HttpLoggingInterceptor.Level.BODY)// default level
 
     private var sBuilder = Retrofit.Builder().baseUrl(FanfouApiBaseUrl)
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(ScalarsConverterFactory.create())
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
 
     private var httpClient = OkHttpClient
             .Builder()

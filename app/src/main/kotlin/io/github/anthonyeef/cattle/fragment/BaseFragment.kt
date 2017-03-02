@@ -6,5 +6,4 @@ import io.github.anthonyeef.cattle.utils.CatLogger
 /**
  *
  */
-open class BaseFragment : Fragment(), CatLogger {
-}
+open class BaseFragment : Fragment(), CatLogger

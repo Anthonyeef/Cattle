@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Cattle</string>
+    <string name="nav_item_profile">Profile</string>
+    <string name="nav_item_draft">Draft</string>
+    <string name="nav_item_setting">Setting</string>
+    <string name="nav_item_about">About</string>
 </resources>

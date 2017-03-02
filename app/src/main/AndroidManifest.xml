@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activity.BaseActivity"/>
+        <activity android:name=".activity.HomeActivity"/>
         <activity
             android:name=".activity.DebugActivity"
             android:launchMode="singleInstance">
