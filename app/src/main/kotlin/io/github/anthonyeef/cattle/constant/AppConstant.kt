@@ -12,5 +12,11 @@ val bus = App.getRxBusSingleton()
 /**
  * General viewGroup id to hold fragment
  */
-val CONTAINER_ID = 110
+val CONTAINER_ID = R.id.container
 val TOOLBAR_ID = R.id.toolbar
+
+/**
+ * The date Fanfou come back.
+ * 11/25/2010 21:30 PM
+ */
+val TIME_GOD_CREAT_LIGHT: Long = 1290763800000L

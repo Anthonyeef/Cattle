@@ -1,0 +1,137 @@
+package io.github.anthonyeef.cattle.presenter
+
+import com.raizlabs.android.dbflow.kotlinextensions.*
+import com.raizlabs.android.dbflow.sql.language.OrderBy
+import io.github.anthonyeef.cattle.constant.KEY_HOME_TIMELINE_LAST_UPDATE_TIME
+import io.github.anthonyeef.cattle.constant.TIME_GOD_CREAT_LIGHT
+import io.github.anthonyeef.cattle.contract.HomeFeedListContract
+import io.github.anthonyeef.cattle.entity.Status
+import io.github.anthonyeef.cattle.entity.Status_Table
+import io.github.anthonyeef.cattle.service.HomeTimelineService
+import io.github.anthonyeef.cattle.service.ServiceGenerator
+import io.github.anthonyeef.cattle.utils.SharedPreferenceUtils
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
+import java.util.concurrent.atomic.AtomicInteger
+
+/**
+ *
+ */
+class HomeFeedListPresenter(): HomeFeedListContract.Presenter {
+
+    companion object {
+        val TTL = 10 * 60 * 1000
+    }
+
+    constructor(view: HomeFeedListContract.View): this() {
+        homeFeedListView = view
+        homeFeedListView.setPresenter(this)
+    }
+
+    lateinit var homeFeedListView: HomeFeedListContract.View
+
+    lateinit var loadingCount: AtomicInteger
+
+    var lastUpdateTime: Long = SharedPreferenceUtils.getLong(KEY_HOME_TIMELINE_LAST_UPDATE_TIME, TIME_GOD_CREAT_LIGHT)
+
+    var lastItemId: String = ""
+
+    var isDataLoaded: Boolean = false
+
+    var isDataOld: Boolean
+        get() {
+            val currentTime = System.currentTimeMillis()
+            return (currentTime - lastUpdateTime) > TTL
+        }
+        set(v) = throw UnsupportedOperationException("Set method for isDataOld is not supported")
+
+    var _disposable: CompositeDisposable = CompositeDisposable()
+
+
+    override fun loadDataFromCache() {
+        doAsync {
+            val status: List<Status> = (select
+                    from Status::class
+                    orderBy OrderBy.fromProperty(Status_Table.raw_id)
+                    limit 40
+                    ).list
+            uiThread {
+                if (status.isNotEmpty()) {
+                    homeFeedListView.updateTimeline(clearData = true, data = status)
+                    isDataLoaded = true
+                    lastItemId = status[status.size - 1].id
+                }
+            }
+        }
+    }
+
+
+    override fun loadDataFromRemote(clearData: Boolean) {
+        notifyLoadingStarted()
+        val timelineService = ServiceGenerator.createDefaultService(HomeTimelineService::class.java)
+        _disposable.add(timelineService.getHomeTimeline(lastId = if (clearData) "" else lastItemId)
+                .subscribeOn(Schedulers.io())
+                .doOnNext { statuses ->
+                    statuses.processInTransaction { item, databaseWrapper ->
+                        item.save()
+                    }
+                }
+                .doFinally {
+                    homeFeedListView.setLoadingProgressBar(false)
+                    notifyLoadingFinished()
+                }
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe (
+                        { statuses ->
+                            homeFeedListView.updateTimeline(clearData = clearData, data = statuses)
+
+                            isDataLoaded = true
+
+                            // FIXME
+                            if (isDataOld) {
+                                homeFeedListView.scrollToTop()
+                            }
+                            lastUpdateTime = System.currentTimeMillis()
+                            lastItemId = statuses[statuses.size - 1].id
+                            SharedPreferenceUtils.putLong(KEY_HOME_TIMELINE_LAST_UPDATE_TIME, lastUpdateTime)
+                        },
+                        { error ->
+                            if (homeFeedListView.isActivated()) {
+                                homeFeedListView.showError(error)
+                            }
+                        }
+                ))
+    }
+
+
+    override fun subscribe() {
+        loadingCount = AtomicInteger(0)
+
+        if (!isDataLoaded) {
+            loadDataFromCache()
+        }
+        if (isDataOld) {
+            loadDataFromRemote(clearData = true)
+        }
+    }
+
+
+    override fun unSubscribe() {
+        _disposable.clear()
+    }
+
+    override fun isLoading(): Boolean {
+        return loadingCount.get() > 0
+    }
+
+    private fun notifyLoadingStarted() {
+        loadingCount.getAndIncrement()
+    }
+
+    private fun notifyLoadingFinished() {
+        loadingCount.decrementAndGet()
+    }
+}

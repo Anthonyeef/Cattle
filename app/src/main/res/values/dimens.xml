@@ -3,6 +3,19 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-    <dimen name="avatar_height">64dp</dimen>
-    <dimen name="avatar_width">64dp</dimen>
+
+    <dimen name="horizontal_padding_large">56dp</dimen>
+    <dimen name="vertical_padding_large">56dp</dimen>
+    <dimen name="horizontal_padding_normal">16dp</dimen>
+    <dimen name="vertical_padding_normal">16dp</dimen>
+    <dimen name="horizontal_padding_small">8dp</dimen>
+    <dimen name="vertical_padding_small">8dp</dimen>
+    <dimen name="horizontal_padding_tiny">4dp</dimen>
+    <dimen name="vertical_padding_tiny">4dp</dimen>
+
+    <dimen name="avatar_size">64dp</dimen>
+    <dimen name="avatar_size_normal">40dp</dimen>
+    <dimen name="avatar_size_home">28dp</dimen>
+
+    <dimen name="text_size_normal">16sp</dimen>
 </resources>

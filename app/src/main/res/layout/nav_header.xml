@@ -14,8 +14,8 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/nav_avatar"
-        android:layout_width="@dimen/avatar_width"
-        android:layout_height="@dimen/avatar_height"
+        android:layout_width="@dimen/avatar_size"
+        android:layout_height="@dimen/avatar_size"
         android:layout_gravity="center"/>
 
     <TextView

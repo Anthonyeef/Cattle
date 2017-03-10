@@ -1,17 +1,14 @@
 package io.github.anthonyeef.cattle.presenter
 
 import android.net.Uri
-import com.jakewharton.retrofit2.adapter.rxjava2.HttpException
 import io.github.anthonyeef.cattle.constant.*
 import io.github.anthonyeef.cattle.contract.LoginContract
-import io.github.anthonyeef.cattle.exception.ApiException
 import io.github.anthonyeef.cattle.exception.DataNotFoundException
 import io.github.anthonyeef.cattle.extension.getQueryParameter
-import io.github.anthonyeef.cattle.extension.realm.save
 import io.github.anthonyeef.cattle.service.AccountService
 import io.github.anthonyeef.cattle.service.LoginService
 import io.github.anthonyeef.cattle.service.ServiceGenerator
-import io.github.anthonyeef.cattle.service.model.UserInfo
+import io.github.anthonyeef.cattle.entity.UserInfo
 import io.github.anthonyeef.cattle.utils.CatLogger
 import io.github.anthonyeef.cattle.utils.SharedPreferenceUtils
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -47,7 +44,8 @@ class LoginPresenter() : LoginContract.Presenter, CatLogger {
     override fun login() {
         loginService = ServiceGenerator.createService(LoginService::class.java,
                 token = "", secret = "")
-        _disposable.add(loginService.oauthRequestToken(FanfouRequestTokenUrl).subscribeOn(Schedulers.io())
+        _disposable.add(loginService.oauthRequestToken(FanfouRequestTokenUrl)
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnComplete { loginView.goAuthorizeRequestToken() }
                 .subscribe(

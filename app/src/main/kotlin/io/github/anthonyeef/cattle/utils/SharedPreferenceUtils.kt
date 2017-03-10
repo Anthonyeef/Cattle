@@ -16,6 +16,17 @@ object SharedPreferenceUtils {
         return app.getSharedPreferences(key, MODE_PRIVATE).getString(key, defaultValue)
     }
 
+    fun getLong(key: String, defaultValue: Long): Long {
+        return app.getSharedPreferences(key, MODE_PRIVATE).getLong(key, defaultValue)
+    }
+
+    fun putLong(key: String, value: Long) {
+        val sharePreferences = app.getSharedPreferences(key, MODE_PRIVATE)
+        val editor = sharePreferences.edit()
+        editor.putLong(key, value)
+        editor.apply()
+    }
+
     fun putString(key: String, value: String) {
         val sharePreferences = app.getSharedPreferences(key, MODE_PRIVATE)
         val editor = sharePreferences.edit()

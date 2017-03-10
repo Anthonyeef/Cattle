@@ -11,15 +11,20 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.BaseActivity"/>
-        <activity android:name=".activity.HomeActivity"/>
         <activity
-            android:name=".activity.DebugActivity"
-            android:launchMode="singleInstance">
+            android:name=".activity.BaseActivity"/>
+
+        <activity
+            android:name=".activity.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".activity.LoginActivity"
+            android:launchMode="singleInstance">
             <intent-filter>
                 <data
                     android:host="oauth.success"
@@ -29,6 +34,9 @@
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
+
+        <activity android:name=".activity.DebugActivity"/>
+        <activity android:name=".activity.TestFieldActivity"/>
     </application>
 
 </manifest>

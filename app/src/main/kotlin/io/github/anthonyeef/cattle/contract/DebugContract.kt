@@ -10,6 +10,7 @@ interface DebugContract {
     interface View : BaseView<Presenter> {
         fun goLogin()
         fun goHome()
+        fun goHomeTimeline()
     }
 
     interface Presenter : BasePresenter
