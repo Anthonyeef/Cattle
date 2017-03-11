@@ -8,3 +8,7 @@ import android.view.View
 fun <T: View> T.gone(): Unit {
     this.visibility = View.GONE
 }
+
+fun <T: View> T.show(): Unit {
+    this.visibility = View.VISIBLE
+}

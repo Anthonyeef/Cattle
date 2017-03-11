@@ -13,6 +13,7 @@ val pageHorizontalPadding = dip(8)
 
 val verticalPaddingNormal = dip(12)
 val verticalPaddingMedium = dip(16)
+val verticalPaddingLarge = dip(20)
 
 val paddingMedium = dip(16)
 

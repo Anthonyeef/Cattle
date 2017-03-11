@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="container" type="id"/>
+    <item name="toolbar" type="id"/>
+    <item name="avatar" type="id"/>
+    <item name="user_display_name" type="id"/>
+    <item name="username" type="id"/>
+    <item name="user_info_container" type="id"/>
+</resources>

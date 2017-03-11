@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@id/user_info_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_toRightOf="@id/avatar">
+
+    <TextView
+        android:id="@id/user_display_name"
+        style="@style/Widget.Cattle.Text.DisplayName"/>
+
+    <TextView
+        android:id="@id/username"
+        style="@style/Widget.Cattle.Text"
+        android:textColor="@color/grey600"
+        android:textSize="15sp"
+        android:maxLines="1"
+        android:layout_weight="1"/>
+
+    <TextView
+        android:id="@+id/create_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="1"/>
+</LinearLayout>

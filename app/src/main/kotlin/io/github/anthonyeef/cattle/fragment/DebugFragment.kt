@@ -37,6 +37,10 @@ class DebugFragment : BaseFragment(), DebugContract.View {
         navigateTo<HomeActivity>()
     }
 
+    override fun goHomeTimeline() {
+        HomeFeedListFragment().show(this)
+    }
+
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return UI {
             verticalLayout {
@@ -53,6 +57,10 @@ class DebugFragment : BaseFragment(), DebugContract.View {
                     onClick {
                         goHome()
                     }
+                }
+
+                button("Go to HomeTimeline") {
+                    onClick { goHomeTimeline() }
                 }
             }
         }.view
