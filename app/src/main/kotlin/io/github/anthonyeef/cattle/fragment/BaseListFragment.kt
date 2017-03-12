@@ -41,8 +41,4 @@ abstract class BaseListFragment : BaseFragment() {
 
         return root
     }
-
-    /*protected open fun onInterceptLoadMore(): Boolean {
-        return false
-    }*/
 }
