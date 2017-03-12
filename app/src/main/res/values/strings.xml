@@ -14,4 +14,6 @@
     <string name="drawer_close">Drawer close</string>
 
     <string name="text_photo_only_status">Uploaded new photo</string>
+
+    <string name="hint_compose_new_fanfou">Write something new</string>
 </resources>

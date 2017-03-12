@@ -3,7 +3,6 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-
     <dimen name="horizontal_padding_large">56dp</dimen>
     <dimen name="vertical_padding_large">56dp</dimen>
     <dimen name="horizontal_padding_normal">16dp</dimen>
@@ -17,5 +16,10 @@
     <dimen name="avatar_size_normal">40dp</dimen>
     <dimen name="avatar_size_home">28dp</dimen>
 
+    <dimen name="fab_margin">12dp</dimen>
+
     <dimen name="text_size_normal">16sp</dimen>
+
+
+    <dimen name="compose_fragment_page_horizontal_padding">20dp</dimen>
 </resources>
