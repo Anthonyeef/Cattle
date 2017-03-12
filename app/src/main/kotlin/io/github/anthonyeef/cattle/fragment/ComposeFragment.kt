@@ -33,7 +33,7 @@ import org.jetbrains.anko.findOptional
 import org.jetbrains.anko.onClick
 
 /**
- *
+ * ComposeFragment, where to create and edit fanfou.
  */
 class ComposeFragment : BaseFragment(), ComposeContract.View {
     companion object {

@@ -8,7 +8,7 @@ import org.jetbrains.anko.matchParent
 import org.jetbrains.anko.verticalLayout
 
 /**
- *
+ * ComposeActivity to host [ComposeFragment]
  */
 class ComposeActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

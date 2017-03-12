@@ -9,7 +9,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
 /**
- *
+ * ComposePresenter for [io.github.anthonyeef.cattle.fragment.ComposeFragment]
  */
 class ComposePresenter() : ComposeContract.Presenter {
     lateinit var composeView: ComposeContract.View
