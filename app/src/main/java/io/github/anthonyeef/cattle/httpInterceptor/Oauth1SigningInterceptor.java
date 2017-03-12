@@ -112,7 +112,10 @@ public final class Oauth1SigningInterceptor implements Interceptor {
             String value = valueEnd == -1 ? body.readUtf8() : body.readUtf8(valueEnd);
             if (valueEnd != -1) body.skip(1); // Ampersand.
 
-            parameters.put(key, value);
+            // Fanfou POST method don't need this in signing base string.
+            if (!request.method().contains("POST")) {
+                parameters.put(key, value);
+            }
         }
 
         Buffer base = new Buffer();
