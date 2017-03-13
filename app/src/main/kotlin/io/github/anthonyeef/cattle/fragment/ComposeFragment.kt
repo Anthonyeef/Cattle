@@ -22,6 +22,7 @@ import com.raizlabs.android.dbflow.kotlinextensions.where
 import de.hdodenhof.circleimageview.CircleImageView
 import io.github.anthonyeef.cattle.R
 import io.github.anthonyeef.cattle.constant.KEY_CURRENT_USER_ID
+import io.github.anthonyeef.cattle.constant.horizontalPaddingMedium
 import io.github.anthonyeef.cattle.contract.ComposeContract
 import io.github.anthonyeef.cattle.entity.UserInfo
 import io.github.anthonyeef.cattle.entity.UserInfo_Table
@@ -31,6 +32,7 @@ import io.github.anthonyeef.cattle.utils.bindOptionalView
 import io.github.anthonyeef.cattle.utils.bindView
 import org.jetbrains.anko.findOptional
 import org.jetbrains.anko.onClick
+import org.jetbrains.anko.wrapContent
 
 /**
  * ComposeFragment, where to create and edit fanfou.
@@ -44,6 +46,7 @@ class ComposeFragment : BaseFragment(), ComposeContract.View {
     val sendBtn: Button by bindView<Button>(R.id.send)
     val editContent: EditText by bindView<EditText>(android.R.id.content)
     val toolbar: Toolbar? by bindOptionalView<Toolbar>(R.id.toolbar)
+    val inputLimit: TextView? by bindOptionalView<TextView>(R.id.title)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -132,6 +135,11 @@ class ComposeFragment : BaseFragment(), ComposeContract.View {
             }
         }
 
+        // move to left little bit
+        val layoutParams = LinearLayout.LayoutParams(wrapContent, wrapContent)
+        layoutParams.leftMargin = horizontalPaddingMedium
+        inputLimit?.layoutParams = layoutParams
+
         updateInputCount(INPUT_LIMIT)
     }
 
@@ -154,9 +162,8 @@ class ComposeFragment : BaseFragment(), ComposeContract.View {
 
 
     private fun updateInputCount(inputCount: Int) {
-        val title = toolbar?.findOptional<TextView>(R.id.title)
-        title?.text = inputCount.toString()
-        title?.typeface = Typeface.DEFAULT // remove bold
+        inputLimit?.text = inputCount.toString()
+        inputLimit?.typeface = Typeface.DEFAULT // remove bold
 
         // TODO
     }
