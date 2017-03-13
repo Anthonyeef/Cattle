@@ -2,6 +2,7 @@ package io.github.anthonyeef.cattle.activity
 
 import android.os.Bundle
 import android.support.annotation.StringRes
+import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.NavigationView
 import android.support.design.widget.TabLayout
 import android.support.v4.view.ViewPager
@@ -34,13 +35,23 @@ import org.jetbrains.anko.onClick
  * HomeActivity.
  */
 class HomeActivity : BaseActivity() {
+
     val drawerLayout: DrawerLayout by bindView<DrawerLayout>(R.id.drawer_layout)
+
     val navigation: NavigationView by bindView<NavigationView>(R.id.nav_view)
+
     val toolbar: Toolbar? by bindOptionalView<Toolbar>(R.id.toolbar)
+
     val viewpager: ViewPager by bindView<ViewPager>(R.id.viewpager)
+
     val tabLayout: TabLayout by bindView<TabLayout>(R.id.tabs)
+
+    val composeBtn: FloatingActionButton by bindView<FloatingActionButton>(R.id.fab)
+
     var drawerAction: Any.() -> Unit = { }
+
     lateinit var drawerToggle: ActionBarDrawerToggle
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,7 +65,12 @@ class HomeActivity : BaseActivity() {
         setupDrawerContent(navigation)
         setupViewpager()
         setupTabLayout()
+
+        composeBtn.onClick {
+            startActivity(intentFor<ComposeActivity>())
+        }
     }
+
 
     private fun setupToolbar() {
         toolbar?.let {
@@ -80,6 +96,7 @@ class HomeActivity : BaseActivity() {
         updateTitle(R.string.page_title_home)
     }
 
+
     private fun setupProfileInDrawer() {
         val navHeader = navigation.getHeaderView(0)
         val avatar = navHeader?.findOptional<CircleImageView>(R.id.nav_avatar)
@@ -98,17 +115,30 @@ class HomeActivity : BaseActivity() {
         }
 
         avatar?.onClick {
-            startActivity(intentFor<LoginActivity>())
+            bindDrawerAction { startActivity(intentFor<LoginActivity>()) }
         }
 
         Glide.with(navBg?.context).load(R.raw.drawer_bg_3).into(navBg)
     }
 
+
     private fun setupDrawer() {
         drawerToggle = object : ActionBarDrawerToggle(this, drawerLayout, R.string.drawer_open, R.string.drawer_close) {
+            override fun onDrawerOpened(drawerView: View?) {
+                super.onDrawerOpened(drawerView)
+
+                composeBtn.hide(object : FloatingActionButton.OnVisibilityChangedListener() {
+                    override fun onHidden(fab: FloatingActionButton?) {
+                        super.onHidden(fab)
+                        fab?.visibility = View.INVISIBLE
+                    }
+                })
+            }
+
             override fun onDrawerClosed(drawerView: View?) {
                 super.onDrawerClosed(drawerView)
 
+                composeBtn.show()
                 this@HomeActivity.run(drawerAction)
                 drawerAction = { }
             }
@@ -117,11 +147,12 @@ class HomeActivity : BaseActivity() {
         drawerLayout.addDrawerListener(drawerToggle)
     }
 
+
     private fun setupDrawerContent(navigation: NavigationView) {
         navigation.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.nav_test_field -> {
-                    drawerAction = { startActivity(intentFor<TestFieldActivity>()) }
+                    bindDrawerAction { startActivity(intentFor<TestFieldActivity>()) }
                 }
                 else -> {
 
@@ -131,6 +162,7 @@ class HomeActivity : BaseActivity() {
             false
         }
     }
+
 
     private fun setupViewpager() {
         viewpager.offscreenPageLimit = 2
@@ -149,6 +181,7 @@ class HomeActivity : BaseActivity() {
         })
     }
 
+
     private fun setupTabLayout() {
         tabLayout.setupWithViewPager(viewpager)
         tabLayout.getTabAt(0)?.setIcon(R.drawable.icon_home)
@@ -156,10 +189,12 @@ class HomeActivity : BaseActivity() {
         tabLayout.getTabAt(2)?.setIcon(R.drawable.icon_mail)
     }
 
+
     private fun updateTitle(@StringRes pageName: Int) {
         val title = toolbar?.findOptional<TextView>(R.id.title)
         title?.text = getString(pageName)
     }
+
 
     override fun onBackPressed() {
         if (drawerLayout.isDrawerOpen(Gravity.START)) {
@@ -167,5 +202,12 @@ class HomeActivity : BaseActivity() {
         } else {
             super.onBackPressed()
         }
+    }
+
+
+    // This method only should be called when drawer is opening and trying to click some drawer item
+    private fun bindDrawerAction(action: Any.() -> Unit) {
+        drawerAction = action
+        drawerLayout.closeDrawer(Gravity.START)
     }
 }

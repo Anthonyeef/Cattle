@@ -24,7 +24,7 @@
 
         <activity
             android:name=".activity.LoginActivity"
-            android:launchMode="singleInstance">
+            android:launchMode="singleTask">
             <intent-filter>
                 <data
                     android:host="oauth.success"
@@ -35,6 +35,9 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".activity.ComposeActivity"
+            android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".activity.DebugActivity"/>
         <activity android:name=".activity.TestFieldActivity"/>
     </application>

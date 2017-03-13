@@ -5,6 +5,7 @@
     android:id="@id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
+    app:contentInsetStartWithNavigation="0dp"
     app:layout_scrollFlags="scroll|enterAlways|snap">
 
     <LinearLayout
@@ -27,7 +28,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginStart="30dp"
             android:textColor="@color/grey900"
-            android:textSize="16dp"
+            android:textSize="@dimen/text_size_normal"
             android:textStyle="bold"/>
     </LinearLayout>
 

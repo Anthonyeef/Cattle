@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <include layout="@layout/toolbar_home"/>
+
+    <EditText
+        android:id="@android:id/content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/compose_fragment_page_horizontal_padding"
+        android:paddingTop="@dimen/vertical_padding_normal"
+        android:paddingBottom="@dimen/vertical_padding_normal"
+        android:paddingRight="@dimen/compose_fragment_page_horizontal_padding"
+        android:background="?android:colorBackground"
+        android:textCursorDrawable="@drawable/edit_text_cursor"
+        android:hint="@string/hint_compose_new_fanfou"/>
+
+    <android.support.v4.widget.Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/horizontal_padding_normal"
+        android:paddingRight="@dimen/horizontal_padding_normal"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal">
+
+        <android.support.v4.widget.Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/vertical_padding_small"
+            android:text="send"
+            android:layout_gravity="right"/>
+    </LinearLayout>
+
+</LinearLayout>
