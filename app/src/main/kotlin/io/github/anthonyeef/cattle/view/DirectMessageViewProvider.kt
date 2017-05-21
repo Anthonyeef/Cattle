@@ -13,12 +13,12 @@ import io.github.anthonyeef.cattle.R
 import io.github.anthonyeef.cattle.entity.DirectMessage
 import io.github.anthonyeef.cattle.utils.TimeUtils
 import io.github.anthonyeef.cattle.utils.bindView
-import me.drakeet.multitype.ItemViewProvider
+import me.drakeet.multitype.ItemViewBinder
 
 /**
  *
  */
-class DirectMessageViewProvider : ItemViewProvider<DirectMessage, DirectMessageViewProvider.DirectMessageViewHolder>() {
+class DirectMessageViewProvider : ItemViewBinder<DirectMessage, DirectMessageViewProvider.DirectMessageViewHolder>() {
     override fun onCreateViewHolder(inflater: LayoutInflater, parent: ViewGroup): DirectMessageViewHolder {
         val directMessageView = inflater.inflate(R.layout.view_item_direct_message, parent, false)
         val viewHolder = DirectMessageViewHolder(directMessageView)
