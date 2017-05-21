@@ -19,12 +19,12 @@ import io.github.anthonyeef.cattle.utils.CatLogger
 import io.github.anthonyeef.cattle.utils.StatusParsingUtils
 import io.github.anthonyeef.cattle.utils.TimeUtils
 import io.github.anthonyeef.cattle.utils.bindView
-import me.drakeet.multitype.ItemViewProvider
+import me.drakeet.multitype.ItemViewBinder
 
 /**
  *
  */
-class StatusItemViewProvider : ItemViewProvider<Status, StatusItemViewProvider.StatusFeedViewHolder>() {
+class StatusItemViewProvider : ItemViewBinder<Status, StatusItemViewProvider.StatusFeedViewHolder>() {
 
     override fun onCreateViewHolder(inflater: LayoutInflater, parent: ViewGroup): StatusFeedViewHolder {
         val statusView = inflater.inflate(R.layout.view_item_status, parent, false)

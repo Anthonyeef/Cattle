@@ -7,13 +7,13 @@ import android.view.ViewGroup
 import android.widget.TextView
 import io.github.anthonyeef.cattle.R
 import io.github.anthonyeef.cattle.entity.BottomRefreshEntity
-import me.drakeet.multitype.ItemViewProvider
+import me.drakeet.multitype.ItemViewBinder
 import org.jetbrains.anko.findOptional
 
 /**
  *
  */
-class BottomRefreshViewProvider : ItemViewProvider<BottomRefreshEntity, BottomRefreshViewProvider.BottomRefreshViewHolder>() {
+class BottomRefreshViewProvider : ItemViewBinder<BottomRefreshEntity, BottomRefreshViewProvider.BottomRefreshViewHolder>() {
 
     override fun onCreateViewHolder(inflater: LayoutInflater, parent: ViewGroup): BottomRefreshViewHolder {
         val root = inflater.inflate(R.layout.view_bottom_refresh, parent, false)
