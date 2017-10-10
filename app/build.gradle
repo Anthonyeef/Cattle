@@ -26,6 +26,8 @@ android {
             buildConfigField("String", "API_KEY", API_KEY)
             buildConfigField("String", "API_SECRET", API_SECRET)
         }
+
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
