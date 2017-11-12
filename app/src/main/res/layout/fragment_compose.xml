@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,10 +13,10 @@
         android:id="@android:id/content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/compose_fragment_page_horizontal_padding"
+        android:paddingLeft="@dimen/horizontal_padding_normal"
         android:paddingTop="@dimen/vertical_padding_normal"
         android:paddingBottom="@dimen/vertical_padding_normal"
-        android:paddingRight="@dimen/compose_fragment_page_horizontal_padding"
+        android:paddingRight="@dimen/horizontal_padding_normal"
         android:background="?android:colorBackground"
         android:textCursorDrawable="@drawable/edit_text_cursor"
         android:hint="@string/hint_compose_new_fanfou"/>
@@ -27,11 +28,59 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/horizontal_padding_normal"
-        android:paddingRight="@dimen/horizontal_padding_normal"
+        android:layout_height="60dp"
+        android:paddingRight="@dimen/padding_normal"
+        android:orientation="horizontal"
         android:layout_gravity="bottom"
-        android:orientation="horizontal">
+        android:gravity="center_vertical">
+
+        <ImageButton
+            android:id="@id/location"
+            android:layout_width="@dimen/compose_action_size"
+            android:layout_height="match_parent"
+            android:padding="@dimen/padding_normal"
+            android:background="?android:selectableItemBackground"
+            android:tint="@color/grey600"
+            app:srcCompat="@drawable/icon_location"/>
+
+        <ImageButton
+            android:id="@id/camera"
+            android:layout_width="@dimen/compose_action_size"
+            android:layout_height="match_parent"
+            android:padding="@dimen/padding_normal"
+            android:background="?android:selectableItemBackground"
+            android:tint="@color/grey600"
+            app:srcCompat="@drawable/icon_camera"/>
+
+        <ImageButton
+            android:id="@id/image"
+            android:layout_width="@dimen/compose_action_size"
+            android:layout_height="match_parent"
+            android:padding="@dimen/padding_normal"
+            android:background="?android:selectableItemBackground"
+            android:tint="@color/grey600"
+            app:srcCompat="@drawable/icon_photo"/>
+
+        <Button
+            android:layout_width="@dimen/compose_action_size"
+            android:layout_height="match_parent"
+            android:textSize="16dp"
+            android:textColor="@color/grey600"
+            android:textStyle="bold"
+            android:paddingBottom="4dp"
+            android:gravity="center"
+            android:background="?android:selectableItemBackground"
+            android:text="@string/text_mention_button"/>
+
+        <Button
+            android:layout_width="@dimen/compose_action_size"
+            android:layout_height="match_parent"
+            android:textSize="16dp"
+            android:textColor="@color/grey600"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:background="?android:selectableItemBackground"
+            android:text="@string/text_hash_tag_button"/>
 
         <android.support.v4.widget.Space
             android:layout_width="0dp"
@@ -42,9 +91,8 @@
             android:id="@+id/send"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/vertical_padding_small"
             android:text="send"
-            android:layout_gravity="right"/>
+            android:layout_gravity="center_vertical"/>
     </LinearLayout>
 
 </LinearLayout>

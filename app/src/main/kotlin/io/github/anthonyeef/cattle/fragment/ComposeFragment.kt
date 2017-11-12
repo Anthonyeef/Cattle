@@ -7,27 +7,17 @@ import android.support.v7.widget.Toolbar
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
-import com.bumptech.glide.Glide
-import com.raizlabs.android.dbflow.kotlinextensions.from
-import com.raizlabs.android.dbflow.kotlinextensions.list
-import com.raizlabs.android.dbflow.kotlinextensions.select
-import com.raizlabs.android.dbflow.kotlinextensions.where
 import de.hdodenhof.circleimageview.CircleImageView
 import io.github.anthonyeef.cattle.R
-import io.github.anthonyeef.cattle.constant.KEY_CURRENT_USER_ID
 import io.github.anthonyeef.cattle.constant.horizontalPaddingMedium
 import io.github.anthonyeef.cattle.contract.ComposeContract
-import io.github.anthonyeef.cattle.entity.UserInfo
-import io.github.anthonyeef.cattle.entity.UserInfo_Table
 import io.github.anthonyeef.cattle.presenter.ComposePresenter
-import io.github.anthonyeef.cattle.utils.SharedPreferenceUtils
 import io.github.anthonyeef.cattle.utils.bindOptionalView
 import io.github.anthonyeef.cattle.utils.bindView
 import org.jetbrains.anko.findOptional
@@ -102,36 +92,29 @@ class ComposeFragment : BaseFragment(), ComposeContract.View {
     }
 
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        val id = item?.itemId
-        when(id) {
-            android.R.id.home -> {
-                activity.onBackPressed()
-                return true
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
-
     private fun setupToolbar() {
         toolbar?.let {
             (activity as AppCompatActivity).setSupportActionBar(it)
             val homeAvatar = it.findOptional<CircleImageView>(R.id.toolbar_avatar)
             homeAvatar?.let {
-                val userInfo: UserInfo? = (select
+                // fixme: get rid of DB
+                /*val userInfo: UserInfo? = (select
                         from UserInfo::class
                         where (UserInfo_Table.id.eq(SharedPreferenceUtils.getString(KEY_CURRENT_USER_ID)))
                         ).list.firstOrNull()
                 Glide.with(it.context)
                         .load(userInfo?.profileImageUrlLarge)
-                        .into(it)
+                        .into(it)*/
             }
 
             with(activity as AppCompatActivity) {
                 supportActionBar?.setDisplayShowTitleEnabled(false)
                 supportActionBar?.setDisplayHomeAsUpEnabled(true)
                 supportActionBar?.setDisplayShowHomeEnabled(true)
+            }
+
+            it.setNavigationOnClickListener {
+                activity.onBackPressed()
             }
         }
 

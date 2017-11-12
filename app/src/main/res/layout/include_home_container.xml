@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/icon_compose"
+        app:srcCompat="@drawable/icon_compose"
         app:layout_behavior="io.github.anthonyeef.cattle.view.behavior.FloatingActionButtonScrollAwareBehavior"
         app:layout_anchorGravity="bottom|right|end"/>
 

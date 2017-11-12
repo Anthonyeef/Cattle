@@ -16,4 +16,6 @@
     <string name="text_photo_only_status">Uploaded new photo</string>
 
     <string name="hint_compose_new_fanfou">Write something new</string>
+    <string name="text_mention_button">\@</string>
+    <string name="text_hash_tag_button">#</string>
 </resources>
