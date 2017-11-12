@@ -15,11 +15,16 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import de.hdodenhof.circleimageview.CircleImageView
+import io.github.anthonyeef.cattle.App
 import io.github.anthonyeef.cattle.R
 import io.github.anthonyeef.cattle.adapter.ViewpagerAdapter
+import io.github.anthonyeef.cattle.constant.KEY_CURRENT_USER_ID
+import io.github.anthonyeef.cattle.data.AppDatabase
+import io.github.anthonyeef.cattle.data.userData.UserInfo
 import io.github.anthonyeef.cattle.fragment.DirectMessageInboxFragment
 import io.github.anthonyeef.cattle.fragment.HomeFeedListFragment
 import io.github.anthonyeef.cattle.fragment.MentionListFragment
+import io.github.anthonyeef.cattle.utils.SharedPreferenceUtils
 import io.github.anthonyeef.cattle.utils.bindOptionalView
 import io.github.anthonyeef.cattle.utils.bindView
 import org.jetbrains.anko.findOptional
@@ -73,14 +78,11 @@ class HomeActivity : BaseActivity() {
 
             val homeAvatar = it.findOptional<CircleImageView>(R.id.toolbar_avatar)
             homeAvatar?.let {
-                // fixme: get rid of DB
-                /*val userInfo: UserInfo? = (select
-                        from UserInfo::class
-                        where (id eq SharedPreferenceUtils.getString(KEY_CURRENT_USER_ID))
-                        ).list.firstOrNull()
+                val userInfo: UserInfo? = AppDatabase.getInstance(App.get())
+                        .userInfoDao().getUserInfoById(SharedPreferenceUtils.getString(KEY_CURRENT_USER_ID))
                 Glide.with(it.context)
                         .load(userInfo?.profileImageUrlLarge)
-                        .into(it)*/
+                        .into(it)
                 it.onClick {
                     if (!drawerLayout.isDrawerOpen(Gravity.START)) {
                         drawerLayout.openDrawer(Gravity.START)
@@ -99,17 +101,15 @@ class HomeActivity : BaseActivity() {
         val userName = navHeader?.findOptional<TextView>(R.id.nav_user_name)
         val navBg = navHeader?.findOptional<ImageView>(R.id.nav_header_bg)
 
-        // fixme: get rid of DB
-        /*val userInfo: UserInfo? = (select
-                        from UserInfo::class
-                        where (id eq SharedPreferenceUtils.getString(KEY_CURRENT_USER_ID))
-                        ).list.firstOrNull()
+        val userInfo: UserInfo? = AppDatabase.getInstance(App.get())
+                .userInfoDao().getUserInfoById(SharedPreferenceUtils.getString(KEY_CURRENT_USER_ID))
+
         userInfo?.let {
             Glide.with(avatar?.context)
                     .load(it.profileImageUrlLarge)
                     .into(avatar)
             userName?.text = it.screenName
-        }*/
+        }
 
         avatar?.onClick {
             bindDrawerAction { startActivity(intentFor<LoginActivity>()) }
