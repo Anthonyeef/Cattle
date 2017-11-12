@@ -12,7 +12,6 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import de.hdodenhof.circleimageview.CircleImageView
 import io.github.anthonyeef.cattle.R
-import io.github.anthonyeef.cattle.entity.Status
 import io.github.anthonyeef.cattle.extension.gone
 import io.github.anthonyeef.cattle.extension.show
 import io.github.anthonyeef.cattle.utils.CatLogger

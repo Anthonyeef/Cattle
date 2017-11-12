@@ -8,7 +8,6 @@ import io.github.anthonyeef.cattle.extension.getQueryParameter
 import io.github.anthonyeef.cattle.service.AccountService
 import io.github.anthonyeef.cattle.service.LoginService
 import io.github.anthonyeef.cattle.service.ServiceGenerator
-import io.github.anthonyeef.cattle.entity.UserInfo
 import io.github.anthonyeef.cattle.utils.CatLogger
 import io.github.anthonyeef.cattle.utils.SharedPreferenceUtils
 import io.reactivex.android.schedulers.AndroidSchedulers

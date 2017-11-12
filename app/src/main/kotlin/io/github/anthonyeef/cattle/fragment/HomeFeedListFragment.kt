@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import io.github.anthonyeef.cattle.contract.HomeFeedListContract
 import io.github.anthonyeef.cattle.entity.BottomRefreshEntity
-import io.github.anthonyeef.cattle.entity.Status
 import io.github.anthonyeef.cattle.exception.showException
 import io.github.anthonyeef.cattle.presenter.HomeFeedListPresenter
 import io.github.anthonyeef.cattle.utils.LoadMoreDelegate

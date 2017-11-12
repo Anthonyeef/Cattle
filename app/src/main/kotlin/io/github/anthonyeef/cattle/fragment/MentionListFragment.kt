@@ -5,7 +5,6 @@ import android.view.View
 import io.github.anthonyeef.cattle.contract.MentionListContract
 import io.github.anthonyeef.cattle.exception.showException
 import io.github.anthonyeef.cattle.presenter.MentionListPresenter
-import io.github.anthonyeef.cattle.entity.Status
 import io.github.anthonyeef.cattle.utils.SwipeRefreshDelegate
 import io.github.anthonyeef.cattle.view.StatusItemViewProvider
 
