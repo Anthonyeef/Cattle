@@ -14,17 +14,12 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
-import com.raizlabs.android.dbflow.kotlinextensions.*
 import de.hdodenhof.circleimageview.CircleImageView
 import io.github.anthonyeef.cattle.R
 import io.github.anthonyeef.cattle.adapter.ViewpagerAdapter
-import io.github.anthonyeef.cattle.constant.KEY_CURRENT_USER_ID
-import io.github.anthonyeef.cattle.entity.UserInfo
-import io.github.anthonyeef.cattle.entity.UserInfo_Table.id
 import io.github.anthonyeef.cattle.fragment.DirectMessageInboxFragment
 import io.github.anthonyeef.cattle.fragment.HomeFeedListFragment
 import io.github.anthonyeef.cattle.fragment.MentionListFragment
-import io.github.anthonyeef.cattle.utils.SharedPreferenceUtils
 import io.github.anthonyeef.cattle.utils.bindOptionalView
 import io.github.anthonyeef.cattle.utils.bindView
 import org.jetbrains.anko.findOptional
@@ -78,13 +73,14 @@ class HomeActivity : BaseActivity() {
 
             val homeAvatar = it.findOptional<CircleImageView>(R.id.toolbar_avatar)
             homeAvatar?.let {
-                val userInfo: UserInfo? = (select
+                // fixme: get rid of DB
+                /*val userInfo: UserInfo? = (select
                         from UserInfo::class
                         where (id eq SharedPreferenceUtils.getString(KEY_CURRENT_USER_ID))
                         ).list.firstOrNull()
                 Glide.with(it.context)
                         .load(userInfo?.profileImageUrlLarge)
-                        .into(it)
+                        .into(it)*/
                 it.onClick {
                     if (!drawerLayout.isDrawerOpen(Gravity.START)) {
                         drawerLayout.openDrawer(Gravity.START)
@@ -103,7 +99,8 @@ class HomeActivity : BaseActivity() {
         val userName = navHeader?.findOptional<TextView>(R.id.nav_user_name)
         val navBg = navHeader?.findOptional<ImageView>(R.id.nav_header_bg)
 
-        val userInfo: UserInfo? = (select
+        // fixme: get rid of DB
+        /*val userInfo: UserInfo? = (select
                         from UserInfo::class
                         where (id eq SharedPreferenceUtils.getString(KEY_CURRENT_USER_ID))
                         ).list.firstOrNull()
@@ -112,7 +109,7 @@ class HomeActivity : BaseActivity() {
                     .load(it.profileImageUrlLarge)
                     .into(avatar)
             userName?.text = it.screenName
-        }
+        }*/
 
         avatar?.onClick {
             bindDrawerAction { startActivity(intentFor<LoginActivity>()) }

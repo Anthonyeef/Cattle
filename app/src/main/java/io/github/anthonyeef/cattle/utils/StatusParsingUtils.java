@@ -7,6 +7,7 @@ import android.text.Html;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextPaint;
+import android.text.method.LinkMovementMethod;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.URLSpan;
 import android.text.util.Linkify;
@@ -35,6 +36,7 @@ public class StatusParsingUtils {
         tintUserName(spannable);
         removeUnderLines(spannable);
         textView.setText(spannable, TextView.BufferType.SPANNABLE);
+        textView.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     private static void removeUnderLines(final SpannableString spannable) {

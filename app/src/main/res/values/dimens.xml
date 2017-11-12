@@ -3,6 +3,8 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
+    <dimen name="padding_normal">8dp</dimen>
+
     <dimen name="horizontal_padding_large">56dp</dimen>
     <dimen name="vertical_padding_large">56dp</dimen>
     <dimen name="horizontal_padding_normal">16dp</dimen>
@@ -20,6 +22,5 @@
 
     <dimen name="text_size_normal">16sp</dimen>
 
-
-    <dimen name="compose_fragment_page_horizontal_padding">20dp</dimen>
+    <dimen name="compose_action_size">50dp</dimen>
 </resources>

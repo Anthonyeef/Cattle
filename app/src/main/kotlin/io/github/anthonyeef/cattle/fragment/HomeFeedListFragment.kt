@@ -66,12 +66,12 @@ class HomeFeedListFragment : BaseListFragment(),
     override fun updateTimeline(clearData: Boolean, data: List<Status>) {
         if (clearData) {
             items = Items(data)
-            adapter.setItems(items)
+            adapter.items = items
             adapter.notifyDataSetChanged()
         } else {
             val tempItems = items
             tempItems.addAll(data)
-            adapter.setItems(tempItems)
+            adapter.items = tempItems
             adapter.notifyDataSetChanged()
         }
     }

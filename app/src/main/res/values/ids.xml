@@ -6,4 +6,9 @@
     <item name="user_display_name" type="id"/>
     <item name="username" type="id"/>
     <item name="user_info_container" type="id"/>
+
+    <item name="location" type="id"/>
+    <item name="camera" type="id"/>
+    <item name="image" type="id"/>
+    <item name="topic" type="id"/>
 </resources>
