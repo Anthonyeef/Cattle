@@ -8,7 +8,7 @@ import io.github.anthonyeef.cattle.data.userData.UserInfo
 import io.github.anthonyeef.cattle.entity.Photo
 
 /**
- *
+ * A fanfou status.
  */
 @Entity
 class Status {
@@ -16,7 +16,7 @@ class Status {
     @PrimaryKey
     var rawid: Int = 0
 
-    @ColumnInfo
+    @ColumnInfo(name = "status_id")
     var id: String = ""
 
     @ColumnInfo

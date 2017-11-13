@@ -11,9 +11,6 @@ import android.arch.persistence.room.Query
 @Dao
 interface UserInfoDao {
 
-    @Query("SELECT * FROM userInfo ")
-    fun getAllUserInfo()
-
     @Query("SELECT * FROM userInfo WHERE id LIKE :id")
     fun getUserInfoById(id: String): UserInfo
 
