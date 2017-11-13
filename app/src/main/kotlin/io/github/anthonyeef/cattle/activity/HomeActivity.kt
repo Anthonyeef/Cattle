@@ -27,9 +27,7 @@ import io.github.anthonyeef.cattle.fragment.MentionListFragment
 import io.github.anthonyeef.cattle.utils.SharedPreferenceUtils
 import io.github.anthonyeef.cattle.utils.bindOptionalView
 import io.github.anthonyeef.cattle.utils.bindView
-import org.jetbrains.anko.findOptional
-import org.jetbrains.anko.intentFor
-import org.jetbrains.anko.onClick
+import org.jetbrains.anko.*
 
 /**
  * HomeActivity.
@@ -77,15 +75,20 @@ class HomeActivity : BaseActivity() {
             setSupportActionBar(it)
 
             val homeAvatar = it.findOptional<CircleImageView>(R.id.toolbar_avatar)
-            homeAvatar?.let {
-                val userInfo: UserInfo? = AppDatabase.getInstance(App.get())
-                        .userInfoDao().getUserInfoById(SharedPreferenceUtils.getString(KEY_CURRENT_USER_ID))
-                Glide.with(it.context)
-                        .load(userInfo?.profileImageUrlLarge)
-                        .into(it)
-                it.onClick {
-                    if (!drawerLayout.isDrawerOpen(Gravity.START)) {
-                        drawerLayout.openDrawer(Gravity.START)
+            homeAvatar?.let { avatar ->
+                doAsync {
+                    val userInfo: UserInfo? = AppDatabase.getInstance(App.get())
+                            .userInfoDao().getUserInfoById(SharedPreferenceUtils.getString(KEY_CURRENT_USER_ID))
+
+                    uiThread {
+                        Glide.with(avatar.context)
+                                .load(userInfo?.profileImageUrlLarge)
+                                .into(avatar)
+                        avatar.onClick {
+                            if (!drawerLayout.isDrawerOpen(Gravity.START)) {
+                                drawerLayout.openDrawer(Gravity.START)
+                            }
+                        }
                     }
                 }
             }
@@ -101,14 +104,18 @@ class HomeActivity : BaseActivity() {
         val userName = navHeader?.findOptional<TextView>(R.id.nav_user_name)
         val navBg = navHeader?.findOptional<ImageView>(R.id.nav_header_bg)
 
-        val userInfo: UserInfo? = AppDatabase.getInstance(App.get())
-                .userInfoDao().getUserInfoById(SharedPreferenceUtils.getString(KEY_CURRENT_USER_ID))
+        doAsync {
+            val userInfo: UserInfo? = AppDatabase.getInstance(App.get())
+                    .userInfoDao().getUserInfoById(SharedPreferenceUtils.getString(KEY_CURRENT_USER_ID))
 
-        userInfo?.let {
-            Glide.with(avatar?.context)
-                    .load(it.profileImageUrlLarge)
-                    .into(avatar)
-            userName?.text = it.screenName
+            uiThread {
+                userInfo?.let {
+                    Glide.with(avatar?.context)
+                            .load(it.profileImageUrlLarge)
+                            .into(avatar)
+                    userName?.text = it.screenName
+                }
+            }
         }
 
         avatar?.onClick {
