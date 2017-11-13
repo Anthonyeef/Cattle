@@ -1,9 +1,11 @@
 package io.github.anthonyeef.cattle.presenter
 
-import com.raizlabs.android.dbflow.kotlinextensions.processInTransaction
+import io.github.anthonyeef.cattle.App
 import io.github.anthonyeef.cattle.constant.KEY_HOME_TIMELINE_LAST_UPDATE_TIME
 import io.github.anthonyeef.cattle.constant.TIME_GOD_CREAT_LIGHT
 import io.github.anthonyeef.cattle.contract.HomeFeedListContract
+import io.github.anthonyeef.cattle.data.AppDatabase
+import io.github.anthonyeef.cattle.data.statusData.Status
 import io.github.anthonyeef.cattle.service.HomeTimelineService
 import io.github.anthonyeef.cattle.service.ServiceGenerator
 import io.github.anthonyeef.cattle.utils.SharedPreferenceUtils
@@ -11,6 +13,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 import java.util.concurrent.atomic.AtomicInteger
 
 /**
@@ -49,19 +52,14 @@ class HomeFeedListPresenter(): HomeFeedListContract.Presenter {
 
     override fun loadDataFromCache() {
         doAsync {
-            // fixme: get rid of DB
-            /*val status: List<Status> = (select
-                    from Status::class
-                    orderBy OrderBy.fromProperty(Status_Table.raw_id)
-                    limit 40
-                    ).list
+            val status: List<Status> = AppDatabase.getInstance(App.get()).statusDao().getStatus()
             uiThread {
                 if (status.isNotEmpty()) {
                     homeFeedListView.updateTimeline(clearData = true, data = status)
                     isDataLoaded = true
                     lastItemId = status[status.size - 1].id
                 }
-            }*/
+            }
         }
     }
 
@@ -72,8 +70,9 @@ class HomeFeedListPresenter(): HomeFeedListContract.Presenter {
         _disposable.add(timelineService.getHomeTimeline(lastId = if (clearData) "" else lastItemId)
                 .subscribeOn(Schedulers.io())
                 .doOnNext { statuses ->
-                    statuses.processInTransaction { item, databaseWrapper ->
-                        item.save()
+                    val statusDao = AppDatabase.getInstance(App.get()).statusDao()
+                    statuses.forEach {
+                        statusDao.insertStatus(it)
                     }
                 }
                 .doFinally {

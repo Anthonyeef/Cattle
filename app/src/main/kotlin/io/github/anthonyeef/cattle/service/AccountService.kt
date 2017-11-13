@@ -1,6 +1,6 @@
 package io.github.anthonyeef.cattle.service
 
-import io.github.anthonyeef.cattle.entity.UserInfo
+import io.github.anthonyeef.cattle.data.userData.UserInfo
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Url

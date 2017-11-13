@@ -1,6 +1,6 @@
 package io.github.anthonyeef.cattle.service
 
-import io.github.anthonyeef.cattle.entity.Status
+import io.github.anthonyeef.cattle.data.statusData.Status
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query

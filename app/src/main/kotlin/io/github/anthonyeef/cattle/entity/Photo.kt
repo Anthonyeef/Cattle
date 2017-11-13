@@ -1,21 +1,12 @@
 package io.github.anthonyeef.cattle.entity
 
-import com.raizlabs.android.dbflow.annotation.Column
-import com.raizlabs.android.dbflow.annotation.PrimaryKey
-import com.raizlabs.android.dbflow.annotation.Table
-import com.raizlabs.android.dbflow.structure.BaseModel
-import io.github.anthonyeef.cattle.data.CattleDatabase
-
 /**
- *
+ * Photo entity within a [io.github.anthonyeef.cattle.data.statusData.Status] .
  */
-@Table(database = CattleDatabase::class)
-class Photo : BaseModel() {
-    @PrimaryKey
-    @Column
-    var thumburl: String = ""
-    @Column
-    var imageurl: String = ""
-    @Column
+data class Photo (
+    var thumburl: String = "",
+
+    var imageurl: String = "",
+
     var largeurl: String = ""
-}
+)

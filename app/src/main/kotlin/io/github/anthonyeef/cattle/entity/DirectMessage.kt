@@ -1,5 +1,7 @@
 package io.github.anthonyeef.cattle.entity
 
+import io.github.anthonyeef.cattle.data.userData.UserInfo
+
 /**
  *
  */
