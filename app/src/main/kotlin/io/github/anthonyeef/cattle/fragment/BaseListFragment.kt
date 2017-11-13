@@ -41,4 +41,9 @@ abstract class BaseListFragment : BaseFragment() {
 
         return root
     }
+
+
+    fun doScrollToTop() {
+        list?.smoothScrollToPosition(0)
+    }
 }

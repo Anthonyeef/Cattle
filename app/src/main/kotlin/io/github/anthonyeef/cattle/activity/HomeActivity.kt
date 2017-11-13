@@ -21,6 +21,7 @@ import io.github.anthonyeef.cattle.adapter.ViewpagerAdapter
 import io.github.anthonyeef.cattle.constant.KEY_CURRENT_USER_ID
 import io.github.anthonyeef.cattle.data.AppDatabase
 import io.github.anthonyeef.cattle.data.userData.UserInfo
+import io.github.anthonyeef.cattle.fragment.BaseListFragment
 import io.github.anthonyeef.cattle.fragment.DirectMessageInboxFragment
 import io.github.anthonyeef.cattle.fragment.HomeFeedListFragment
 import io.github.anthonyeef.cattle.fragment.MentionListFragment
@@ -191,6 +192,22 @@ class HomeActivity : BaseActivity() {
         tabLayout.getTabAt(0)?.setIcon(R.drawable.icon_home)
         tabLayout.getTabAt(1)?.setIcon(R.drawable.icon_ringbell)
         tabLayout.getTabAt(2)?.setIcon(R.drawable.icon_mail)
+        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+
+            }
+
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+                val index = tab?.position
+                index?.let {
+                    ((viewpager.adapter as ViewpagerAdapter).getItem(it) as BaseListFragment).doScrollToTop()
+                }
+            }
+        })
     }
 
 
