@@ -1,10 +1,9 @@
 package io.github.anthonyeef.cattle.service
 
 import io.github.anthonyeef.cattle.data.statusData.Status
+import io.reactivex.Flowable
 import io.reactivex.Observable
-import retrofit2.http.Multipart
-import retrofit2.http.POST
-import retrofit2.http.Part
+import retrofit2.http.*
 
 /**
  *
@@ -16,4 +15,7 @@ interface StatusService {
     fun composeNewFanfou(
             @Part("status") status: String
     ): Observable<Status>
+
+    @GET("statuses/show.json")
+    fun getFanfouById(@Query("id") id: String): Flowable<Status>
 }
