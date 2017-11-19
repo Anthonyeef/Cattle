@@ -35,17 +35,17 @@ import org.jetbrains.anko.*
  */
 class HomeActivity : BaseActivity() {
 
-    val drawerLayout: DrawerLayout by bindView<DrawerLayout>(R.id.drawer_layout)
+    private val drawerLayout: DrawerLayout by bindView<DrawerLayout>(R.id.drawer_layout)
 
-    val navigation: NavigationView by bindView<NavigationView>(R.id.nav_view)
+    private val navigation: NavigationView by bindView<NavigationView>(R.id.nav_view)
 
-    val toolbar: Toolbar? by bindOptionalView<Toolbar>(R.id.toolbar)
+    private val toolbar: Toolbar? by bindOptionalView<Toolbar>(R.id.toolbar)
 
-    val viewpager: ViewPager by bindView<ViewPager>(R.id.viewpager)
+    private val viewpager: ViewPager by bindView<ViewPager>(R.id.viewpager)
 
-    val tabLayout: TabLayout by bindView<TabLayout>(R.id.tabs)
+    private val tabLayout: TabLayout by bindView<TabLayout>(R.id.tabs)
 
-    val composeBtn: FloatingActionButton by bindView<FloatingActionButton>(R.id.fab)
+    private val composeBtn: FloatingActionButton by bindView<FloatingActionButton>(R.id.fab)
 
     var drawerAction: Any.() -> Unit = { }
 

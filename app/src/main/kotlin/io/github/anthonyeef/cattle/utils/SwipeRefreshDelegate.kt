@@ -11,7 +11,7 @@ import org.jetbrains.anko.support.v4.findOptional
  */
 class SwipeRefreshDelegate : CatLogger {
 
-    var swipeRefreshLayout: SwipeRefreshLayout? = null
+    private var swipeRefreshLayout: SwipeRefreshLayout? = null
     private var refreshListener: OnSwipeRefreshListener? = null
     private var list: RecyclerView? = null
 
