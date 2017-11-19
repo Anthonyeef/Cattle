@@ -35,7 +35,6 @@ class StatusItemViewProvider : ItemViewBinder<Status, StatusItemViewProvider.Sta
 
     override fun onBindViewHolder(holder: StatusFeedViewHolder, t: Status) {
         holder.bindData(t)
-        holder.itemView.isClickable = true
     }
 
     inner class StatusFeedViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), CatLogger {
@@ -55,7 +54,7 @@ class StatusItemViewProvider : ItemViewBinder<Status, StatusItemViewProvider.Sta
                     .into(avatar)
             displayName.text = status.user?.screenName
             userName.text = " @${status.user?.id}"
-            createTime.text = TimeUtils.format(status.createdAt)
+            createTime.text = TimeUtils.prettyFormat(status.createdAt)
             if (status.text.isNotEmpty()) {
                 StatusParsingUtils.setStatus(content, status.text)
             } else {
