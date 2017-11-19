@@ -15,11 +15,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import de.hdodenhof.circleimageview.CircleImageView
-import io.github.anthonyeef.cattle.App
+import io.github.anthonyeef.cattle.Injection
 import io.github.anthonyeef.cattle.R
 import io.github.anthonyeef.cattle.adapter.ViewpagerAdapter
 import io.github.anthonyeef.cattle.constant.KEY_CURRENT_USER_ID
-import io.github.anthonyeef.cattle.data.AppDatabase
 import io.github.anthonyeef.cattle.data.userData.UserInfo
 import io.github.anthonyeef.cattle.extension.addOnTabSelectedListener
 import io.github.anthonyeef.cattle.fragment.BaseListFragment
@@ -79,8 +78,8 @@ class HomeActivity : BaseActivity() {
             val homeAvatar = it.findOptional<CircleImageView>(R.id.toolbar_avatar)
             homeAvatar?.let { avatar ->
                 doAsync {
-                    val userInfo: UserInfo? = AppDatabase.getInstance(App.get())
-                            .userInfoDao().getUserInfoById(SharedPreferenceUtils.getString(KEY_CURRENT_USER_ID))
+                    val userInfo: UserInfo? = Injection.provideUserInfoDao()
+                            .getUserInfoById(SharedPreferenceUtils.getString(KEY_CURRENT_USER_ID))
 
                     uiThread {
                         Glide.with(avatar.context)
@@ -107,8 +106,8 @@ class HomeActivity : BaseActivity() {
         val navBg = navHeader?.findOptional<ImageView>(R.id.nav_header_bg)
 
         doAsync {
-            val userInfo: UserInfo? = AppDatabase.getInstance(App.get())
-                    .userInfoDao().getUserInfoById(SharedPreferenceUtils.getString(KEY_CURRENT_USER_ID))
+            val userInfo: UserInfo? = Injection.provideUserInfoDao()
+                    .getUserInfoById(SharedPreferenceUtils.getString(KEY_CURRENT_USER_ID))
 
             uiThread {
                 userInfo?.let {
