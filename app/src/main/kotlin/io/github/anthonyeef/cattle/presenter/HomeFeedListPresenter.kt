@@ -71,9 +71,7 @@ class HomeFeedListPresenter(): HomeFeedListContract.Presenter {
                 .subscribeOn(Schedulers.io())
                 .doOnNext { statuses ->
                     val statusDao = AppDatabase.getInstance(App.get()).statusDao()
-                    statuses.forEach {
-                        statusDao.insertStatus(it)
-                    }
+                    statusDao.insertStatuses(statuses)
                 }
                 .doFinally {
                     homeFeedListView.setLoadingProgressBar(false)

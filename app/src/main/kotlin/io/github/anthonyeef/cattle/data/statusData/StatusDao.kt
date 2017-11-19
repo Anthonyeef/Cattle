@@ -11,10 +11,10 @@ import android.arch.persistence.room.Query
 @Dao
 interface StatusDao {
 
-    @Query("SELECT * FROM Status LIMIT 40")
+    @Query("SELECT * FROM Status ORDER BY rawid DESC LIMIT 40")
     fun getStatus(): List<Status>
 
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertStatus(status: Status)
+    fun insertStatuses(statuses: List<Status>)
 }
