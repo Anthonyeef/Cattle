@@ -48,7 +48,7 @@ abstract class BaseListFragment : BaseFragment() {
 
 
     fun doScrollToTop() {
-        list?.smoothScrollToPosition(0)
+        list?.scrollToPosition(0)
     }
 
     fun disablePullToRefresh() {

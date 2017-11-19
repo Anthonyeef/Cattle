@@ -51,6 +51,6 @@ class SwipeRefreshDelegate : CatLogger {
     }
 
     fun scrollToTop() {
-        list?.smoothScrollToPosition(0)
+        list?.scrollToPosition(0)
     }
 }
