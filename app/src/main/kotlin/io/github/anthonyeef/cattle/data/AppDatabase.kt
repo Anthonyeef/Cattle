@@ -5,7 +5,7 @@ import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 import android.content.Context
 import io.github.anthonyeef.cattle.App
-
+import io.github.anthonyeef.cattle.data.statusData.EmbeddedStatus
 import io.github.anthonyeef.cattle.data.statusData.Status
 import io.github.anthonyeef.cattle.data.statusData.StatusDao
 import io.github.anthonyeef.cattle.data.userData.UserInfo
@@ -14,7 +14,7 @@ import io.github.anthonyeef.cattle.data.userData.UserInfoDao
 /**
  *
  */
-@Database(entities = arrayOf(UserInfo::class, Status::class), version = 1)
+@Database(entities = arrayOf(UserInfo::class, Status::class, EmbeddedStatus::class), version = 1)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun userInfoDao(): UserInfoDao
