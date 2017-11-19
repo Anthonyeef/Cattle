@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/horizontal_padding_normal"
+    android:paddingTop="@dimen/vertical_padding_normal"
+    android:paddingRight="@dimen/horizontal_padding_normal"
+    >
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@id/avatar"
+        android:layout_width="@dimen/avatar_size_medium"
+        android:layout_height="@dimen/avatar_size_medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@id/user_display_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/horizontal_padding_normal"
+        android:textSize="@dimen/text_size_normal"
+        android:textStyle="bold"
+        android:textColor="@color/text_color_normal"
+        android:gravity="start"
+        app:layout_constraintStart_toEndOf="@id/avatar"
+        app:layout_constraintTop_toTopOf="@id/avatar"
+        app:layout_constraintBottom_toTopOf="@id/user_id"
+        />
+
+    <TextView
+        android:id="@+id/user_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/horizontal_padding_normal"
+        android:textSize="@dimen/text_size_normal"
+        android:textColor="@color/text_color_secondary"
+        app:layout_constraintStart_toEndOf="@id/avatar"
+        app:layout_constraintTop_toBottomOf="@id/user_display_name"
+        app:layout_constraintBottom_toBottomOf="@id/avatar"
+        />
+
+    <TextView
+        android:id="@+id/status_create_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size_small"
+        android:textColor="@color/text_color_secondary"
+        android:gravity="end"
+        app:layout_constraintTop_toTopOf="@id/user_display_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/status_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/vertical_padding_normal"
+        android:textSize="@dimen/text_size_medium"
+        android:textColor="@color/text_color_normal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/avatar"
+        />
+
+    <ImageView
+        android:id="@+id/status_photo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/vertical_padding_normal"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/status_content"
+        />
+
+    <android.support.v4.widget.Space
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/vertical_padding_large"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/status_photo"
+        />
+
+</android.support.constraint.ConstraintLayout>
