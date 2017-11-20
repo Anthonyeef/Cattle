@@ -1,9 +1,6 @@
 package io.github.anthonyeef.cattle.data.statusData
 
-import android.arch.persistence.room.ColumnInfo
-import android.arch.persistence.room.Embedded
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.PrimaryKey
+import android.arch.persistence.room.*
 import io.github.anthonyeef.cattle.data.userData.UserInfo
 import io.github.anthonyeef.cattle.entity.Photo
 
@@ -27,6 +24,36 @@ class Status {
 
     @ColumnInfo(name = "created_at")
     var createdAt: String = ""
+
+    @ColumnInfo
+    var truncated: Boolean = false
+
+    @ColumnInfo
+    var favorited: Boolean = false
+
+    @ColumnInfo(name = "in_reply_to_status_id")
+    var inReplyToStatusId: String = ""
+
+    @ColumnInfo(name = "in_reply_to_user_id")
+    var inReplyToUserId: String = ""
+
+    @ColumnInfo(name = "in_reply_to_screen_name")
+    var inReplyToScreenName: String = ""
+
+    /*@ColumnInfo(name = "repo_status_id")
+    var repostStatusId: String = ""*/
+
+    @ColumnInfo(name = "repost_user_id")
+    var repostUserId: String = ""
+
+    @ColumnInfo(name = "repost_screen_name")
+    var repostScreenName: String = ""
+
+    @ColumnInfo(name = "status_location")
+    var location: String = ""
+
+    @Ignore
+    var repostStatus: EmbeddedStatus? = null
 
     @Embedded
     var user: UserInfo? = null

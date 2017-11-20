@@ -12,6 +12,9 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import de.hdodenhof.circleimageview.CircleImageView
 import io.github.anthonyeef.cattle.R
+import io.github.anthonyeef.cattle.activity.StatusDetailActivity
+import io.github.anthonyeef.cattle.activity.StatusDetailActivity.Companion.EXTRA_STATUS_ID
+import io.github.anthonyeef.cattle.constant.app
 import io.github.anthonyeef.cattle.data.statusData.Status
 import io.github.anthonyeef.cattle.extension.gone
 import io.github.anthonyeef.cattle.extension.show
@@ -20,6 +23,9 @@ import io.github.anthonyeef.cattle.utils.StatusParsingUtils
 import io.github.anthonyeef.cattle.utils.TimeUtils
 import io.github.anthonyeef.cattle.utils.bindView
 import me.drakeet.multitype.ItemViewBinder
+import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.newTask
+import org.jetbrains.anko.onClick
 
 /**
  *
@@ -35,7 +41,6 @@ class StatusItemViewProvider : ItemViewBinder<Status, StatusItemViewProvider.Sta
 
     override fun onBindViewHolder(holder: StatusFeedViewHolder, t: Status) {
         holder.bindData(t)
-        holder.itemView.isClickable = true
     }
 
     inner class StatusFeedViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), CatLogger {
@@ -55,7 +60,7 @@ class StatusItemViewProvider : ItemViewBinder<Status, StatusItemViewProvider.Sta
                     .into(avatar)
             displayName.text = status.user?.screenName
             userName.text = " @${status.user?.id}"
-            createTime.text = TimeUtils.format(status.createdAt)
+            createTime.text = TimeUtils.prettyFormat(status.createdAt)
             if (status.text.isNotEmpty()) {
                 StatusParsingUtils.setStatus(content, status.text)
             } else {
@@ -64,6 +69,9 @@ class StatusItemViewProvider : ItemViewBinder<Status, StatusItemViewProvider.Sta
                 } else {
                     content.text = status.text
                 }
+            }
+            content.onClick {
+                app.startActivity(app.intentFor<StatusDetailActivity>(EXTRA_STATUS_ID to status.id).newTask())
             }
             if (status.photo?.imageurl?.isNotEmpty() ?: false) {
                 previewImageTopMargin.show()

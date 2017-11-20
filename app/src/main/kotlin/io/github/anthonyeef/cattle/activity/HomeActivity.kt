@@ -15,11 +15,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import de.hdodenhof.circleimageview.CircleImageView
-import io.github.anthonyeef.cattle.App
+import io.github.anthonyeef.cattle.Injection
 import io.github.anthonyeef.cattle.R
 import io.github.anthonyeef.cattle.adapter.ViewpagerAdapter
 import io.github.anthonyeef.cattle.constant.KEY_CURRENT_USER_ID
-import io.github.anthonyeef.cattle.data.AppDatabase
 import io.github.anthonyeef.cattle.data.userData.UserInfo
 import io.github.anthonyeef.cattle.extension.addOnTabSelectedListener
 import io.github.anthonyeef.cattle.fragment.BaseListFragment
@@ -36,17 +35,17 @@ import org.jetbrains.anko.*
  */
 class HomeActivity : BaseActivity() {
 
-    val drawerLayout: DrawerLayout by bindView<DrawerLayout>(R.id.drawer_layout)
+    private val drawerLayout: DrawerLayout by bindView<DrawerLayout>(R.id.drawer_layout)
 
-    val navigation: NavigationView by bindView<NavigationView>(R.id.nav_view)
+    private val navigation: NavigationView by bindView<NavigationView>(R.id.nav_view)
 
-    val toolbar: Toolbar? by bindOptionalView<Toolbar>(R.id.toolbar)
+    private val toolbar: Toolbar? by bindOptionalView<Toolbar>(R.id.toolbar)
 
-    val viewpager: ViewPager by bindView<ViewPager>(R.id.viewpager)
+    private val viewpager: ViewPager by bindView<ViewPager>(R.id.viewpager)
 
-    val tabLayout: TabLayout by bindView<TabLayout>(R.id.tabs)
+    private val tabLayout: TabLayout by bindView<TabLayout>(R.id.tabs)
 
-    val composeBtn: FloatingActionButton by bindView<FloatingActionButton>(R.id.fab)
+    private val composeBtn: FloatingActionButton by bindView<FloatingActionButton>(R.id.fab)
 
     var drawerAction: Any.() -> Unit = { }
 
@@ -79,8 +78,8 @@ class HomeActivity : BaseActivity() {
             val homeAvatar = it.findOptional<CircleImageView>(R.id.toolbar_avatar)
             homeAvatar?.let { avatar ->
                 doAsync {
-                    val userInfo: UserInfo? = AppDatabase.getInstance(App.get())
-                            .userInfoDao().getUserInfoById(SharedPreferenceUtils.getString(KEY_CURRENT_USER_ID))
+                    val userInfo: UserInfo? = Injection.provideUserInfoDao()
+                            .getUserInfoById(SharedPreferenceUtils.getString(KEY_CURRENT_USER_ID))
 
                     uiThread {
                         Glide.with(avatar.context)
@@ -107,8 +106,8 @@ class HomeActivity : BaseActivity() {
         val navBg = navHeader?.findOptional<ImageView>(R.id.nav_header_bg)
 
         doAsync {
-            val userInfo: UserInfo? = AppDatabase.getInstance(App.get())
-                    .userInfoDao().getUserInfoById(SharedPreferenceUtils.getString(KEY_CURRENT_USER_ID))
+            val userInfo: UserInfo? = Injection.provideUserInfoDao()
+                    .getUserInfoById(SharedPreferenceUtils.getString(KEY_CURRENT_USER_ID))
 
             uiThread {
                 userInfo?.let {

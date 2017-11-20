@@ -21,17 +21,20 @@
         layout="@layout/view_user_info"/>
 
     <LinearLayout
+        android:id="@+id/status_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@id/user_info_container"
         android:layout_below="@id/user_info_container"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        >
 
         <TextView
             android:id="@android:id/content"
             style="@style/Widget.Cattle.Text.Content"
             android:layout_width="match_parent"
-            android:paddingTop="@dimen/vertical_padding_small"/>
+            android:paddingTop="@dimen/vertical_padding_small"
+            />
 
         <android.support.v4.widget.Space
             android:id="@+id/margin_above_image"

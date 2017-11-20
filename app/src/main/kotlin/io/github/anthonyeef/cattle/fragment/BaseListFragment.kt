@@ -1,6 +1,7 @@
 package io.github.anthonyeef.cattle.fragment
 
 import android.os.Bundle
+import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -19,6 +20,7 @@ abstract class BaseListFragment : BaseFragment() {
 
     protected lateinit var adapter: MultiTypeAdapter
     protected lateinit var items: Items
+    private var swipeRefreshLayout: SwipeRefreshLayout? = null
 
     var list: RecyclerView? = null
 
@@ -39,11 +41,17 @@ abstract class BaseListFragment : BaseFragment() {
         list?.adapter = adapter
         list?.layoutManager = LinearLayoutManager(app)
 
+        swipeRefreshLayout = root?.findOptional(R.id.swipe_refresh_layout)
+
         return root
     }
 
 
     fun doScrollToTop() {
-        list?.smoothScrollToPosition(0)
+        list?.scrollToPosition(0)
+    }
+
+    fun disablePullToRefresh() {
+        swipeRefreshLayout?.isEnabled = false
     }
 }

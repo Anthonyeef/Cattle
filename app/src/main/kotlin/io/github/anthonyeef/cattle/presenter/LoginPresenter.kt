@@ -1,10 +1,9 @@
 package io.github.anthonyeef.cattle.presenter
 
 import android.net.Uri
-import io.github.anthonyeef.cattle.App
+import io.github.anthonyeef.cattle.Injection
 import io.github.anthonyeef.cattle.constant.*
 import io.github.anthonyeef.cattle.contract.LoginContract
-import io.github.anthonyeef.cattle.data.AppDatabase
 import io.github.anthonyeef.cattle.data.userData.UserInfo
 import io.github.anthonyeef.cattle.exception.DataNotFoundException
 import io.github.anthonyeef.cattle.extension.getQueryParameter
@@ -99,7 +98,7 @@ class LoginPresenter() : LoginContract.Presenter, CatLogger {
 
     private fun saveUserInfo(user: UserInfo) {
         SharedPreferenceUtils.putString(KEY_CURRENT_USER_ID, user.id)
-        AppDatabase.getInstance(App.get()).userInfoDao().insertUserInfo(user)
+                Injection.provideUserInfoDao().insertUserInfo(user)
         info("Save userInfo done")
     }
 }

@@ -1,10 +1,9 @@
 package io.github.anthonyeef.cattle.presenter
 
-import io.github.anthonyeef.cattle.App
+import io.github.anthonyeef.cattle.Injection
 import io.github.anthonyeef.cattle.constant.KEY_HOME_TIMELINE_LAST_UPDATE_TIME
 import io.github.anthonyeef.cattle.constant.TIME_GOD_CREAT_LIGHT
 import io.github.anthonyeef.cattle.contract.HomeFeedListContract
-import io.github.anthonyeef.cattle.data.AppDatabase
 import io.github.anthonyeef.cattle.data.statusData.Status
 import io.github.anthonyeef.cattle.service.HomeTimelineService
 import io.github.anthonyeef.cattle.service.ServiceGenerator
@@ -52,7 +51,7 @@ class HomeFeedListPresenter(): HomeFeedListContract.Presenter {
 
     override fun loadDataFromCache() {
         doAsync {
-            val status: List<Status> = AppDatabase.getInstance(App.get()).statusDao().getStatus()
+            val status: List<Status> = Injection.provideStatusDao().getStatus()
             uiThread {
                 if (status.isNotEmpty()) {
                     homeFeedListView.updateTimeline(clearData = true, data = status)
@@ -70,9 +69,14 @@ class HomeFeedListPresenter(): HomeFeedListContract.Presenter {
         _disposable.add(timelineService.getHomeTimeline(lastId = if (clearData) "" else lastItemId)
                 .subscribeOn(Schedulers.io())
                 .doOnNext { statuses ->
-                    val statusDao = AppDatabase.getInstance(App.get()).statusDao()
-                    statuses.forEach {
-                        statusDao.insertStatus(it)
+                    val statusDao = Injection.provideStatusDao()
+                    statusDao.insertStatuses(statuses)
+
+                    statuses.forEach { status ->
+                        status.repostStatus?.let {
+                            it.ownerId = status.rawid
+                            statusDao.insertRepostStatus(it)
+                        }
                     }
                 }
                 .doFinally {

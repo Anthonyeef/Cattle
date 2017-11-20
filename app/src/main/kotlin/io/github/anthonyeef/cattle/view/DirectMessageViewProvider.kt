@@ -47,7 +47,7 @@ class DirectMessageViewProvider : ItemViewBinder<DirectMessage, DirectMessageVie
                     .into(avatar)
             displayName.text = data.senderScreenName
             userName.text = " @${data.sender?.id}"
-            createTime.text = TimeUtils.format(data.createdAt)
+            createTime.text = TimeUtils.prettyFormat(data.createdAt)
             content.text = data.text
         }
     }
