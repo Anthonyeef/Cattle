@@ -34,7 +34,9 @@ class StatusDetailFragment : BaseListFragment(), StatusDetailContract.View {
     }
 
     override fun showStatusDetail(item: Status) {
+        items.clear()
         items.add(item)
+        adapter.notifyDataSetChanged()
     }
 
 
