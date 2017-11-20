@@ -40,8 +40,8 @@ class Status {
     @ColumnInfo(name = "in_reply_to_screen_name")
     var inReplyToScreenName: String = ""
 
-    /*@ColumnInfo(name = "repo_status_id")
-    var repostStatusId: String = ""*/
+    @ColumnInfo(name = "repo_status_id")
+    var repostStatusId: String = ""
 
     @ColumnInfo(name = "repost_user_id")
     var repostUserId: String = ""

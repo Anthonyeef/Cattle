@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.Toolbar
 import io.github.anthonyeef.cattle.R
+import io.github.anthonyeef.cattle.extension.bindFragment
 import io.github.anthonyeef.cattle.fragment.StatusDetailFragment
 import io.github.anthonyeef.cattle.fragment.StatusDetailFragment.Companion.KEY_STATUS_ID
 import io.github.anthonyeef.cattle.presenter.StatusDetailPresenter
@@ -53,15 +54,8 @@ class StatusDetailActivity : BaseActivity() {
     private fun setupDetailFragment() {
         val statusId = intent.getStringExtra(EXTRA_STATUS_ID)
         statusId?.let {
-            var detailFragment = supportFragmentManager.findFragmentById(R.id.contentFrame) as? StatusDetailFragment
-            if (detailFragment == null) {
-                detailFragment = StatusDetailFragment().withArguments(KEY_STATUS_ID to it)
-
-                supportFragmentManager.beginTransaction()
-                        .add(R.id.contentFrame, detailFragment)
-                        .commit()
-            }
-
+            val detailFragment = StatusDetailFragment().withArguments(KEY_STATUS_ID to it)
+            bindFragment(detailFragment)
             StatusDetailPresenter(detailFragment, it)
         }
     }
