@@ -22,7 +22,7 @@ abstract class BaseListFragment : BaseFragment() {
     protected lateinit var items: Items
     private var swipeRefreshLayout: SwipeRefreshLayout? = null
 
-    var list: RecyclerView? = null
+    protected var list: RecyclerView? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

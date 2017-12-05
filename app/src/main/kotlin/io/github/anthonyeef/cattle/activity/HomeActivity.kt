@@ -159,6 +159,13 @@ class HomeActivity : BaseActivity() {
                 R.id.nav_test_field -> {
                     bindDrawerAction { startActivity(intentFor<TestFieldActivity>()) }
                 }
+
+                R.id.nav_profile -> {
+                    bindDrawerAction {
+                        startActivity(intentFor<ProfileActivity>(ProfileActivity.EXTRA_USER_ID to SharedPreferenceUtils.getString(KEY_CURRENT_USER_ID) ))
+                    }
+                }
+
                 else -> {
 
                 }
