@@ -7,11 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.RelativeLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import de.hdodenhof.circleimageview.CircleImageView
 import io.github.anthonyeef.cattle.R
+import io.github.anthonyeef.cattle.activity.ProfileActivity
 import io.github.anthonyeef.cattle.activity.StatusDetailActivity
 import io.github.anthonyeef.cattle.activity.StatusDetailActivity.Companion.EXTRA_STATUS_ID
 import io.github.anthonyeef.cattle.constant.app
@@ -21,8 +21,8 @@ import io.github.anthonyeef.cattle.extension.show
 import io.github.anthonyeef.cattle.utils.CatLogger
 import io.github.anthonyeef.cattle.utils.StatusParsingUtils
 import io.github.anthonyeef.cattle.utils.TimeUtils
-import io.github.anthonyeef.cattle.utils.bindView
 import me.drakeet.multitype.ItemViewBinder
+import org.jetbrains.anko.find
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.newTask
 import org.jetbrains.anko.onClick
@@ -34,9 +34,7 @@ class StatusItemViewProvider : ItemViewBinder<Status, StatusItemViewProvider.Sta
 
     override fun onCreateViewHolder(inflater: LayoutInflater, parent: ViewGroup): StatusFeedViewHolder {
         val statusView = inflater.inflate(R.layout.view_item_status, parent, false)
-        val viewHolder = StatusFeedViewHolder(statusView)
-        viewHolder.bindView<RelativeLayout>(R.layout.view_item_status)
-        return viewHolder
+        return StatusFeedViewHolder(statusView)
     }
 
     override fun onBindViewHolder(holder: StatusFeedViewHolder, t: Status) {
@@ -44,19 +42,24 @@ class StatusItemViewProvider : ItemViewBinder<Status, StatusItemViewProvider.Sta
     }
 
     inner class StatusFeedViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), CatLogger {
-        val avatar: CircleImageView by bindView<CircleImageView>(R.id.avatar)
-        val displayName: TextView by bindView<TextView>(R.id.user_display_name)
-        val userName: TextView by bindView<TextView>(R.id.username)
-        val createTime: TextView by bindView<TextView>(R.id.create_time)
-        val content: TextView by bindView<TextView>(android.R.id.content)
-        val previewImageTopMargin by bindView<Space>(R.id.margin_above_image)
-        val previewImage: ImageView by bindView<ImageView>(R.id.status_image_preview)
+        private val avatar: CircleImageView by lazy { itemView.find<CircleImageView>(R.id.avatar) }
+        private val displayName: TextView by lazy { itemView.find<TextView>(R.id.user_display_name) }
+        private val userName: TextView by lazy { itemView.find<TextView>(R.id.username) }
+        private val createTime: TextView by lazy { itemView.find<TextView>(R.id.create_time) }
+        private val content: TextView by lazy { itemView.find<TextView>(android.R.id.content) }
+        private val previewImageTopMargin by lazy { itemView.find<Space>(R.id.margin_above_image) }
+        private val previewImage: ImageView by lazy { itemView.find<ImageView>(R.id.status_image_preview) }
 
         @SuppressLint("SetTextI18n")
         fun bindData(status: Status) {
             Glide.with(avatar.context)
                     .load(status.user?.profileImageUrlLarge)
                     .into(avatar)
+            avatar.onClick {
+                status.user?.let {
+                    app.startActivity(app.intentFor<ProfileActivity>(ProfileActivity.EXTRA_USER_ID to it.id).newTask())
+                }
+            }
             displayName.text = status.user?.screenName
             userName.text = " @${status.user?.id}"
             createTime.text = TimeUtils.prettyFormat(status.createdAt)
