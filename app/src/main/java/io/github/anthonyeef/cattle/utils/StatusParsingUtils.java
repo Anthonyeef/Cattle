@@ -39,6 +39,18 @@ public class StatusParsingUtils {
         textView.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
+    public static void setSource(TextView textView, String source) {
+        source = "来自" + source;
+        @SuppressWarnings("deprecation")
+        String plainText = Build.VERSION.SDK_INT > 24 ?
+                Html.fromHtml(source, FROM_HTML_MODE_LEGACY).toString() : Html.fromHtml(source).toString();
+
+        SpannableString spannable = new SpannableString(plainText);
+        Linkify.addLinks(spannable, Linkify.WEB_URLS);
+        textView.setText(spannable, TextView.BufferType.SPANNABLE);
+        textView.setMovementMethod(LinkMovementMethod.getInstance());
+    }
+
     private static void removeUnderLines(final SpannableString spannable) {
         URLSpan[] spans = spannable.getSpans(0, spannable.length(), URLSpan.class);
         for (final URLSpan span : spans) {

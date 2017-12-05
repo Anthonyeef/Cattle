@@ -17,15 +17,20 @@
     <dimen name="vertical_padding_tiny">4dp</dimen>
 
     <dimen name="avatar_size">64dp</dimen>
+    <dimen name="avatar_size_large">72dp</dimen>
     <dimen name="avatar_size_medium">56dp</dimen>
     <dimen name="avatar_size_normal">40dp</dimen>
     <dimen name="avatar_size_home">28dp</dimen>
 
     <dimen name="fab_margin">12dp</dimen>
 
+    <dimen name="text_size_tiny">12sp</dimen>
     <dimen name="text_size_small">14sp</dimen>
     <dimen name="text_size_normal">16sp</dimen>
     <dimen name="text_size_medium">18sp</dimen>
 
     <dimen name="compose_action_size">50dp</dimen>
+
+    <!-- ProfileFragment -->
+    <dimen name="height_profile_background_max">160dp</dimen>
 </resources>

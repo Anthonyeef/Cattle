@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <ImageView
+        android:id="@+id/profile_bg"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_profile_background_max"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <android.support.v4.widget.Space
+        android:id="@+id/dummy_space"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        app:layout_constraintBottom_toBottomOf="@id/profile_bg"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@id/avatar"
+        android:layout_width="@dimen/avatar_size_large"
+        android:layout_height="@dimen/avatar_size_large"
+        android:layout_marginStart="@dimen/horizontal_padding_normal"
+        app:civ_border_width="2dp"
+        app:civ_border_color="@android:color/white"
+        app:civ_border_overlay="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/dummy_space"
+        />
+
+    <TextView
+        android:id="@id/user_display_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/vertical_padding_normal"
+        android:textSize="@dimen/text_size_medium"
+        android:textStyle="bold"
+        android:textColor="@color/text_color_normal"
+        app:layout_constraintStart_toStartOf="@id/avatar"
+        app:layout_constraintTop_toBottomOf="@id/avatar"
+        />
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/vertical_padding_small"
+        android:paddingStart="0dp"
+        android:paddingEnd="@dimen/horizontal_padding_normal"
+        android:textSize="@dimen/text_size_small"
+        android:textColor="@color/text_color_normal"
+        app:layout_constraintStart_toStartOf="@id/avatar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/user_display_name"
+        />
+
+</android.support.constraint.ConstraintLayout>

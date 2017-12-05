@@ -22,7 +22,12 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.StatusDetailActivity"/>
+        <activity android:name=".activity.StatusDetailActivity" />
+
+        <activity
+            android:name=".activity.ProfileActivity"
+            android:theme="@style/AppTheme.Transparent"
+            />
 
         <activity
             android:name=".activity.LoginActivity"
