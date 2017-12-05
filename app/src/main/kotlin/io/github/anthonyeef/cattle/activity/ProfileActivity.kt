@@ -10,7 +10,7 @@ import org.jetbrains.anko.support.v4.withArguments
 import org.jetbrains.anko.verticalLayout
 
 /**
- *
+ * host activity for [ProfileFragment]
  */
 class ProfileActivity : BaseActivity() {
 

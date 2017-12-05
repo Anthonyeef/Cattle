@@ -9,7 +9,9 @@ import io.github.anthonyeef.cattle.data.statusData.Status
 import io.github.anthonyeef.cattle.view.StatusItemDetailViewProvider
 
 /**
+ * Detail fragment of one status.
  *
+ * Show more info than timeline list.
  */
 class StatusDetailFragment : BaseListFragment(), StatusDetailContract.View {
 

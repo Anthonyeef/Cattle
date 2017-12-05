@@ -8,7 +8,7 @@ import io.github.anthonyeef.cattle.view.ProfileItemViewBinder
 import io.github.anthonyeef.cattle.view.ProfileStatusViewBinder
 
 /**
- *
+ * Personal info fragment. Display personal info, fanfou list, fav fanfou, etc.
  */
 class ProfileFragment : BaseListFragment(), ProfileContract.View {
 
