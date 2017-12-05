@@ -44,7 +44,9 @@ class StatusDetailPresenter() : StatusDetailContract.Presenter {
 
 
     private fun getStatusById(id: String): Flowable<Status> {
-        return Flowable.concat(Injection.provideStatusDao().getStatusById(id), statusService.getFanfouById(id))
+        return Flowable.concat(Injection.provideStatusDao().getStatusById(id).toFlowable(), statusService.getFanfouById(id))
+                .firstOrError()
+                .toFlowable()
     }
 
 
