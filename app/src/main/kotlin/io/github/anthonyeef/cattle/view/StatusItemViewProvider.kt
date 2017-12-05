@@ -56,7 +56,6 @@ class StatusItemViewProvider : ItemViewBinder<Status, StatusItemViewProvider.Sta
         fun bindData(status: Status) {
             Glide.with(avatar.context)
                     .load(status.user?.profileImageUrlLarge)
-                    .dontAnimate()
                     .into(avatar)
             displayName.text = status.user?.screenName
             userName.text = " @${status.user?.id}"

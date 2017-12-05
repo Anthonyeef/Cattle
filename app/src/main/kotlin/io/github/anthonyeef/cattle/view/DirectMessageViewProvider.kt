@@ -43,7 +43,6 @@ class DirectMessageViewProvider : ItemViewBinder<DirectMessage, DirectMessageVie
         fun bindData(data: DirectMessage) {
             Glide.with(avatar.context)
                     .load(data.sender?.profileImageUrlLarge)
-                    .dontAnimate()
                     .into(avatar)
             displayName.text = data.senderScreenName
             userName.text = " @${data.sender?.id}"
