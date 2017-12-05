@@ -22,7 +22,7 @@ class Status {
     @ColumnInfo
     var source: String = ""
 
-    @ColumnInfo(name = "created_at")
+    @ColumnInfo(name = "status_created_at")
     var createdAt: String = ""
 
     @ColumnInfo

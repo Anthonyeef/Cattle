@@ -4,7 +4,7 @@ import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.OnConflictStrategy
 import android.arch.persistence.room.Query
-import io.reactivex.Flowable
+import io.reactivex.Maybe
 
 /**
  * [Status] data access object class
@@ -17,11 +17,11 @@ interface StatusDao {
 
 
     @Query("SELECT * FROM Status WHERE status_id LIKE :id")
-    fun getStatusById(id: String): Flowable<Status>
+    fun getStatusById(id: String): Maybe<Status>
 
 
     @Query("SELECT * FROM embedded_status WHERE owner_id LIKE :id")
-    fun getRepostStatus(id: String): Flowable<EmbeddedStatus>
+    fun getRepostStatus(id: String): Maybe<EmbeddedStatus>
 
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
