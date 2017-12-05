@@ -1,5 +1,6 @@
 package io.github.anthonyeef.cattle.view
 
+import android.annotation.SuppressLint
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import de.hdodenhof.circleimageview.CircleImageView
 import io.github.anthonyeef.cattle.R
+import io.github.anthonyeef.cattle.constant.app
 import io.github.anthonyeef.cattle.data.userData.UserInfo
 import me.drakeet.multitype.ItemViewBinder
 import org.jetbrains.anko.find
@@ -33,6 +35,7 @@ class ProfileItemViewBinder : ItemViewBinder<UserInfo, ProfileItemViewBinder.Pro
         private val profileDisplayName: TextView by lazy { itemView.find<TextView>(R.id.user_display_name) }
         private val profileDescription: TextView by lazy { itemView.find<TextView>(R.id.description) }
 
+        @SuppressLint("SetTextI18n")
         fun bindUserInfo(item: UserInfo) {
             Glide.with(itemView.context)
                     .load(item.profileBackgroundImageUrl)
@@ -43,7 +46,7 @@ class ProfileItemViewBinder : ItemViewBinder<UserInfo, ProfileItemViewBinder.Pro
                     .into(profileAvatar)
 
             profileDisplayName.text = item.screenName
-            profileDescription.text = item.description
+            profileDescription.text = app.resources.getString(R.string.text_self_intro) + item.description
         }
     }
 }
