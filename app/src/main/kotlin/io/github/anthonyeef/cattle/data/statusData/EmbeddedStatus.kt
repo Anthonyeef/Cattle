@@ -20,6 +20,6 @@ class EmbeddedStatus {
     @PrimaryKey
     var id: String = ""
 
-    @ColumnInfo(name = "owner_id")
+    @ColumnInfo(name = "owner_id", index = true)
     var ownerId: Int? = null
 }
