@@ -14,7 +14,7 @@ import org.jetbrains.anko.findOptional
 import org.jetbrains.anko.support.v4.withArguments
 
 /**
- *
+ * host activity for [StatusDetailFragment]
  */
 class StatusDetailActivity : BaseActivity() {
 

@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import de.hdodenhof.circleimageview.CircleImageView
 import io.github.anthonyeef.cattle.R
 import io.github.anthonyeef.cattle.data.statusData.Status
+import io.github.anthonyeef.cattle.extension.goneIf
 import io.github.anthonyeef.cattle.utils.StatusParsingUtils
 import io.github.anthonyeef.cattle.utils.TimeUtils
 import me.drakeet.multitype.ItemViewBinder
@@ -43,9 +44,12 @@ class StatusItemDetailViewProvider : ItemViewBinder<Status, StatusItemDetailView
                     .load(item.user?.profileImageUrlLarge)
                     .into(avatar)
 
-            Glide.with(itemView.context)
-                    .load(item.photo?.largeurl)
+            statusPhoto.goneIf(item.photo == null)
+            item.photo?.let {
+                Glide.with(itemView.context)
+                    .load(it.largeurl)
                     .into(statusPhoto)
+            }
 
             userName.text = item.user?.screenName
             userId.text = "@" + item.user?.id

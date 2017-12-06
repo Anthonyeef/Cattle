@@ -36,7 +36,7 @@
     <!-- Divider -->
     <style name="Widget.Cattle.Divider">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">3px</item>
+        <item name="android:layout_height">1.5px</item>
         <item name="android:background">@color/divider_background_color</item>
     </style>
 
