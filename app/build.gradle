@@ -98,7 +98,7 @@ dependencies {
         exclude group: 'com.android.support'
     }
 
-    compile 'com.android.support.constraint:constraint-layout:1.1.0-beta3'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0-beta3'
 
     implementation 'org.ocpsoft.prettytime:prettytime:4.0.1.Final'
 
