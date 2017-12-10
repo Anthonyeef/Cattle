@@ -21,7 +21,7 @@ import io.github.anthonyeef.cattle.presenter.ComposePresenter
 import io.github.anthonyeef.cattle.utils.bindOptionalView
 import io.github.anthonyeef.cattle.utils.bindView
 import org.jetbrains.anko.findOptional
-import org.jetbrains.anko.onClick
+import org.jetbrains.anko.sdk25.listeners.onClick
 import org.jetbrains.anko.wrapContent
 
 /**

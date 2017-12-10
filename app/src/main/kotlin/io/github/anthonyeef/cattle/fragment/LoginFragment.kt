@@ -16,6 +16,7 @@ import io.github.anthonyeef.cattle.presenter.LoginPresenter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import org.jetbrains.anko.*
+import org.jetbrains.anko.sdk25.listeners.onClick
 import org.jetbrains.anko.support.v4.UI
 import org.jetbrains.anko.support.v4.browse
 import org.jetbrains.anko.support.v4.toast
@@ -99,11 +100,9 @@ class LoginFragment : BaseFragment(), LoginContract.View {
                 }
 
                 checkCredential = button("Check credential") {
-                    lparams(width = wrapContent, height = wrapContent) {
-                        topMargin = verticalPaddingNormal
-                    }
-
                     onClick { mLoginPresenter.checkCredential() }
+                }.lparams(width = wrapContent, height = wrapContent) {
+                    topMargin = verticalPaddingNormal
                 }
             }
         }.view

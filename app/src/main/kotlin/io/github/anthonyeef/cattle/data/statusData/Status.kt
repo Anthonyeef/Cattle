@@ -59,6 +59,5 @@ class Status {
     var user: UserInfo? = null
 
     @Embedded
-    @Ignore
     var photo: Photo? = null
 }

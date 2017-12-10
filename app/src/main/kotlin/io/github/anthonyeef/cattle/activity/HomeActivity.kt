@@ -28,7 +28,11 @@ import io.github.anthonyeef.cattle.fragment.MentionListFragment
 import io.github.anthonyeef.cattle.utils.SharedPreferenceUtils
 import io.github.anthonyeef.cattle.utils.bindOptionalView
 import io.github.anthonyeef.cattle.utils.bindView
-import org.jetbrains.anko.*
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.findOptional
+import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.sdk25.listeners.onClick
+import org.jetbrains.anko.uiThread
 
 /**
  * HomeActivity.
@@ -105,7 +109,9 @@ class HomeActivity : BaseActivity() {
         val userName = navHeader?.findOptional<TextView>(R.id.nav_user_name)
         val navBg = navHeader?.findOptional<ImageView>(R.id.nav_header_bg)
 
-        doAsync {
+        doAsync(exceptionHandler = {
+            // todo
+        }) {
             val userInfo: UserInfo? = Injection.provideUserInfoDao()
                     .getUserInfoById(SharedPreferenceUtils.getString(KEY_CURRENT_USER_ID))
 

@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
-def ankoLibraryVersion = '0.9'
+def ankoLibraryVersion = '0.10.3'
 
 kapt {
 
@@ -37,11 +37,13 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            useProguard true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
             minifyEnabled false
+            useProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -75,7 +77,8 @@ dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
-    implementation "org.jetbrains.anko:anko-sdk23:$ankoLibraryVersion"
+    implementation "org.jetbrains.anko:anko-sdk25:$ankoLibraryVersion"
+    implementation "org.jetbrains.anko:anko-sdk25-listeners:$ankoLibraryVersion"
     implementation "org.jetbrains.anko:anko-appcompat-v7:$ankoLibraryVersion"
     implementation "org.jetbrains.anko:anko-design:$ankoLibraryVersion"
 

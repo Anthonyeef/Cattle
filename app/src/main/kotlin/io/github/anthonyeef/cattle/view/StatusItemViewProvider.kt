@@ -18,14 +18,13 @@ import io.github.anthonyeef.cattle.constant.app
 import io.github.anthonyeef.cattle.data.statusData.Status
 import io.github.anthonyeef.cattle.extension.gone
 import io.github.anthonyeef.cattle.extension.show
-import io.github.anthonyeef.cattle.utils.CatLogger
 import io.github.anthonyeef.cattle.utils.StatusParsingUtils
 import io.github.anthonyeef.cattle.utils.TimeUtils
 import me.drakeet.multitype.ItemViewBinder
 import org.jetbrains.anko.find
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.newTask
-import org.jetbrains.anko.onClick
+import org.jetbrains.anko.sdk25.listeners.onClick
 
 /**
  *
@@ -41,7 +40,7 @@ class StatusItemViewProvider : ItemViewBinder<Status, StatusItemViewProvider.Sta
         holder.bindData(t)
     }
 
-    inner class StatusFeedViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), CatLogger {
+    inner class StatusFeedViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val avatar: CircleImageView by lazy { itemView.find<CircleImageView>(R.id.avatar) }
         private val displayName: TextView by lazy { itemView.find<TextView>(R.id.user_display_name) }
         private val userName: TextView by lazy { itemView.find<TextView>(R.id.username) }
