@@ -40,7 +40,7 @@ class StatusItemViewProvider : ItemViewBinder<Status, StatusItemViewProvider.Sta
         holder.bindData(t)
     }
 
-    inner class StatusFeedViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), CatLogger {
+    inner class StatusFeedViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val avatar: CircleImageView by lazy { itemView.find<CircleImageView>(R.id.avatar) }
         private val displayName: TextView by lazy { itemView.find<TextView>(R.id.user_display_name) }
         private val userName: TextView by lazy { itemView.find<TextView>(R.id.username) }
