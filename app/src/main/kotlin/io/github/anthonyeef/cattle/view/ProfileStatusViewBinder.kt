@@ -19,7 +19,7 @@ import me.drakeet.multitype.ItemViewBinder
 import org.jetbrains.anko.find
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.newTask
-import org.jetbrains.anko.onClick
+import org.jetbrains.anko.sdk25.listeners.onClick
 
 /**
  *

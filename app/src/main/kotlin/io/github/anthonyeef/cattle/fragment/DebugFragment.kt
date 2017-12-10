@@ -12,6 +12,7 @@ import io.github.anthonyeef.cattle.extension.navigateTo
 import io.github.anthonyeef.cattle.extension.show
 import io.github.anthonyeef.cattle.presenter.DebugPresenter
 import org.jetbrains.anko.*
+import org.jetbrains.anko.sdk25.listeners.onClick
 import org.jetbrains.anko.support.v4.UI
 
 /**
