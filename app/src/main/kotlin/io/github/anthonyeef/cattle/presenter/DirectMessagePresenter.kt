@@ -14,7 +14,6 @@ class DirectMessagePresenter() : DirectMessageContract.Presenter {
     lateinit var directListView: DirectMessageContract.View
     var isDataLoaded: Boolean = false
     var _disposable: CompositeDisposable = CompositeDisposable()
-    val directMessageService = ServiceGenerator.createDefaultService(DirectMessageService::class.java)
 
     constructor(view: DirectMessageContract.View): this() {
         directListView = view
@@ -22,6 +21,7 @@ class DirectMessagePresenter() : DirectMessageContract.Presenter {
     }
 
     override fun loadDataFromRemote() {
+        val directMessageService = ServiceGenerator.createDefaultService(DirectMessageService::class.java)
         _disposable.add(directMessageService.getDirectMessagesList()
                 .subscribeOn(Schedulers.io())
                 .doOnSubscribe { directListView.setLoadingProgressBar(true) }
