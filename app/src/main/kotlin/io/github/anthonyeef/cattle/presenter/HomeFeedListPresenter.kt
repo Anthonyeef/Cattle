@@ -7,18 +7,20 @@ import io.github.anthonyeef.cattle.contract.HomeFeedListContract
 import io.github.anthonyeef.cattle.data.statusData.Status
 import io.github.anthonyeef.cattle.service.HomeTimelineService
 import io.github.anthonyeef.cattle.service.ServiceGenerator
-import io.github.anthonyeef.cattle.utils.SharedPreferenceUtils
+import io.github.anthonyeef.cattle.utils.PrefUtils
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.info
 import org.jetbrains.anko.uiThread
 import java.util.concurrent.atomic.AtomicInteger
 
 /**
  *
  */
-class HomeFeedListPresenter(): HomeFeedListContract.Presenter {
+class HomeFeedListPresenter(): HomeFeedListContract.Presenter, AnkoLogger {
 
     companion object {
         val TTL = 10 * 60 * 1000
@@ -33,7 +35,7 @@ class HomeFeedListPresenter(): HomeFeedListContract.Presenter {
 
     lateinit var loadingCount: AtomicInteger
 
-    var lastUpdateTime: Long = SharedPreferenceUtils.getLong(KEY_HOME_TIMELINE_LAST_UPDATE_TIME, TIME_GOD_CREAT_LIGHT)
+    var lastUpdateTime: Long = PrefUtils.getLong(KEY_HOME_TIMELINE_LAST_UPDATE_TIME, TIME_GOD_CREAT_LIGHT)
 
     var lastItemId: String = ""
 
@@ -51,6 +53,7 @@ class HomeFeedListPresenter(): HomeFeedListContract.Presenter {
 
     override fun loadDataFromCache() {
         doAsync {
+            info("load cache")
             val status: List<Status> = Injection.provideStatusDao().getStatus()
             uiThread {
                 if (status.isNotEmpty()) {
@@ -96,7 +99,8 @@ class HomeFeedListPresenter(): HomeFeedListContract.Presenter {
                             }
                             lastUpdateTime = System.currentTimeMillis()
                             lastItemId = statuses[statuses.size - 1].id
-                            SharedPreferenceUtils.putLong(KEY_HOME_TIMELINE_LAST_UPDATE_TIME, lastUpdateTime)
+                            PrefUtils.put(KEY_HOME_TIMELINE_LAST_UPDATE_TIME, lastUpdateTime)
+                            info("load from remote")
                         },
                         { error ->
                             if (homeFeedListView.isActivated()) {

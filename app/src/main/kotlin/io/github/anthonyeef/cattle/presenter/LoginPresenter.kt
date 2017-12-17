@@ -11,7 +11,7 @@ import io.github.anthonyeef.cattle.service.AccountService
 import io.github.anthonyeef.cattle.service.LoginService
 import io.github.anthonyeef.cattle.service.ServiceGenerator
 import io.github.anthonyeef.cattle.utils.CatLogger
-import io.github.anthonyeef.cattle.utils.SharedPreferenceUtils
+import io.github.anthonyeef.cattle.utils.PrefUtils
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -92,12 +92,12 @@ class LoginPresenter() : LoginContract.Presenter, CatLogger {
     private fun saveToken(response: String) {
         accessToken = response.getQueryParameter("oauth_token")
         accessTokenSecret = response.getQueryParameter("oauth_token_secret")
-        SharedPreferenceUtils.putString(KEY_ACCESS_TOKEN, accessToken)
-        SharedPreferenceUtils.putString(KEY_ACCESS_TOKEN_SECRET, accessTokenSecret)
+        PrefUtils.put(KEY_ACCESS_TOKEN, accessToken)
+        PrefUtils.put(KEY_ACCESS_TOKEN_SECRET, accessTokenSecret)
     }
 
     private fun saveUserInfo(user: UserInfo) {
-        SharedPreferenceUtils.putString(KEY_CURRENT_USER_ID, user.id)
+        PrefUtils.put(KEY_CURRENT_USER_ID, user.id)
                 Injection.provideUserInfoDao().insertUserInfo(user)
         info("Save userInfo done")
     }

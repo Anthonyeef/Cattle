@@ -1,5 +1,6 @@
 package io.github.anthonyeef.cattle.activity
 
+import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.support.annotation.StringRes
 import android.support.design.widget.FloatingActionButton
@@ -25,14 +26,12 @@ import io.github.anthonyeef.cattle.fragment.BaseListFragment
 import io.github.anthonyeef.cattle.fragment.DirectMessageInboxFragment
 import io.github.anthonyeef.cattle.fragment.HomeFeedListFragment
 import io.github.anthonyeef.cattle.fragment.MentionListFragment
-import io.github.anthonyeef.cattle.utils.SharedPreferenceUtils
+import io.github.anthonyeef.cattle.livedata.SharedPreferenceStringLiveData
+import io.github.anthonyeef.cattle.utils.PrefUtils
 import io.github.anthonyeef.cattle.utils.bindOptionalView
 import io.github.anthonyeef.cattle.utils.bindView
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.findOptional
-import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
-import org.jetbrains.anko.uiThread
 
 /**
  * HomeActivity.
@@ -40,20 +39,18 @@ import org.jetbrains.anko.uiThread
 class HomeActivity : BaseActivity() {
 
     private val drawerLayout: DrawerLayout by bindView<DrawerLayout>(R.id.drawer_layout)
-
     private val navigation: NavigationView by bindView<NavigationView>(R.id.nav_view)
-
     private val toolbar: Toolbar? by bindOptionalView<Toolbar>(R.id.toolbar)
-
     private val viewpager: ViewPager by bindView<ViewPager>(R.id.viewpager)
-
     private val tabLayout: TabLayout by bindView<TabLayout>(R.id.tabs)
-
     private val composeBtn: FloatingActionButton by bindView<FloatingActionButton>(R.id.fab)
 
-    var drawerAction: Any.() -> Unit = { }
+    private var toolbarAvatar: CircleImageView? = null
+    private var navigationHeaderAvatar: CircleImageView? = null
+    private var navigationHeaderUserName: TextView? = null
 
-    lateinit var drawerToggle: ActionBarDrawerToggle
+    private var drawerAction: Any.() -> Unit = { }
+    lateinit private var drawerToggle: ActionBarDrawerToggle
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -69,8 +66,63 @@ class HomeActivity : BaseActivity() {
         setupViewpager()
         setupTabLayout()
 
+        initUserInfoViewModel()
+
         composeBtn.onClick {
             startActivity(intentFor<ComposeActivity>())
+        }
+    }
+
+
+    override fun onBackPressed() {
+        if (drawerLayout.isDrawerOpen(Gravity.START)) {
+            drawerLayout.closeDrawer(Gravity.START)
+        } else {
+            super.onBackPressed()
+        }
+    }
+
+
+    private fun initUserInfoViewModel() {
+         SharedPreferenceStringLiveData(PrefUtils.getDefaultPref(), KEY_CURRENT_USER_ID, "").observe(this, Observer {
+             showUserInfoInToolbar()
+             showUserInfoInDrawer()
+         })
+    }
+
+
+    private fun showUserInfoInToolbar() {
+        doAsync(exceptionHandler = {
+            // todo: report to fabric
+        }) {
+            val userInfo: UserInfo? = Injection.provideUserInfoDao()
+                    .loadUserInfoSync(PrefUtils.getString(KEY_CURRENT_USER_ID))
+            activityUiThread {
+                userInfo?.let {
+                    Glide.with(toolbarAvatar?.context)
+                            .load(it.profileImageUrlLarge)
+                            .into(toolbarAvatar)
+                }
+            }
+        }
+    }
+
+
+    private fun showUserInfoInDrawer() {
+        doAsync(exceptionHandler = {
+            // todo: report to fabric
+        }) {
+            val userInfo: UserInfo? = Injection.provideUserInfoDao()
+                    .loadUserInfoSync(PrefUtils.getString(KEY_CURRENT_USER_ID))
+
+            uiThread {
+                userInfo?.let {
+                    Glide.with(navigationHeaderAvatar?.context)
+                            .load(it.profileImageUrlLarge)
+                            .into(navigationHeaderAvatar)
+                    navigationHeaderUserName?.text = it.screenName
+                }
+            }
         }
     }
 
@@ -79,22 +131,10 @@ class HomeActivity : BaseActivity() {
         toolbar?.let {
             setSupportActionBar(it)
 
-            val homeAvatar = it.findOptional<CircleImageView>(R.id.toolbar_avatar)
-            homeAvatar?.let { avatar ->
-                doAsync {
-                    val userInfo: UserInfo? = Injection.provideUserInfoDao()
-                            .getUserInfoById(SharedPreferenceUtils.getString(KEY_CURRENT_USER_ID))
-
-                    uiThread {
-                        Glide.with(avatar.context)
-                                .load(userInfo?.profileImageUrlLarge)
-                                .into(avatar)
-                        avatar.onClick {
-                            if (!drawerLayout.isDrawerOpen(Gravity.START)) {
-                                drawerLayout.openDrawer(Gravity.START)
-                            }
-                        }
-                    }
+            toolbarAvatar = it.findOptional(R.id.toolbar_avatar)
+            toolbarAvatar?.onClick {
+                if (!drawerLayout.isDrawerOpen(Gravity.START)) {
+                    drawerLayout.openDrawer(Gravity.START)
                 }
             }
         }
@@ -105,27 +145,13 @@ class HomeActivity : BaseActivity() {
 
     private fun setupProfileInDrawer() {
         val navHeader = navigation.getHeaderView(0)
-        val avatar = navHeader?.findOptional<CircleImageView>(R.id.nav_avatar)
-        val userName = navHeader?.findOptional<TextView>(R.id.nav_user_name)
         val navBg = navHeader?.findOptional<ImageView>(R.id.nav_header_bg)
+        navigationHeaderAvatar = navHeader?.findOptional(R.id.nav_avatar)
+        navigationHeaderUserName = navHeader?.findOptional<TextView>(R.id.nav_user_name)
 
-        doAsync(exceptionHandler = {
-            // todo
-        }) {
-            val userInfo: UserInfo? = Injection.provideUserInfoDao()
-                    .getUserInfoById(SharedPreferenceUtils.getString(KEY_CURRENT_USER_ID))
+        showUserInfoInDrawer()
 
-            uiThread {
-                userInfo?.let {
-                    Glide.with(avatar?.context)
-                            .load(it.profileImageUrlLarge)
-                            .into(avatar)
-                    userName?.text = it.screenName
-                }
-            }
-        }
-
-        avatar?.onClick {
+        navigationHeaderAvatar?.onClick {
             bindDrawerAction { startActivity(intentFor<LoginActivity>()) }
         }
 
@@ -168,7 +194,7 @@ class HomeActivity : BaseActivity() {
 
                 R.id.nav_profile -> {
                     bindDrawerAction {
-                        startActivity(intentFor<ProfileActivity>(ProfileActivity.EXTRA_USER_ID to SharedPreferenceUtils.getString(KEY_CURRENT_USER_ID) ))
+                        startActivity(intentFor<ProfileActivity>(ProfileActivity.EXTRA_USER_ID to PrefUtils.getString(KEY_CURRENT_USER_ID) ))
                     }
                 }
 
@@ -218,15 +244,6 @@ class HomeActivity : BaseActivity() {
     private fun updateTitle(@StringRes pageName: Int) {
         val title = toolbar?.findOptional<TextView>(R.id.title)
         title?.text = getString(pageName)
-    }
-
-
-    override fun onBackPressed() {
-        if (drawerLayout.isDrawerOpen(Gravity.START)) {
-            drawerLayout.closeDrawer(Gravity.START)
-        } else {
-            super.onBackPressed()
-        }
     }
 
 

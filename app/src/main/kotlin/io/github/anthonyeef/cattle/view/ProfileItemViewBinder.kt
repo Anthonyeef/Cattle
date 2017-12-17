@@ -16,7 +16,7 @@ import me.drakeet.multitype.ItemViewBinder
 import org.jetbrains.anko.find
 
 /**
- *
+ * Personal info item in the [io.github.anthonyeef.cattle.fragment.ProfileFragment]
  */
 class ProfileItemViewBinder : ItemViewBinder<UserInfo, ProfileItemViewBinder.ProfileItemViewHolder>() {
 
@@ -28,6 +28,7 @@ class ProfileItemViewBinder : ItemViewBinder<UserInfo, ProfileItemViewBinder.Pro
     override fun onBindViewHolder(holder: ProfileItemViewHolder, item: UserInfo) {
         holder.bindUserInfo(item)
     }
+
 
     inner class ProfileItemViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         private val profileBackground: ImageView by lazy { itemView.find<ImageView>(R.id.profile_bg) }
