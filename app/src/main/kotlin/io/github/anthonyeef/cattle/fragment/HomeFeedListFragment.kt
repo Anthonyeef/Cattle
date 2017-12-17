@@ -27,7 +27,6 @@ class HomeFeedListFragment : BaseListFragment(),
 
     lateinit var loadMoreDelegate: LoadMoreDelegate
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

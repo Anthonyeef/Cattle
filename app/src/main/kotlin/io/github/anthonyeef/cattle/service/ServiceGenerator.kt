@@ -8,7 +8,7 @@ import io.github.anthonyeef.cattle.constant.FanfouApiBaseUrl
 import io.github.anthonyeef.cattle.constant.KEY_ACCESS_TOKEN
 import io.github.anthonyeef.cattle.constant.KEY_ACCESS_TOKEN_SECRET
 import io.github.anthonyeef.cattle.httpInterceptor.Oauth1SigningInterceptor
-import io.github.anthonyeef.cattle.utils.SharedPreferenceUtils
+import io.github.anthonyeef.cattle.utils.PrefUtils
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -25,7 +25,7 @@ object ServiceGenerator {
             .create()
 
     private var logging = HttpLoggingInterceptor()
-            .setLevel(HttpLoggingInterceptor.Level.BODY)// default level
+            .setLevel(HttpLoggingInterceptor.Level.BASIC)// default level
 
     private var sBuilder = Retrofit.Builder().baseUrl(FanfouApiBaseUrl)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -41,8 +41,8 @@ object ServiceGenerator {
      * with default token and secret
      */
     fun <S> createDefaultService(serviceClass: Class<S>): S {
-        return createService(serviceClass, SharedPreferenceUtils.getString(KEY_ACCESS_TOKEN),
-                SharedPreferenceUtils.getString(KEY_ACCESS_TOKEN_SECRET))
+        return createService(serviceClass, PrefUtils.getString(KEY_ACCESS_TOKEN),
+                PrefUtils.getString(KEY_ACCESS_TOKEN_SECRET))
     }
 
     /**
