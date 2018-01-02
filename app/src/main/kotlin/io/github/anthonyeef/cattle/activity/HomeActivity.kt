@@ -14,8 +14,8 @@ import android.view.Gravity
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import com.bumptech.glide.Glide
 import de.hdodenhof.circleimageview.CircleImageView
+import io.github.anthonyeef.cattle.GlideApp
 import io.github.anthonyeef.cattle.Injection
 import io.github.anthonyeef.cattle.R
 import io.github.anthonyeef.cattle.adapter.ViewpagerAdapter
@@ -99,7 +99,7 @@ class HomeActivity : BaseActivity() {
                     .loadUserInfoSync(PrefUtils.getString(KEY_CURRENT_USER_ID))
             activityUiThread {
                 userInfo?.let {
-                    Glide.with(toolbarAvatar?.context)
+                    GlideApp.with(toolbarAvatar?.context)
                             .load(it.profileImageUrlLarge)
                             .into(toolbarAvatar)
                 }
@@ -117,7 +117,7 @@ class HomeActivity : BaseActivity() {
 
             uiThread {
                 userInfo?.let {
-                    Glide.with(navigationHeaderAvatar?.context)
+                    GlideApp.with(navigationHeaderAvatar?.context)
                             .load(it.profileImageUrlLarge)
                             .into(navigationHeaderAvatar)
                     navigationHeaderUserName?.text = it.screenName
@@ -155,7 +155,9 @@ class HomeActivity : BaseActivity() {
             bindDrawerAction { startActivity(intentFor<LoginActivity>()) }
         }
 
-        Glide.with(navBg?.context).load(R.raw.drawer_bg_3).into(navBg)
+        GlideApp.with(navBg?.context)
+                .load(R.raw.drawer_bg_3)
+                .into(navBg)
     }
 
 

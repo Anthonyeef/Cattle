@@ -10,6 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import de.hdodenhof.circleimageview.CircleImageView
+import io.github.anthonyeef.cattle.GlideApp
 import io.github.anthonyeef.cattle.R
 import io.github.anthonyeef.cattle.activity.ProfileActivity
 import io.github.anthonyeef.cattle.activity.StatusDetailActivity
@@ -51,9 +52,10 @@ class StatusItemViewProvider : ItemViewBinder<Status, StatusItemViewProvider.Sta
 
         @SuppressLint("SetTextI18n")
         fun bindData(status: Status) {
-            Glide.with(avatar.context)
+            GlideApp.with(avatar.context)
                     .load(status.user?.profileImageUrlLarge)
                     .into(avatar)
+
             avatar.onClick {
                 status.user?.let {
                     app.startActivity(app.intentFor<ProfileActivity>(ProfileActivity.EXTRA_USER_ID to it.id).newTask())
