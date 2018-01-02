@@ -163,7 +163,7 @@ class HomeActivity : BaseActivity() {
 
     private fun setupDrawer() {
         drawerToggle = object : ActionBarDrawerToggle(this, drawerLayout, R.string.drawer_open, R.string.drawer_close) {
-            override fun onDrawerOpened(drawerView: View?) {
+            override fun onDrawerOpened(drawerView: View) {
                 super.onDrawerOpened(drawerView)
 
                 composeBtn.hide(object : FloatingActionButton.OnVisibilityChangedListener() {
@@ -174,7 +174,7 @@ class HomeActivity : BaseActivity() {
                 })
             }
 
-            override fun onDrawerClosed(drawerView: View?) {
+            override fun onDrawerClosed(drawerView: View) {
                 super.onDrawerClosed(drawerView)
 
                 composeBtn.show()

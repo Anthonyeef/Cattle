@@ -28,7 +28,7 @@ class StatusDetailFragment : BaseListFragment(), StatusDetailContract.View {
         adapter.register(Status::class.java, StatusItemDetailViewProvider())
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val contentView =  super.onCreateView(inflater, container, savedInstanceState)
         disablePullToRefresh()
 

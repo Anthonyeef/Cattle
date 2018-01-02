@@ -15,7 +15,7 @@ import org.jetbrains.anko.verticalLayout
  */
 class TestFieldFragment : BaseFragment() {
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return UI {
             verticalLayout {
                 lparams(width = matchParent, height = matchParent)

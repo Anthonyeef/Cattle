@@ -46,12 +46,12 @@ class ComposeFragment : BaseFragment(), ComposeContract.View {
     }
 
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater?.inflate(R.layout.fragment_compose, container, false)
     }
 
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         sendBtn.onClick {
@@ -87,7 +87,7 @@ class ComposeFragment : BaseFragment(), ComposeContract.View {
 
     override fun sendFinish(success: Boolean) {
         if (success) {
-            activity.finish()
+            activity?.finish()
         }
     }
 
@@ -114,7 +114,7 @@ class ComposeFragment : BaseFragment(), ComposeContract.View {
             }
 
             it.setNavigationOnClickListener {
-                activity.onBackPressed()
+                activity?.onBackPressed()
             }
         }
 

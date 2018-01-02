@@ -42,7 +42,7 @@ class DebugFragment : BaseFragment(), DebugContract.View {
         HomeFeedListFragment().show(this)
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return UI {
             verticalLayout {
                 horizontalPadding = pageHorizontalPadding

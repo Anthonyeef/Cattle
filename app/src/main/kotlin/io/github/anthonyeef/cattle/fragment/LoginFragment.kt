@@ -86,7 +86,7 @@ class LoginFragment : BaseFragment(), LoginContract.View {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return UI {
             verticalLayout {
                 lparams(width = matchParent, height = matchParent)

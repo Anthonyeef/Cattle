@@ -33,10 +33,10 @@ abstract class BaseListFragment : BaseFragment() {
     }
 
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
 
-        val root = inflater?.inflate(R.layout.fragment_list, container, false)
+        val root = inflater.inflate(R.layout.fragment_list, container, false)
         list = root?.findOptional(android.R.id.list)
         list?.adapter = adapter
         list?.layoutManager = LinearLayoutManager(app)
