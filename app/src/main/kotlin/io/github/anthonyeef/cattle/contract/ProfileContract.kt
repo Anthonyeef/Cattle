@@ -6,7 +6,8 @@ import io.github.anthonyeef.cattle.data.statusData.Status
 import io.github.anthonyeef.cattle.data.userData.UserInfo
 
 /**
- *
+ * contract of user profile
+ * see [io.github.anthonyeef.cattle.fragment.ProfileFragment]
  */
 interface ProfileContract {
 
@@ -19,6 +20,8 @@ interface ProfileContract {
     interface Presenter : BasePresenter {
         fun loadProfile(forceUpdate: Boolean = false)
 
-        fun loadStatuses()
+        fun loadStatuses(clearData: Boolean = false)
+
+        fun isStatusLoading(): Boolean
     }
 }
