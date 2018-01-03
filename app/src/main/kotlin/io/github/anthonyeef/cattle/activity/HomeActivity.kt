@@ -66,7 +66,7 @@ class HomeActivity : BaseActivity() {
         setupViewpager()
         setupTabLayout()
 
-        initUserInfoViewModel()
+        subscribeToUserInfoChanged()
 
         composeBtn.onClick {
             startActivity(intentFor<ComposeActivity>())
@@ -83,7 +83,7 @@ class HomeActivity : BaseActivity() {
     }
 
 
-    private fun initUserInfoViewModel() {
+    private fun subscribeToUserInfoChanged() {
          SharedPreferenceStringLiveData(PrefUtils.getDefaultPref(), KEY_CURRENT_USER_ID, "").observe(this, Observer {
              showUserInfoInToolbar()
              showUserInfoInDrawer()

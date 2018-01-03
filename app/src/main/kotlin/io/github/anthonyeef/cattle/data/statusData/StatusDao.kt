@@ -29,4 +29,7 @@ interface StatusDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertRepostStatus(status: EmbeddedStatus)
+
+    @Query("DELETE FROM Status")
+    fun deleteAllStatus()
 }

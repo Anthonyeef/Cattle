@@ -15,6 +15,7 @@
     <dimen name="vertical_padding_normal">16dp</dimen>
     <dimen name="vertical_padding_small">8dp</dimen>
     <dimen name="vertical_padding_tiny">4dp</dimen>
+    <dimen name="vertical_padding_teeny">2dp</dimen>
 
     <dimen name="avatar_size">64dp</dimen>
     <dimen name="avatar_size_large">72dp</dimen>

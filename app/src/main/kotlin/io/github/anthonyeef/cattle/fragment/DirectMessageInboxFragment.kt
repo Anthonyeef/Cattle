@@ -3,9 +3,9 @@ package io.github.anthonyeef.cattle.fragment
 import android.os.Bundle
 import android.view.View
 import io.github.anthonyeef.cattle.contract.DirectMessageContract
+import io.github.anthonyeef.cattle.entity.DirectMessage
 import io.github.anthonyeef.cattle.exception.showException
 import io.github.anthonyeef.cattle.presenter.DirectMessagePresenter
-import io.github.anthonyeef.cattle.entity.DirectMessage
 import io.github.anthonyeef.cattle.utils.SwipeRefreshDelegate
 import io.github.anthonyeef.cattle.view.DirectMessageViewProvider
 
@@ -44,7 +44,7 @@ class DirectMessageInboxFragment : BaseListFragment(), DirectMessageContract.Vie
 
     override fun updateList(clearData: Boolean, data: List<DirectMessage>) {
         if (clearData) {
-            adapter.setItems(data)
+            adapter.items = data
             adapter.notifyDataSetChanged()
         }
     }
