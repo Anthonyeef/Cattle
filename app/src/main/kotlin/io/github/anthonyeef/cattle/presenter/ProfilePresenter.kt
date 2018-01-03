@@ -7,6 +7,7 @@ import io.github.anthonyeef.cattle.service.UserInfoService
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import java.util.concurrent.atomic.AtomicInteger
 
 /**
  *
@@ -20,11 +21,16 @@ class ProfilePresenter() : ProfileContract.Presenter {
     lateinit private var userId: String
     lateinit private var profileView: ProfileContract.View
 
+    lateinit var loadingCount: AtomicInteger
+
+    private var lastItemId: String = ""
+
     constructor(view: ProfileContract.View, id: String): this() {
         userId = id
         profileView = view
         profileView.setPresenter(this)
     }
+
 
     override fun loadProfile(forceUpdate: Boolean) {
         if (forceUpdate.not() && firstLoad.not()) {
@@ -34,7 +40,7 @@ class ProfilePresenter() : ProfileContract.Presenter {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnNext {
-                    loadStatuses()
+                    loadStatuses(clearData = true)
                 }
                 .subscribe(
                         {
@@ -48,13 +54,19 @@ class ProfilePresenter() : ProfileContract.Presenter {
         )
     }
 
-    override fun loadStatuses() {
-        _disposable.add(userTimelineService.getUserTimeline(id = userId)
+
+    override fun loadStatuses(clearData: Boolean) {
+        notifyStatusLoadingStarted()
+        _disposable.add(userTimelineService.getUserTimeline(id = userId, lastId = if (clearData) "" else lastItemId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .doFinally {
+                    notifyStatusLoadingFinished()
+                }
                 .subscribe(
                         { statuses ->
                             profileView.showStatuses(statuses)
+                            lastItemId = statuses.last().id
                         },
                         { error ->
                             // todo
@@ -63,11 +75,29 @@ class ProfilePresenter() : ProfileContract.Presenter {
         )
     }
 
+
+    override fun isStatusLoading(): Boolean {
+        return loadingCount.get() > 0
+    }
+
+
     override fun subscribe() {
+        loadingCount = AtomicInteger(0)
         loadProfile(false)
     }
 
+
     override fun unSubscribe() {
         _disposable.clear()
+    }
+
+
+    private fun notifyStatusLoadingStarted() {
+        loadingCount.getAndIncrement()
+    }
+
+
+    private fun notifyStatusLoadingFinished() {
+        loadingCount.decrementAndGet()
     }
 }

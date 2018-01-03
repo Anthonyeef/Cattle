@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#dddddd</color>
     <color name="colorAccent">#E91E63</color>
 
+    <color name="grey50">#fafafa</color>
     <color name="grey200">#EEEEEE</color>
     <color name="grey600">#757575</color>
     <color name="grey800">#424242</color>
