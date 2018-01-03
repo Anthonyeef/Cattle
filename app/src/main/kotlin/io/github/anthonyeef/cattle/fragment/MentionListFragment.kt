@@ -25,7 +25,7 @@ class MentionListFragment : BaseListFragment(), MentionListContract.View, SwipeR
         MentionListPresenter(this)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         refreshDelegate.attach(this)
     }

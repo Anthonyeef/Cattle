@@ -3,18 +3,19 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 def ankoLibraryVersion = '0.10.3'
+def androidSupportLibraryVersion = '27.0.2'
 
 kapt {
 
 }
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 27
     buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "io.github.anthonyeef.cattle"
         minSdkVersion 19
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -64,8 +65,8 @@ dependencies {
     })
     testImplementation 'junit:junit:4.12'
 
-    implementation 'com.android.support:appcompat-v7:26.1.0'
-    implementation 'com.android.support:design:26.1.0'
+    implementation "com.android.support:appcompat-v7:$androidSupportLibraryVersion"
+    implementation "com.android.support:design:$androidSupportLibraryVersion"
 
     implementation "android.arch.persistence.room:runtime:1.0.0"
     kapt "android.arch.persistence.room:compiler:1.0.0"
@@ -93,15 +94,16 @@ dependencies {
 
     implementation 'com.jakewharton.rxrelay2:rxrelay:2.0.0'
 
-    implementation 'com.github.bumptech.glide:okhttp3-integration:4.0.0'
-    implementation 'com.github.bumptech.glide:glide:4.3.1'
+    implementation 'com.github.bumptech.glide:okhttp3-integration:4.3.0'
+    implementation 'com.github.bumptech.glide:glide:4.4.0'
+    kapt 'com.github.bumptech.glide:compiler:4.4.0'
     implementation 'de.hdodenhof:circleimageview:2.1.0'
 
     implementation 'me.drakeet.multitype:multitype:3.0.1', {
         exclude group: 'com.android.support'
     }
 
-    implementation 'com.android.support.constraint:constraint-layout:1.1.0-beta3'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0-beta4'
 
     implementation 'org.ocpsoft.prettytime:prettytime:4.0.1.Final'
 

@@ -30,11 +30,13 @@ fun <T: FragmentActivity> T.showFragment(containerId: Int, fragmentToShow: Fragm
  *
  * @param fragmentToShow fragment ready to show
  */
-fun <T: FragmentActivity> T.showFragment(fragmentToShow: Fragment) {
+fun <T: FragmentActivity?> T.showFragment(fragmentToShow: Fragment) {
     if (isFragmentContainer()) {
-        supportFragmentManager.beginTransaction().replace(CONTAINER_ID, fragmentToShow)
-                .addToBackStack(fragmentToShow.TAG)
-                .commit()
+        this?.let {
+            supportFragmentManager.beginTransaction().replace(CONTAINER_ID, fragmentToShow)
+                    .addToBackStack(fragmentToShow.TAG)
+                    .commit()
+        }
     }
 }
 
@@ -42,8 +44,8 @@ fun <T: FragmentActivity> T.showFragment(fragmentToShow: Fragment) {
  * Method to check whether current activity have the container to hold fragment.
  * Default container with id [CONTAINER_ID]
  */
-fun <T: FragmentActivity> T.isFragmentContainer(): Boolean {
-    return this.findOptional<ViewGroup>(CONTAINER_ID) != null
+fun <T: FragmentActivity?> T.isFragmentContainer(): Boolean {
+    return this?.findOptional<ViewGroup>(CONTAINER_ID) != null
 }
 
 /**
