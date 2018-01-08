@@ -10,6 +10,7 @@
     <dimen name="horizontal_padding_small">8dp</dimen>
     <dimen name="horizontal_padding_tiny">4dp</dimen>
 
+    <dimen name="vertical_padding_huge">88dp</dimen>
     <dimen name="vertical_padding_large">56dp</dimen>
     <dimen name="vertical_padding_medium">32dp</dimen>
     <dimen name="vertical_padding_normal">16dp</dimen>
