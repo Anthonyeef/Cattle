@@ -20,10 +20,12 @@ import io.github.anthonyeef.cattle.data.statusData.Status
 import io.github.anthonyeef.cattle.data.userData.UserInfo
 import io.github.anthonyeef.cattle.extension.gone
 import io.github.anthonyeef.cattle.utils.LoadMoreDelegate
+import io.github.anthonyeef.cattle.view.ProfileHeaderCountView
 import io.github.anthonyeef.cattle.view.ProfileStatusViewBinder
 import me.drakeet.multitype.Items
 import me.drakeet.multitype.MultiTypeAdapter
 import org.jetbrains.anko.find
+import org.jetbrains.anko.info
 
 /**
  * Personal info fragment. Display personal info, fanfou list, fav fanfou, etc.
@@ -44,12 +46,16 @@ class ProfileFragment : BaseFragment(),
     private var profileAppbar: AppBarLayout? = null
     private var profileToolbarLayout: CollapsingToolbarLayout? = null
     private var profileToolbar: Toolbar? = null
-
     private var userStatusList: RecyclerView? = null
     private var items: Items = Items()
-    private var adapter: MultiTypeAdapter = MultiTypeAdapter(items)
 
-    lateinit var loadMoreDelegate: LoadMoreDelegate
+    private var followingCount: ProfileHeaderCountView? = null
+    private var followerCount: ProfileHeaderCountView? = null
+    private var statusCount: ProfileHeaderCountView? = null
+
+    private val adapter: MultiTypeAdapter by lazy { MultiTypeAdapter(items).apply { register(Status::class.java, ProfileStatusViewBinder()) } }
+
+    lateinit private var loadMoreDelegate: LoadMoreDelegate
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,7 +72,9 @@ class ProfileFragment : BaseFragment(),
         profileAppbar = contentView?.find(R.id.appbar)
         profileToolbarLayout = contentView?.find(R.id.toolbar_layout)
         profileToolbar = contentView?.find(R.id.toolbar)
-
+        followingCount = contentView?.find(R.id.following_count)
+        followerCount = contentView?.find(R.id.follower_count)
+        statusCount = contentView?.find(R.id.status_count)
         userStatusList = contentView?.find(android.R.id.list)
 
         return contentView
@@ -85,7 +93,6 @@ class ProfileFragment : BaseFragment(),
         profileToolbarLayout?.title = " "
 
         userStatusList?.adapter = adapter
-        adapter.register(Status::class.java, ProfileStatusViewBinder())
     }
 
 
@@ -118,11 +125,29 @@ class ProfileFragment : BaseFragment(),
                 .into(profileAvatar)
 
         profileUserName?.text = userInfo.screenName
+
         if (userInfo.description.isNotEmpty()) {
-            profileDescription?.text = getString(R.string.text_self_intro) + userInfo.description.trimIndent()
+            profileDescription?.text = getString(R.string.text_self_intro) + "\n" + userInfo.description.trimIndent()
         } else {
             profileDescription?.gone()
         }
+
+        // todo: implementation for real page
+        followingCount?.userProfileData = ProfileHeaderCountView.UserProfileDataEntity(
+                itemName = getString(R.string.text_following),
+                countNumber = userInfo.friendsCount,
+                operation = { info("clicked following count")
+                })
+        followerCount?.userProfileData = ProfileHeaderCountView.UserProfileDataEntity(
+                itemName = getString(R.string.text_follower),
+                countNumber = userInfo.followersCount,
+                operation = { info("clicked follower count")
+                })
+        statusCount?.userProfileData = ProfileHeaderCountView.UserProfileDataEntity(
+                itemName = getString(R.string.text_status),
+                countNumber = userInfo.statusesCount,
+                operation = { info("clicked status count")
+                })
     }
 
 

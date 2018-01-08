@@ -20,95 +20,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:contentScrim="@android:color/white"
+            app:statusBarScrim="@color/colorPrimaryDark"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             >
 
-            <android.support.constraint.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
-
-                <ImageView
-                    android:id="@+id/profile_bg"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/height_profile_background_max"
-                    android:scaleType="centerCrop"
-                    android:fitsSystemWindows="true"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    />
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@id/avatar"
-                    android:layout_width="@dimen/avatar_size_large"
-                    android:layout_height="@dimen/avatar_size_large"
-                    android:layout_marginStart="@dimen/horizontal_padding_normal"
-                    app:civ_border_width="2dp"
-                    app:civ_border_color="@android:color/white"
-                    app:civ_border_overlay="false"
-                    app:layout_constraintTop_toBottomOf="@id/profile_bg"
-                    app:layout_constraintBottom_toBottomOf="@id/profile_bg"
-                    app:layout_constraintStart_toStartOf="parent"
-                    />
-
-                <TextView
-                    android:id="@id/user_display_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/vertical_padding_small"
-                    android:layout_marginStart="@dimen/horizontal_padding_normal"
-                    android:textSize="@dimen/text_size_medium"
-                    android:textStyle="bold"
-                    android:textColor="@color/text_color_normal"
-                    app:layout_constraintTop_toBottomOf="@id/avatar"
-                    app:layout_constraintStart_toStartOf="parent"
-                    />
-
-                <TextView
-                    android:id="@+id/description"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/vertical_padding_small"
-                    android:paddingBottom="@dimen/vertical_padding_normal"
-                    android:layout_marginStart="@dimen/horizontal_padding_normal"
-                    android:textSize="@dimen/text_size_small"
-                    android:textColor="@color/text_color_normal"
-                    android:maxLines="5"
-                    app:layout_constraintTop_toBottomOf="@id/user_display_name"
-                    app:layout_constraintStart_toStartOf="parent"
-                    />
-
-                <android.support.constraint.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/vertical_padding_normal"
-                    android:background="@color/grey50"
-                    app:layout_constraintTop_toBottomOf="@id/description"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    >
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/vertical_divider_height"
-                        android:background="@color/divider_background_color"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        />
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/vertical_divider_height"
-                        android:background="@color/divider_background_color"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        />
-                </android.support.constraint.ConstraintLayout>
-            </android.support.constraint.ConstraintLayout>
+            <include
+                layout="@layout/view_profile_header"
+                />
 
             <android.support.v7.widget.Toolbar
                 android:id="@id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
+                android:fitsSystemWindows="false"
                 app:contentInsetStartWithNavigation="0dp"
                 app:layout_collapseMode="pin"
                 />
@@ -123,6 +47,7 @@
         android:scrollbars="vertical"
         android:scrollbarSize="2dp"
         android:scrollbarStyle="outsideOverlay"
+        android:clipToPadding="false"
         app:layoutManager="LinearLayoutManager"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         />
