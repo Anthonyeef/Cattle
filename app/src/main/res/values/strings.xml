@@ -5,6 +5,7 @@
     <string name="nav_item_setting">Setting</string>
     <string name="nav_item_about">About</string>
     <string name="nav_item_test_field">Test Field</string>
+    <string name="nav_item_test_profile">Test Profile</string>
 
     <string name="page_title_home">Home</string>
     <string name="page_title_mention">Mention</string>
@@ -21,5 +22,9 @@
     <string name="text_hash_tag_button">#</string>
 
     <!-- Profile -->
-    <string name="text_self_intro">自述：</string>
+    <string name="text_self_intro">Self intro：</string>
+    <string name="text_following">Following</string>
+    <string name="text_follower">Follower</string>
+    <string name="text_status">Status</string>
+
 </resources>

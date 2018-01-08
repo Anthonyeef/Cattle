@@ -25,5 +25,10 @@
             android:id="@+id/nav_test_field"
             android:icon="@drawable/icon_about"
             android:title="@string/nav_item_test_field"/>
+
+        <item
+            android:id="@+id/nav_test_profile"
+            android:icon="@drawable/icon_about"
+            android:title="@string/nav_item_test_profile"/>
     </group>
 </menu>

@@ -200,6 +200,12 @@ class HomeActivity : BaseActivity() {
                     }
                 }
 
+                R.id.nav_test_profile -> {
+                    bindDrawerAction {
+                        startActivity(intentFor<ProfileActivity>(ProfileActivity.EXTRA_USER_ID to "臬兀").newTask())
+                    }
+                }
+
                 else -> {
 
                 }
