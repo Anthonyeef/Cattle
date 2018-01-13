@@ -1,4 +1,4 @@
-package io.github.anthonyeef.cattle.view
+package io.github.anthonyeef.cattle.viewbinder
 
 import android.annotation.SuppressLint
 import android.support.v4.widget.Space

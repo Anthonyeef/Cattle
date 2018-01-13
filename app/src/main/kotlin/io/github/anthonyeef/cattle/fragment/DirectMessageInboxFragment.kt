@@ -7,7 +7,7 @@ import io.github.anthonyeef.cattle.entity.DirectMessage
 import io.github.anthonyeef.cattle.exception.showException
 import io.github.anthonyeef.cattle.presenter.DirectMessagePresenter
 import io.github.anthonyeef.cattle.utils.SwipeRefreshDelegate
-import io.github.anthonyeef.cattle.view.DirectMessageViewProvider
+import io.github.anthonyeef.cattle.viewbinder.DirectMessageViewProvider
 
 /**
  *

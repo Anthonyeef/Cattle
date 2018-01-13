@@ -9,8 +9,8 @@ import io.github.anthonyeef.cattle.exception.showException
 import io.github.anthonyeef.cattle.presenter.HomeFeedListPresenter
 import io.github.anthonyeef.cattle.utils.LoadMoreDelegate
 import io.github.anthonyeef.cattle.utils.SwipeRefreshDelegate
-import io.github.anthonyeef.cattle.view.BottomRefreshViewProvider
-import io.github.anthonyeef.cattle.view.StatusItemViewProvider
+import io.github.anthonyeef.cattle.viewbinder.BottomRefreshViewProvider
+import io.github.anthonyeef.cattle.viewbinder.StatusItemViewProvider
 import me.drakeet.multitype.Items
 
 /**

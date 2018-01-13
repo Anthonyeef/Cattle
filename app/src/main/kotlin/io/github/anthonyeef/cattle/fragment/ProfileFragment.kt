@@ -21,7 +21,7 @@ import io.github.anthonyeef.cattle.data.userData.UserInfo
 import io.github.anthonyeef.cattle.extension.gone
 import io.github.anthonyeef.cattle.utils.LoadMoreDelegate
 import io.github.anthonyeef.cattle.view.ProfileHeaderCountView
-import io.github.anthonyeef.cattle.view.ProfileStatusViewBinder
+import io.github.anthonyeef.cattle.viewbinder.ProfileStatusViewBinder
 import me.drakeet.multitype.Items
 import me.drakeet.multitype.MultiTypeAdapter
 import org.jetbrains.anko.find

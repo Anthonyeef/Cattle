@@ -7,7 +7,7 @@ import io.github.anthonyeef.cattle.data.statusData.Status
 import io.github.anthonyeef.cattle.exception.showException
 import io.github.anthonyeef.cattle.presenter.MentionListPresenter
 import io.github.anthonyeef.cattle.utils.SwipeRefreshDelegate
-import io.github.anthonyeef.cattle.view.StatusItemViewProvider
+import io.github.anthonyeef.cattle.viewbinder.StatusItemViewProvider
 
 /**
  *

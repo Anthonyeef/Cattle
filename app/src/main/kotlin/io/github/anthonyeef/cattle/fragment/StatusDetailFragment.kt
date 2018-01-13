@@ -9,9 +9,9 @@ import io.github.anthonyeef.cattle.constant.app
 import io.github.anthonyeef.cattle.contract.StatusDetailContract
 import io.github.anthonyeef.cattle.data.statusData.ConversationStatus
 import io.github.anthonyeef.cattle.data.statusData.Status
-import io.github.anthonyeef.cattle.view.StatusConversationItemViewBinder
-import io.github.anthonyeef.cattle.view.StatusConversationStartItemViewBinder
-import io.github.anthonyeef.cattle.view.StatusItemDetailViewProvider
+import io.github.anthonyeef.cattle.viewbinder.StatusConversationItemViewBinder
+import io.github.anthonyeef.cattle.viewbinder.StatusConversationStartItemViewBinder
+import io.github.anthonyeef.cattle.viewbinder.StatusItemDetailViewProvider
 
 /**
  * Detail fragment of one status.

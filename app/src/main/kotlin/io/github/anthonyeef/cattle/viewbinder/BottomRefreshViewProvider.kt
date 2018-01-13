@@ -1,4 +1,4 @@
-package io.github.anthonyeef.cattle.view
+package io.github.anthonyeef.cattle.viewbinder
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
