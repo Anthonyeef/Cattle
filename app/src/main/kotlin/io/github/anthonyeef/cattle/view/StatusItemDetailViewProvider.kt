@@ -1,5 +1,7 @@
 package io.github.anthonyeef.cattle.view
 
+import android.annotation.SuppressLint
+import android.support.v4.widget.Space
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -36,9 +38,12 @@ class StatusItemDetailViewProvider : ItemViewBinder<Status, StatusItemDetailView
         private val userName: TextView by lazy { itemView.find<TextView>(R.id.user_display_name) }
         private val userId: TextView by lazy { itemView.find<TextView>(R.id.user_id) }
         private val statusCreateTime: TextView by lazy { itemView.find<TextView>(R.id.status_create_time) }
+        private val statusLeftSpacing: Space by lazy { itemView.find<Space>(R.id.left_spacing) }
+        private val statusConnector: View by lazy { itemView.find<View>(R.id.connector) }
         private val statusContent: TextView by lazy { itemView.find<TextView>(R.id.status_content) }
         private val statusPhoto: ImageView by lazy { itemView.find<ImageView>(R.id.status_photo) }
 
+        @SuppressLint("SetTextI18n")
         fun bindStatusData(item: Status) {
             Glide.with(itemView.context)
                     .load(item.user?.profileImageUrlLarge)
@@ -58,6 +63,9 @@ class StatusItemDetailViewProvider : ItemViewBinder<Status, StatusItemDetailView
             if (item.text.isNotEmpty()) {
                 StatusParsingUtils.setStatus(statusContent, item.text)
             }
+
+            statusLeftSpacing.goneIf(item.isSingle)
+            statusConnector.goneIf(item.isSingle)
         }
     }
 }

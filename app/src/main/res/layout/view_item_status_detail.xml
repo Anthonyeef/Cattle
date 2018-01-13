@@ -17,6 +17,16 @@
         app:layout_constraintTop_toTopOf="parent"
         />
 
+    <View
+        android:id="@+id/connector"
+        style="@style/Widget.Cattle.ConversationConnector"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/avatar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/avatar"
+        app:layout_constraintRight_toRightOf="@id/avatar"
+        />
+
     <TextView
         android:id="@id/user_display_name"
         android:layout_width="wrap_content"
@@ -54,33 +64,42 @@
         app:layout_constraintEnd_toEndOf="parent"
         />
 
+    <android.support.v4.widget.Space
+        android:id="@+id/left_spacing"
+        android:layout_width="64dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/avatar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
     <TextView
         android:id="@+id/status_content"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/vertical_padding_normal"
+        android:layout_marginTop="@dimen/vertical_padding_small"
         android:textSize="@dimen/text_size_medium"
         android:textColor="@color/text_color_normal"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/left_spacing"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/avatar"
         />
 
     <ImageView
         android:id="@+id/status_photo"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/vertical_padding_normal"
+        android:layout_marginTop="@dimen/vertical_padding_small"
         android:scaleType="fitCenter"
         android:adjustViewBounds="true"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/left_spacing"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/status_content"
         />
 
     <android.support.v4.widget.Space
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/vertical_padding_large"
+        android:layout_height="@dimen/vertical_padding_normal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/status_photo"
         />
