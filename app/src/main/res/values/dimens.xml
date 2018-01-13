@@ -20,7 +20,7 @@
 
     <dimen name="avatar_size">64dp</dimen>
     <dimen name="avatar_size_large">72dp</dimen>
-    <dimen name="avatar_size_medium">56dp</dimen>
+    <dimen name="avatar_size_medium">48dp</dimen>
     <dimen name="avatar_size_normal">40dp</dimen>
     <dimen name="avatar_size_home">28dp</dimen>
 

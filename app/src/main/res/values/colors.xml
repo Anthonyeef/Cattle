@@ -10,7 +10,11 @@
     <color name="grey800">#424242</color>
     <color name="grey900">#212121</color>
 
+    <color name="blueGrey">#cfd8dc</color>
+
     <color name="divider_background_color">@color/grey200</color>
+
+    <color name="status_connector_color">@color/blueGrey</color>
 
     <color name="toolbarTextColor">@color/grey900</color>
 
