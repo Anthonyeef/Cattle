@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/horizontal_padding_normal"
+    android:paddingRight="@dimen/horizontal_padding_normal"
+    >
+
+    <android.support.v4.widget.Space
+        android:id="@+id/top_padding"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/vertical_padding_normal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@id/avatar"
+        android:layout_width="@dimen/avatar_size_medium"
+        android:layout_height="@dimen/avatar_size_medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/top_padding"
+        />
+
+    <View
+        style="@style/Widget.Cattle.ConversationConnector"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/avatar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/avatar"
+        app:layout_constraintRight_toRightOf="@id/avatar"
+        />
+
+    <TextView
+        android:id="@id/user_display_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/horizontal_padding_normal"
+        android:textSize="@dimen/text_size_normal"
+        android:textStyle="bold"
+        android:textColor="@color/text_color_normal"
+        android:gravity="start"
+        app:layout_constraintStart_toEndOf="@id/avatar"
+        app:layout_constraintTop_toTopOf="@id/avatar"
+        app:layout_constraintBottom_toBottomOf="@id/avatar"
+        />
+
+    <TextView
+        android:id="@+id/status_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/vertical_padding_small"
+        android:textSize="@dimen/text_size_normal"
+        android:textColor="@color/text_color_normal"
+        app:layout_constraintStart_toStartOf="@id/user_display_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/user_display_name"
+        />
+
+    <ImageView
+        android:id="@+id/status_photo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/status_content"
+        />
+
+</android.support.constraint.ConstraintLayout>
