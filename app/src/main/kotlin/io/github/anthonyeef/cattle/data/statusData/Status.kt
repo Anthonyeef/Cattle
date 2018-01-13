@@ -60,4 +60,7 @@ class Status {
 
     @Embedded
     var photo: Photo? = null
+
+    @Ignore
+    var isSingle: Boolean = true
 }
