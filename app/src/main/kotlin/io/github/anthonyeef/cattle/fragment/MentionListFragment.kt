@@ -7,7 +7,7 @@ import io.github.anthonyeef.cattle.data.statusData.Status
 import io.github.anthonyeef.cattle.exception.showException
 import io.github.anthonyeef.cattle.presenter.MentionListPresenter
 import io.github.anthonyeef.cattle.utils.SwipeRefreshDelegate
-import io.github.anthonyeef.cattle.viewbinder.StatusItemViewProvider
+import io.github.anthonyeef.cattle.viewbinder.StatusItemViewBinder
 
 /**
  *
@@ -20,7 +20,7 @@ class MentionListFragment : BaseListFragment(), MentionListContract.View, SwipeR
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        adapter.register(Status::class.java, StatusItemViewProvider())
+        adapter.register(Status::class.java, StatusItemViewBinder())
         refreshDelegate = SwipeRefreshDelegate(this)
         MentionListPresenter(this)
     }

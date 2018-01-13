@@ -7,7 +7,7 @@ import io.github.anthonyeef.cattle.entity.DirectMessage
 import io.github.anthonyeef.cattle.exception.showException
 import io.github.anthonyeef.cattle.presenter.DirectMessagePresenter
 import io.github.anthonyeef.cattle.utils.SwipeRefreshDelegate
-import io.github.anthonyeef.cattle.viewbinder.DirectMessageViewProvider
+import io.github.anthonyeef.cattle.viewbinder.DirectMessageItemViewBinder
 
 /**
  *
@@ -18,7 +18,7 @@ class DirectMessageInboxFragment : BaseListFragment(), DirectMessageContract.Vie
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        adapter.register(DirectMessage::class.java, DirectMessageViewProvider())
+        adapter.register(DirectMessage::class.java, DirectMessageItemViewBinder())
         refreshDelegate = SwipeRefreshDelegate(this)
         DirectMessagePresenter(this)
     }

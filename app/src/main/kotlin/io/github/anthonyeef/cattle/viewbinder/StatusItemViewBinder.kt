@@ -31,7 +31,7 @@ import org.jetbrains.anko.sdk25.listeners.onClick
 /**
  *
  */
-class StatusItemViewProvider : ItemViewBinder<Status, StatusItemViewProvider.StatusFeedViewHolder>() {
+class StatusItemViewBinder : ItemViewBinder<Status, StatusItemViewBinder.StatusFeedViewHolder>() {
 
     override fun onCreateViewHolder(inflater: LayoutInflater, parent: ViewGroup): StatusFeedViewHolder {
         val statusView = inflater.inflate(R.layout.view_item_status, parent, false)

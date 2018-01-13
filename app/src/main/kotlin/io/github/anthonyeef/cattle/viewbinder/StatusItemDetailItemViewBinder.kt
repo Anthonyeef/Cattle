@@ -21,7 +21,7 @@ import org.jetbrains.anko.find
 /**
  *
  */
-class StatusItemDetailViewProvider : ItemViewBinder<Status, StatusItemDetailViewProvider.StatusItemDetailViewHolder>() {
+class StatusItemDetailItemViewBinder : ItemViewBinder<Status, StatusItemDetailItemViewBinder.StatusItemDetailViewHolder>() {
 
     override fun onCreateViewHolder(inflater: LayoutInflater, parent: ViewGroup): StatusItemDetailViewHolder {
         return StatusItemDetailViewHolder(inflater.inflate(R.layout.view_item_status_detail, parent, false))

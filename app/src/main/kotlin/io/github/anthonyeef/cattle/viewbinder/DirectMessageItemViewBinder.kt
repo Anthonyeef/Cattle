@@ -18,7 +18,7 @@ import me.drakeet.multitype.ItemViewBinder
 /**
  *
  */
-class DirectMessageViewProvider : ItemViewBinder<DirectMessage, DirectMessageViewProvider.DirectMessageViewHolder>() {
+class DirectMessageItemViewBinder : ItemViewBinder<DirectMessage, DirectMessageItemViewBinder.DirectMessageViewHolder>() {
     override fun onCreateViewHolder(inflater: LayoutInflater, parent: ViewGroup): DirectMessageViewHolder {
         val directMessageView = inflater.inflate(R.layout.view_item_direct_message, parent, false)
         val viewHolder = DirectMessageViewHolder(directMessageView)
