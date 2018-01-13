@@ -8,7 +8,7 @@ import android.support.v7.widget.Toolbar
 import io.github.anthonyeef.cattle.R
 import io.github.anthonyeef.cattle.extension.bindFragment
 import io.github.anthonyeef.cattle.fragment.StatusDetailFragment
-import io.github.anthonyeef.cattle.fragment.StatusDetailFragment.Companion.KEY_STATUS_ID
+import io.github.anthonyeef.cattle.fragment.StatusDetailFragment.Companion.KEY_HAS_CONVERSATION
 import io.github.anthonyeef.cattle.presenter.StatusDetailPresenter
 import org.jetbrains.anko.findOptional
 import org.jetbrains.anko.support.v4.withArguments
@@ -22,6 +22,7 @@ class StatusDetailActivity : BaseActivity() {
 
     companion object {
         const val EXTRA_STATUS_ID = "extra_status_id"
+        const val EXTRA_STATUS_HAS_CONVERSATION = "extra_status_has_conversation"
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -53,8 +54,9 @@ class StatusDetailActivity : BaseActivity() {
 
     private fun setupDetailFragment() {
         val statusId = intent.getStringExtra(EXTRA_STATUS_ID)
+        val hasConversation = intent.getBooleanExtra(EXTRA_STATUS_HAS_CONVERSATION, false)
         statusId?.let {
-            val detailFragment = StatusDetailFragment().withArguments(KEY_STATUS_ID to it)
+            val detailFragment = StatusDetailFragment().withArguments(KEY_HAS_CONVERSATION to hasConversation)
             bindFragment(detailFragment)
             StatusDetailPresenter(detailFragment, it)
         }

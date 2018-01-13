@@ -40,4 +40,11 @@
         <item name="android:background">@color/divider_background_color</item>
     </style>
 
+    <!-- ConversationConnector -->
+    <style name="Widget.Cattle.ConversationConnector">
+        <item name="android:layout_width">4dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/status_connector_color</item>
+    </style>
+
 </resources>

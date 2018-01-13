@@ -2,6 +2,7 @@ package io.github.anthonyeef.cattle.presenter
 
 import io.github.anthonyeef.cattle.Injection
 import io.github.anthonyeef.cattle.contract.StatusDetailContract
+import io.github.anthonyeef.cattle.data.statusData.ConversationStatus
 import io.github.anthonyeef.cattle.data.statusData.Status
 import io.github.anthonyeef.cattle.service.ServiceGenerator
 import io.github.anthonyeef.cattle.service.StatusService
@@ -32,9 +33,18 @@ class StatusDetailPresenter() : StatusDetailContract.Presenter {
         _disposable.add(getStatusById(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .doOnNext { status ->
+                    if (status.inReplyToStatusId.isNotEmpty()) {
+                        tryAppendStatus(status.inReplyToStatusId)
+                    }
+                }
                 .subscribe(
                         { status ->
-                            statusDetailView.showStatusDetail(status)
+                            if (status.inReplyToStatusId.isNotEmpty()) {
+                                statusDetailView.showConversationStatus(ConversationStatus(status, true))
+                            } else {
+                                statusDetailView.showSingleStatus(status)
+                            }
                         },
                         { error ->
                             // todo
@@ -47,6 +57,30 @@ class StatusDetailPresenter() : StatusDetailContract.Presenter {
         return Flowable.concat(Injection.provideStatusDao().getStatusById(id).toFlowable(), statusService.getFanfouById(id))
                 .firstOrError()
                 .toFlowable()
+    }
+
+
+    private fun tryAppendStatus(id: String) {
+        _disposable.add(getStatusById(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnNext { status ->
+                    if (status.inReplyToStatusId.isNotEmpty()) {
+                        tryAppendStatus(status.inReplyToStatusId)
+                    }
+                }
+                .subscribe(
+                        { status ->
+                            if (status.inReplyToStatusId.isNotEmpty()) {
+                                statusDetailView.showConversationStatus(ConversationStatus(status))
+                            } else {
+                                statusDetailView.showOriginalStatus(status)
+                            }
+                        },
+                        { error ->
+                            // todo
+                        }
+                ))
     }
 
 
