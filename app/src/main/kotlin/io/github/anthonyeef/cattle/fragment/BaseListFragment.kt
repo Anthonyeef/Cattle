@@ -24,6 +24,7 @@ abstract class BaseListFragment : BaseFragment() {
 
     protected var list: RecyclerView? = null
 
+    open fun customizeRecyclerView() { }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +41,8 @@ abstract class BaseListFragment : BaseFragment() {
         list = root?.findOptional(android.R.id.list)
         list?.adapter = adapter
         list?.layoutManager = LinearLayoutManager(app)
+
+        customizeRecyclerView()
 
         swipeRefreshLayout = root?.findOptional(R.id.swipe_refresh_layout)
 

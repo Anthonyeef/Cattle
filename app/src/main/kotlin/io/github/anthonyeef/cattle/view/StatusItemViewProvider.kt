@@ -14,6 +14,7 @@ import io.github.anthonyeef.cattle.GlideApp
 import io.github.anthonyeef.cattle.R
 import io.github.anthonyeef.cattle.activity.ProfileActivity
 import io.github.anthonyeef.cattle.activity.StatusDetailActivity
+import io.github.anthonyeef.cattle.activity.StatusDetailActivity.Companion.EXTRA_STATUS_HAS_CONVERSATION
 import io.github.anthonyeef.cattle.activity.StatusDetailActivity.Companion.EXTRA_STATUS_ID
 import io.github.anthonyeef.cattle.constant.app
 import io.github.anthonyeef.cattle.data.statusData.Status
@@ -74,7 +75,7 @@ class StatusItemViewProvider : ItemViewBinder<Status, StatusItemViewProvider.Sta
                 }
             }
             content.onClick {
-                app.startActivity(app.intentFor<StatusDetailActivity>(EXTRA_STATUS_ID to status.id).newTask())
+                app.startActivity(app.intentFor<StatusDetailActivity>(EXTRA_STATUS_ID to status.id, EXTRA_STATUS_HAS_CONVERSATION to status.inReplyToStatusId.isNotEmpty()).newTask())
             }
             if (status.photo?.imageurl?.isNotEmpty() ?: false) {
                 previewImageTopMargin.show()
