@@ -31,15 +31,12 @@ class HomeFeedListPresenter(): HomeFeedListContract.Presenter, AnkoLogger {
         homeFeedListView.setPresenter(this)
     }
 
-    lateinit var homeFeedListView: HomeFeedListContract.View
-
-    lateinit var loadingCount: AtomicInteger
-
-    var lastUpdateTime: Long = PrefUtils.getLong(KEY_HOME_TIMELINE_LAST_UPDATE_TIME, TIME_GOD_CREAT_LIGHT)
-
-    var lastItemId: String = ""
-
-    var isDataLoaded: Boolean = false
+    lateinit private var homeFeedListView: HomeFeedListContract.View
+    lateinit private var loadingCount: AtomicInteger
+    private var lastUpdateTime: Long = PrefUtils.getLong(KEY_HOME_TIMELINE_LAST_UPDATE_TIME, TIME_GOD_CREAT_LIGHT)
+    private var lastItemId: String = ""
+    private var isDataLoaded: Boolean = false
+    private var _disposable: CompositeDisposable = CompositeDisposable()
 
     var isDataOld: Boolean
         get() {
@@ -48,11 +45,11 @@ class HomeFeedListPresenter(): HomeFeedListContract.Presenter, AnkoLogger {
         }
         set(v) = throw UnsupportedOperationException("Set method for isDataOld is not supported")
 
-    var _disposable: CompositeDisposable = CompositeDisposable()
-
 
     override fun loadDataFromCache() {
-        doAsync {
+        doAsync(exceptionHandler = {
+            // todo
+        }) {
             info("load cache")
             val status: List<Status> = Injection.provideStatusDao().getStatus()
             uiThread {
@@ -127,13 +124,16 @@ class HomeFeedListPresenter(): HomeFeedListContract.Presenter, AnkoLogger {
         _disposable.clear()
     }
 
+
     override fun isLoading(): Boolean {
         return loadingCount.get() > 0
     }
 
+
     private fun notifyLoadingStarted() {
         loadingCount.getAndIncrement()
     }
+
 
     private fun notifyLoadingFinished() {
         loadingCount.decrementAndGet()

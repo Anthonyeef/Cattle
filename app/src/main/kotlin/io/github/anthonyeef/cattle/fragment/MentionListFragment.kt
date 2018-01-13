@@ -13,9 +13,8 @@ import io.github.anthonyeef.cattle.viewbinder.StatusItemViewBinder
  *
  */
 class MentionListFragment : BaseListFragment(), MentionListContract.View, SwipeRefreshDelegate.OnSwipeRefreshListener {
-
-    lateinit var mentionPresenter: MentionListContract.Presenter
-    lateinit var refreshDelegate: SwipeRefreshDelegate
+    lateinit private var mentionPresenter: MentionListContract.Presenter
+    lateinit private var refreshDelegate: SwipeRefreshDelegate
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,43 +24,52 @@ class MentionListFragment : BaseListFragment(), MentionListContract.View, SwipeR
         MentionListPresenter(this)
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         refreshDelegate.attach(this)
     }
+
 
     override fun onResume() {
         super.onResume()
         mentionPresenter.subscribe()
     }
 
+
     override fun onPause() {
         super.onPause()
         mentionPresenter.unSubscribe()
     }
 
+
     override fun setPresenter(presenter: MentionListContract.Presenter) {
         mentionPresenter = presenter
     }
+
 
     override fun showError(e: Throwable) {
         showException(this, e)
     }
 
+
     override fun setLoadingProgressBar(show: Boolean) {
         refreshDelegate.setRefresh(show)
     }
 
+
     override fun updateList(clearData: Boolean, data: List<Status>) {
         if (clearData) {
-            adapter.setItems(data)
+            adapter.items = data
             adapter.notifyDataSetChanged()
         }
     }
 
+
     override fun isActivated(): Boolean {
         return isAdded
     }
+
 
     override fun onSwipeRefresh() {
         mentionPresenter.loadDataFromRemote()

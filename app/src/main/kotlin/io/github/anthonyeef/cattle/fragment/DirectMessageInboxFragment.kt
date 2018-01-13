@@ -13,8 +13,8 @@ import io.github.anthonyeef.cattle.viewbinder.DirectMessageItemViewBinder
  *
  */
 class DirectMessageInboxFragment : BaseListFragment(), DirectMessageContract.View, SwipeRefreshDelegate.OnSwipeRefreshListener {
-    lateinit var directPresenter: DirectMessageContract.Presenter
-    lateinit var refreshDelegate: SwipeRefreshDelegate
+    lateinit private var directPresenter: DirectMessageContract.Presenter
+    lateinit private var refreshDelegate: SwipeRefreshDelegate
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,24 +23,29 @@ class DirectMessageInboxFragment : BaseListFragment(), DirectMessageContract.Vie
         DirectMessagePresenter(this)
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         refreshDelegate.attach(this)
     }
+
 
     override fun onResume() {
         super.onResume()
         directPresenter.subscribe()
     }
 
+
     override fun onPause() {
         super.onPause()
         directPresenter.unSubscribe()
     }
 
+
     override fun setPresenter(presenter: DirectMessageContract.Presenter) {
         directPresenter = presenter
     }
+
 
     override fun updateList(clearData: Boolean, data: List<DirectMessage>) {
         if (clearData) {
@@ -49,17 +54,21 @@ class DirectMessageInboxFragment : BaseListFragment(), DirectMessageContract.Vie
         }
     }
 
+
     override fun showError(e: Throwable) {
         showException(this, e)
     }
+
 
     override fun setLoadingProgressBar(show: Boolean) {
         refreshDelegate.setRefresh(show)
     }
 
+
     override fun isActivated(): Boolean {
         return isAdded
     }
+
 
     override fun onSwipeRefresh() {
         directPresenter.loadDataFromRemote()

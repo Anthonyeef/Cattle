@@ -17,7 +17,6 @@ import org.jetbrains.anko.findOptional
  *
  */
 abstract class BaseListFragment : BaseFragment() {
-
     protected lateinit var adapter: MultiTypeAdapter
     protected lateinit var items: Items
     private var swipeRefreshLayout: SwipeRefreshLayout? = null
@@ -53,6 +52,7 @@ abstract class BaseListFragment : BaseFragment() {
     fun doScrollToTop() {
         list?.scrollToPosition(0)
     }
+
 
     fun disablePullToRefresh() {
         swipeRefreshLayout?.isEnabled = false

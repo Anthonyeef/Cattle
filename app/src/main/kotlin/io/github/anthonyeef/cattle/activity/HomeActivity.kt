@@ -38,12 +38,12 @@ import org.jetbrains.anko.sdk25.listeners.onClick
  */
 class HomeActivity : BaseActivity() {
 
-    private val drawerLayout: DrawerLayout by bindView<DrawerLayout>(R.id.drawer_layout)
-    private val navigation: NavigationView by bindView<NavigationView>(R.id.nav_view)
-    private val toolbar: Toolbar? by bindOptionalView<Toolbar>(R.id.toolbar)
-    private val viewpager: ViewPager by bindView<ViewPager>(R.id.viewpager)
-    private val tabLayout: TabLayout by bindView<TabLayout>(R.id.tabs)
-    private val composeBtn: FloatingActionButton by bindView<FloatingActionButton>(R.id.fab)
+    private val drawerLayout: DrawerLayout by bindView(R.id.drawer_layout)
+    private val navigation: NavigationView by bindView(R.id.nav_view)
+    private val toolbar: Toolbar? by bindOptionalView(R.id.toolbar)
+    private val viewpager: ViewPager by bindView(R.id.viewpager)
+    private val tabLayout: TabLayout by bindView(R.id.tabs)
+    private val composeBtn: FloatingActionButton by bindView(R.id.fab)
 
     private var toolbarAvatar: CircleImageView? = null
     private var navigationHeaderAvatar: CircleImageView? = null
@@ -147,7 +147,7 @@ class HomeActivity : BaseActivity() {
         val navHeader = navigation.getHeaderView(0)
         val navBg = navHeader?.findOptional<ImageView>(R.id.nav_header_bg)
         navigationHeaderAvatar = navHeader?.findOptional(R.id.nav_avatar)
-        navigationHeaderUserName = navHeader?.findOptional<TextView>(R.id.nav_user_name)
+        navigationHeaderUserName = navHeader?.findOptional(R.id.nav_user_name)
 
         showUserInfoInDrawer()
 
