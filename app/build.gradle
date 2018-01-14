@@ -49,6 +49,10 @@ android {
         }
     }
 
+    dataBinding {
+        enabled = true
+    }
+
     lintOptions {
         abortOnError true
         warning 'InvalidPackage'
