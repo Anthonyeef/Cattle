@@ -1,4 +1,4 @@
-package io.github.anthonyeef.cattle.view
+package io.github.anthonyeef.cattle.viewbinder
 
 import android.support.constraint.ConstraintLayout
 import android.support.v7.widget.RecyclerView

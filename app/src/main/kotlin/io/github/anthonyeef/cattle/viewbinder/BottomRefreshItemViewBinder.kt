@@ -1,4 +1,4 @@
-package io.github.anthonyeef.cattle.view
+package io.github.anthonyeef.cattle.viewbinder
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -13,7 +13,7 @@ import org.jetbrains.anko.findOptional
 /**
  *
  */
-class BottomRefreshViewProvider : ItemViewBinder<BottomRefreshEntity, BottomRefreshViewProvider.BottomRefreshViewHolder>() {
+class BottomRefreshItemViewBinder : ItemViewBinder<BottomRefreshEntity, BottomRefreshItemViewBinder.BottomRefreshViewHolder>() {
 
     override fun onCreateViewHolder(inflater: LayoutInflater, parent: ViewGroup): BottomRefreshViewHolder {
         val root = inflater.inflate(R.layout.view_bottom_refresh, parent, false)

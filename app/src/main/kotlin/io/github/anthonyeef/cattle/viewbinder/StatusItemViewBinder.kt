@@ -1,4 +1,4 @@
-package io.github.anthonyeef.cattle.view
+package io.github.anthonyeef.cattle.viewbinder
 
 import android.annotation.SuppressLint
 import android.support.v4.widget.Space
@@ -31,7 +31,7 @@ import org.jetbrains.anko.sdk25.listeners.onClick
 /**
  *
  */
-class StatusItemViewProvider : ItemViewBinder<Status, StatusItemViewProvider.StatusFeedViewHolder>() {
+class StatusItemViewBinder : ItemViewBinder<Status, StatusItemViewBinder.StatusFeedViewHolder>() {
 
     override fun onCreateViewHolder(inflater: LayoutInflater, parent: ViewGroup): StatusFeedViewHolder {
         val statusView = inflater.inflate(R.layout.view_item_status, parent, false)

@@ -9,9 +9,9 @@ import io.github.anthonyeef.cattle.constant.app
 import io.github.anthonyeef.cattle.contract.StatusDetailContract
 import io.github.anthonyeef.cattle.data.statusData.ConversationStatus
 import io.github.anthonyeef.cattle.data.statusData.Status
-import io.github.anthonyeef.cattle.view.StatusConversationItemViewBinder
-import io.github.anthonyeef.cattle.view.StatusConversationStartItemViewBinder
-import io.github.anthonyeef.cattle.view.StatusItemDetailViewProvider
+import io.github.anthonyeef.cattle.viewbinder.StatusConversationItemViewBinder
+import io.github.anthonyeef.cattle.viewbinder.StatusConversationStartItemViewBinder
+import io.github.anthonyeef.cattle.viewbinder.StatusItemDetailItemViewBinder
 
 /**
  * Detail fragment of one status.
@@ -31,7 +31,7 @@ class StatusDetailFragment : BaseListFragment(), StatusDetailContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        adapter.register(Status::class.java, StatusItemDetailViewProvider())
+        adapter.register(Status::class.java, StatusItemDetailItemViewBinder())
         adapter.register(ConversationStatus::class.java)
                 .to(StatusConversationStartItemViewBinder(), StatusConversationItemViewBinder())
                 .withLinker({

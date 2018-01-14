@@ -9,8 +9,8 @@ import io.github.anthonyeef.cattle.exception.showException
 import io.github.anthonyeef.cattle.presenter.HomeFeedListPresenter
 import io.github.anthonyeef.cattle.utils.LoadMoreDelegate
 import io.github.anthonyeef.cattle.utils.SwipeRefreshDelegate
-import io.github.anthonyeef.cattle.view.BottomRefreshViewProvider
-import io.github.anthonyeef.cattle.view.StatusItemViewProvider
+import io.github.anthonyeef.cattle.viewbinder.BottomRefreshItemViewBinder
+import io.github.anthonyeef.cattle.viewbinder.StatusItemViewBinder
 import me.drakeet.multitype.Items
 
 /**
@@ -22,16 +22,14 @@ class HomeFeedListFragment : BaseListFragment(),
         LoadMoreDelegate.LoadMoreSubject {
 
     lateinit var homeFeedListPresenter: HomeFeedListContract.Presenter
-
     lateinit var refreshDelegate: SwipeRefreshDelegate
-
     lateinit var loadMoreDelegate: LoadMoreDelegate
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        adapter.register(Status::class.java, StatusItemViewProvider())
-        adapter.register(BottomRefreshEntity::class.java, BottomRefreshViewProvider())
+        adapter.register(Status::class.java, StatusItemViewBinder())
+        adapter.register(BottomRefreshEntity::class.java, BottomRefreshItemViewBinder())
         refreshDelegate = SwipeRefreshDelegate(this)
         loadMoreDelegate = LoadMoreDelegate(this)
         HomeFeedListPresenter(this)
