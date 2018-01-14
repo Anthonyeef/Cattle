@@ -1,15 +1,15 @@
 package io.github.anthonyeef.cattle.view
 
 import android.content.Context
+import android.databinding.DataBindingUtil
 import android.util.AttributeSet
 import android.view.Gravity
-import android.view.View
+import android.view.LayoutInflater
 import android.widget.LinearLayout
-import android.widget.TextView
 import io.github.anthonyeef.cattle.R
+import io.github.anthonyeef.cattle.databinding.ViewProfileHeaderCountBinding
+import io.github.anthonyeef.cattle.entity.UserProfileDataEntity
 import org.jetbrains.anko.dimen
-import org.jetbrains.anko.find
-import org.jetbrains.anko.sdk25.listeners.onClick
 import org.jetbrains.anko.verticalPadding
 
 /**
@@ -24,29 +24,17 @@ class ProfileHeaderCountView @JvmOverloads constructor(
     var userProfileData: UserProfileDataEntity
         get() = throw UnsupportedOperationException()
         set(v) {
-            countNumber?.text = v.countNumber.toString()
-            countName?.text = v.itemName
-
-            onClick {
-                v.operation.invoke()
-            }
+            headerCountBinding?.profileData = v
         }
 
-    private var countNumber: TextView? = null
-    private var countName: TextView? = null
+    private var headerCountBinding: ViewProfileHeaderCountBinding? = null
 
 
     init {
-        View.inflate(context, R.layout.view_profile_header_count, this)
+        headerCountBinding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.view_profile_header_count, this, true)
         orientation = VERTICAL
         gravity = Gravity.LEFT
         layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
         verticalPadding = dimen(R.dimen.vertical_padding_small)
-
-        countNumber = find(R.id.count_number)
-        countName = find(R.id.count_name)
     }
-
-
-    class UserProfileDataEntity(val itemName: String, val countNumber: Int = 0, val operation: () -> Unit)
 }

@@ -18,6 +18,7 @@ import io.github.anthonyeef.cattle.R
 import io.github.anthonyeef.cattle.contract.ProfileContract
 import io.github.anthonyeef.cattle.data.statusData.Status
 import io.github.anthonyeef.cattle.data.userData.UserInfo
+import io.github.anthonyeef.cattle.entity.UserProfileDataEntity
 import io.github.anthonyeef.cattle.extension.gone
 import io.github.anthonyeef.cattle.utils.LoadMoreDelegate
 import io.github.anthonyeef.cattle.view.ProfileHeaderCountView
@@ -133,17 +134,17 @@ class ProfileFragment : BaseFragment(),
         }
 
         // todo: implementation for real page
-        followingCount?.userProfileData = ProfileHeaderCountView.UserProfileDataEntity(
+        followingCount?.userProfileData = UserProfileDataEntity(
                 itemName = getString(R.string.text_following),
                 countNumber = userInfo.friendsCount,
                 operation = { info("clicked following count")
                 })
-        followerCount?.userProfileData = ProfileHeaderCountView.UserProfileDataEntity(
+        followerCount?.userProfileData = UserProfileDataEntity(
                 itemName = getString(R.string.text_follower),
                 countNumber = userInfo.followersCount,
                 operation = { info("clicked follower count")
                 })
-        statusCount?.userProfileData = ProfileHeaderCountView.UserProfileDataEntity(
+        statusCount?.userProfileData = UserProfileDataEntity(
                 itemName = getString(R.string.text_status),
                 countNumber = userInfo.statusesCount,
                 operation = { info("clicked status count")
@@ -152,8 +153,9 @@ class ProfileFragment : BaseFragment(),
 
 
     override fun showStatuses(statuses: List<Status>) {
+        val tempPosition = items.size
         items.addAll(statuses)
-        adapter.notifyDataSetChanged()
+        adapter.notifyItemInserted(tempPosition)
     }
 
 

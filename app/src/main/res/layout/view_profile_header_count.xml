@@ -1,28 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    >
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="profileData"
+            type="io.github.anthonyeef.cattle.entity.UserProfileDataEntity"
+            />
+    </data>
+    <merge>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_normal"
+            android:textStyle="bold"
+            android:textColor="@color/text_color_normal"
+            android:text="@{Integer.toString(profileData.countNumber)}"
+            />
 
-    <TextView
-        android:id="@+id/count_number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/text_size_normal"
-        android:textStyle="bold"
-        android:textColor="@color/text_color_normal"
-        />
+        <android.support.v4.widget.Space
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/vertical_padding_tiny"
+            />
 
-    <android.support.v4.widget.Space
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/vertical_padding_tiny"
-        />
-
-    <TextView
-        android:id="@+id/count_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/text_size_small"
-        android:textColor="@color/text_color_normal"
-        />
-
-</merge>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_small"
+            android:textColor="@color/text_color_normal"
+            android:text="@{profileData.itemName}"
+            />
+    </merge>
+</layout>
