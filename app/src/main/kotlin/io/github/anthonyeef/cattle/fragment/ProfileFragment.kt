@@ -153,8 +153,9 @@ class ProfileFragment : BaseFragment(),
 
 
     override fun showStatuses(statuses: List<Status>) {
+        val tempPosition = items.size
         items.addAll(statuses)
-        adapter.notifyDataSetChanged()
+        adapter.notifyItemInserted(tempPosition)
     }
 
 
