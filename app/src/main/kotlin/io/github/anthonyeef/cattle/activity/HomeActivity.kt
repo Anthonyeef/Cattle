@@ -20,6 +20,7 @@ import io.github.anthonyeef.cattle.Injection
 import io.github.anthonyeef.cattle.R
 import io.github.anthonyeef.cattle.adapter.ViewpagerAdapter
 import io.github.anthonyeef.cattle.constant.KEY_CURRENT_USER_ID
+import io.github.anthonyeef.cattle.contract.HomeActivityContract
 import io.github.anthonyeef.cattle.data.userData.UserInfo
 import io.github.anthonyeef.cattle.extension.addOnTabSelectedListener
 import io.github.anthonyeef.cattle.fragment.BaseListFragment
@@ -27,6 +28,7 @@ import io.github.anthonyeef.cattle.fragment.DirectMessageInboxFragment
 import io.github.anthonyeef.cattle.fragment.HomeFeedListFragment
 import io.github.anthonyeef.cattle.fragment.MentionListFragment
 import io.github.anthonyeef.cattle.livedata.SharedPreferenceStringLiveData
+import io.github.anthonyeef.cattle.presenter.HomeActivityPresenter
 import io.github.anthonyeef.cattle.utils.PrefUtils
 import io.github.anthonyeef.cattle.utils.bindOptionalView
 import io.github.anthonyeef.cattle.utils.bindView
@@ -36,8 +38,9 @@ import org.jetbrains.anko.sdk25.listeners.onClick
 /**
  * HomeActivity.
  */
-class HomeActivity : BaseActivity() {
+class HomeActivity : BaseActivity(), HomeActivityContract.View {
 
+    private lateinit var homePresenter: HomeActivityContract.Presenter
     private val drawerLayout: DrawerLayout by bindView(R.id.drawer_layout)
     private val navigation: NavigationView by bindView(R.id.nav_view)
     private val toolbar: Toolbar? by bindOptionalView(R.id.toolbar)
@@ -56,6 +59,8 @@ class HomeActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        HomeActivityPresenter(this)
+
         bindView<DrawerLayout>(R.layout.activity_home)
         setContentView(R.layout.activity_home)
 
@@ -69,7 +74,7 @@ class HomeActivity : BaseActivity() {
         subscribeToUserInfoChanged()
 
         composeBtn.onClick {
-            startActivity(intentFor<ComposeActivity>())
+            homePresenter.composeNewFanfou()
         }
     }
 
@@ -80,6 +85,16 @@ class HomeActivity : BaseActivity() {
         } else {
             super.onBackPressed()
         }
+    }
+
+
+    override fun setPresenter(presenter: HomeActivityContract.Presenter) {
+        homePresenter = presenter
+    }
+
+
+    override fun showComposeActivity() {
+        startActivity(intentFor<ComposeActivity>())
     }
 
 
