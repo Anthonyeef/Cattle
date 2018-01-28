@@ -2,13 +2,13 @@
 
 buildscript {
     ext.kotlin_version = '1.2.10'
-    ext.gradle_version = '3.0.1'
+    ext.gradle_version = '3.1.0-alpha09'
     repositories {
         jcenter()
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.0-alpha08'
+        classpath "com.android.tools.build:gradle:$gradle_version"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -31,8 +31,10 @@ ext {
     minSdkVersion = 19
     targetSdkVersion = 27
     compileSdkVersion = 27
-    buildToolsVersion = '26.0.2'
+    buildToolsVersion = '27.0.1'
 
+    espresso = '2.2.2'
+    mockitoVersion = '2.13.0'
     supportLibraryVersion = '27.0.2'
     archLibraryVersion = '1.0.0'
     ankoLibraryVersion = '0.10.3'

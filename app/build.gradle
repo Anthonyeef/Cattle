@@ -61,10 +61,14 @@ android {
 }
 
 dependencies {
-    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+    androidTestImplementation("com.android.support.test.espresso:espresso-core:$rootProject.ext.espresso", {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    androidTestImplementation "com.android.support.test.espresso:espresso-contrib:$rootProject.ext.espresso"
+    androidTestImplementation "com.android.support.test.espresso:espresso-intents:$rootProject.ext.espresso"
+
     testImplementation "junit:junit:$rootProject.ext.junitVersion"
+    testImplementation "org.mockito:mockito-core:$rootProject.ext.mockitoVersion"
 
     implementation "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
     implementation "com.android.support:design:$rootProject.ext.supportLibraryVersion"
