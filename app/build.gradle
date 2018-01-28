@@ -23,9 +23,11 @@ android {
             }
         }
 
-        if (System.getenv("TRAVIS")) {
-            buildConfigField "String", "API_KEY", "\"YOUAPI_KEYHERE\""
-            buildConfigField "String", "API_SECRET", "\"YOUAPI_SECRETHERE\""
+        if (System.getenv("TRAVIS") || System.getenv("CI")) {
+            def key = '\"' + (System.getenv("API_KEY")) + '\"'
+            def secret = '\"' + (System.getenv("API_SECRET")) + '\"'
+            buildConfigField "String", "API_KEY", key
+            buildConfigField "String", "API_SECRET", secret
         } else {
             buildConfigField("String", "API_KEY", API_KEY)
             buildConfigField("String", "API_SECRET", API_SECRET)
