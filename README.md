@@ -1,6 +1,9 @@
 ## Cattle for Fanfou 
 
-master [![Build Status](https://travis-ci.org/Anthonyeef/Cattle.svg?branch=master)](https://travis-ci.org/Anthonyeef/Cattle) dev [![Build Status](https://travis-ci.org/Anthonyeef/Cattle.svg?branch=dev)](https://travis-ci.org/Anthonyeef/Cattle)
+
+master [![CircleCI](https://circleci.com/gh/Anthonyeef/Cattle/tree/master.svg?style=svg)](https://circleci.com/gh/Anthonyeef/Cattle/tree/master)
+
+dev [![CircleCI](https://circleci.com/gh/Anthonyeef/Cattle/tree/dev.svg?style=svg)](https://circleci.com/gh/Anthonyeef/Cattle/tree/dev)
 
 [WIP]
 
