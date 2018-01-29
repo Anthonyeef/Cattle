@@ -13,7 +13,6 @@ import io.github.anthonyeef.cattle.activity.HomeActivity;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.contrib.DrawerActions.close;
 import static android.support.test.espresso.contrib.DrawerActions.open;
 import static android.support.test.espresso.contrib.DrawerMatchers.isClosed;
 import static android.support.test.espresso.contrib.NavigationViewActions.navigateTo;
@@ -40,8 +39,8 @@ public class NavigationDrawerTest {
         onView(withId(R.id.nav_view))
                 .perform(navigateTo(R.id.nav_profile));
 
-        onView(withId(R.id.drawer_layout))
-                .perform(close());
+        /*onView(withId(R.id.drawer_layout))
+                .perform(close());*/
 
         onView(withId(R.id.following_count))
                 .check(matches(isDisplayed()));

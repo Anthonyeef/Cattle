@@ -1,6 +1,5 @@
 version: 2
 references:
-  # We will define reusable references here
   ## Cache
   cache_key: &cache_key
     key: cache-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}-{{ checksum "build.gradle" }}-{{ checksum "app/build.gradle" }}
