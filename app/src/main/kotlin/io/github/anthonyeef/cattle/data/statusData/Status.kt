@@ -8,59 +8,59 @@ import io.github.anthonyeef.cattle.entity.Photo
  * A fanfou status.
  */
 @Entity
-class Status {
+data class Status(
 
     @PrimaryKey
-    var rawid: Int = 0
+    var rawid: Int = 0,
 
     @ColumnInfo(name = "status_id")
-    var id: String = ""
+    var id: String = "",
 
     @ColumnInfo
-    var text: String = ""
+    var text: String = "",
 
     @ColumnInfo
-    var source: String = ""
+    var source: String = "",
 
     @ColumnInfo(name = "status_created_at")
-    var createdAt: String = ""
+    var createdAt: String = "",
 
     @ColumnInfo
-    var truncated: Boolean = false
+    var truncated: Boolean = false,
 
     @ColumnInfo
-    var favorited: Boolean = false
+    var favorited: Boolean = false,
 
     @ColumnInfo(name = "in_reply_to_status_id")
-    var inReplyToStatusId: String = ""
+    var inReplyToStatusId: String = "",
 
     @ColumnInfo(name = "in_reply_to_user_id")
-    var inReplyToUserId: String = ""
+    var inReplyToUserId: String = "",
 
     @ColumnInfo(name = "in_reply_to_screen_name")
-    var inReplyToScreenName: String = ""
+    var inReplyToScreenName: String = "",
 
     @ColumnInfo(name = "repo_status_id")
-    var repostStatusId: String = ""
+    var repostStatusId: String = "",
 
     @ColumnInfo(name = "repost_user_id")
-    var repostUserId: String = ""
+    var repostUserId: String = "",
 
     @ColumnInfo(name = "repost_screen_name")
-    var repostScreenName: String = ""
+    var repostScreenName: String = "",
 
     @ColumnInfo(name = "status_location")
-    var location: String = ""
+    var location: String = "",
 
     @Ignore
-    var repostStatus: EmbeddedStatus? = null
+    var repostStatus: EmbeddedStatus? = null,
 
     @Embedded
-    var user: UserInfo? = null
+    var user: UserInfo? = null,
 
     @Embedded
-    var photo: Photo? = null
+    var photo: Photo? = null,
 
     @Ignore
     var isSingle: Boolean = true
-}
+)
