@@ -6,6 +6,7 @@
 
     <color name="grey50">#fafafa</color>
     <color name="grey200">#EEEEEE</color>
+    <color name="grey400">#BDBDBD</color>
     <color name="grey600">#757575</color>
     <color name="grey800">#424242</color>
     <color name="grey900">#212121</color>
@@ -20,4 +21,5 @@
 
     <color name="text_color_normal">@color/grey900</color>
     <color name="text_color_secondary">@color/grey600</color>
+    <color name="text_color_secondary_light">@color/grey400</color>
 </resources>
