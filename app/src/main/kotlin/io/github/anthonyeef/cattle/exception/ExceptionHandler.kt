@@ -1,6 +1,5 @@
 package io.github.anthonyeef.cattle.exception
 
-import android.content.Context
 import android.support.v4.app.Fragment
 import com.jakewharton.retrofit2.adapter.rxjava2.HttpException
 import io.github.anthonyeef.cattle.constant.app

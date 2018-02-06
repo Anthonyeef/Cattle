@@ -18,10 +18,16 @@ import io.github.anthonyeef.cattle.R
 import io.github.anthonyeef.cattle.contract.ProfileContract
 import io.github.anthonyeef.cattle.data.statusData.Status
 import io.github.anthonyeef.cattle.data.userData.UserInfo
+import io.github.anthonyeef.cattle.entity.DummyListViewEntity
+import io.github.anthonyeef.cattle.entity.ListHeaderViewEntity
+import io.github.anthonyeef.cattle.entity.PreviewAlbumPhotos
 import io.github.anthonyeef.cattle.entity.UserProfileDataEntity
 import io.github.anthonyeef.cattle.extension.gone
 import io.github.anthonyeef.cattle.utils.LoadMoreDelegate
 import io.github.anthonyeef.cattle.view.ProfileHeaderCountView
+import io.github.anthonyeef.cattle.viewbinder.DummyListViewBinder
+import io.github.anthonyeef.cattle.viewbinder.ListHeaderViewBinder
+import io.github.anthonyeef.cattle.viewbinder.ProfilePreviewAlbumListViewBinder
 import io.github.anthonyeef.cattle.viewbinder.ProfileStatusViewBinder
 import me.drakeet.multitype.Items
 import me.drakeet.multitype.MultiTypeAdapter
@@ -54,7 +60,12 @@ class ProfileFragment : BaseFragment(),
     private var followerCount: ProfileHeaderCountView? = null
     private var statusCount: ProfileHeaderCountView? = null
 
-    private val adapter: MultiTypeAdapter by lazy { MultiTypeAdapter(items).apply { register(Status::class.java, ProfileStatusViewBinder()) } }
+    private val adapter: MultiTypeAdapter by lazy { MultiTypeAdapter(items).apply {
+        register(DummyListViewEntity::class.java, DummyListViewBinder())
+        register(ListHeaderViewEntity::class.java, ListHeaderViewBinder())
+        register(Status::class.java, ProfileStatusViewBinder())
+        register(PreviewAlbumPhotos::class.java, ProfilePreviewAlbumListViewBinder())
+    } }
 
     lateinit private var loadMoreDelegate: LoadMoreDelegate
 
@@ -94,6 +105,9 @@ class ProfileFragment : BaseFragment(),
         profileToolbarLayout?.title = " "
 
         userStatusList?.adapter = adapter
+
+        profilePresenter?.loadAlbumPreview()
+        profilePresenter?.loadProfile(false)
     }
 
 
@@ -152,10 +166,26 @@ class ProfileFragment : BaseFragment(),
     }
 
 
+    override fun showAlbumPreview(photos: List<Status>) {
+        if (photos.isNotEmpty()) {
+            items.add(0, DummyListViewEntity(showTopDivider = false))
+            items.add(1, PreviewAlbumPhotos(photos))
+            adapter.notifyItemInserted(0)
+        }
+    }
+
+
     override fun showStatuses(statuses: List<Status>) {
-        val tempPosition = items.size
-        items.addAll(statuses)
-        adapter.notifyItemInserted(tempPosition)
+        // only add list title once
+        if (items.any { it is Status }.not()) {
+            items.add(2, ListHeaderViewEntity(getString(R.string.title_status_list)))
+        }
+
+        if (statuses.isNotEmpty()) {
+            val tempPosition = items.size
+            items.addAll(statuses)
+            adapter.notifyItemInserted(tempPosition)
+        }
     }
 
 

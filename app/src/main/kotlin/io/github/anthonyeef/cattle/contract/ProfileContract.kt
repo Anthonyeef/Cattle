@@ -14,11 +14,16 @@ interface ProfileContract {
     interface View : BaseView<Presenter> {
         fun showProfile(userInfo: UserInfo)
 
+        fun showAlbumPreview(photos: List<Status>)
+
         fun showStatuses(statuses: List<Status>)
     }
 
     interface Presenter : BasePresenter {
+
         fun loadProfile(forceUpdate: Boolean = false)
+
+        fun loadAlbumPreview()
 
         fun loadStatuses(clearData: Boolean = false)
 

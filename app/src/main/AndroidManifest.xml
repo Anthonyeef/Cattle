@@ -29,6 +29,10 @@
             />
 
         <activity
+            android:name=".activity.AlbumActivity"
+            />
+
+        <activity
             android:name=".activity.LoginActivity"
             android:launchMode="singleTask">
             <intent-filter>

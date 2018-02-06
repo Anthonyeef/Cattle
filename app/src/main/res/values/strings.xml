@@ -18,13 +18,19 @@
     <string name="text_photo_only_status">Uploaded new photo</string>
 
     <string name="hint_compose_new_fanfou">Write something new</string>
+    <string name="hint_no_album_photos">No album photos yet</string>
+    <string name="hint_no_more_album_photos">No more album photos</string>
+
     <string name="text_mention_button">\@</string>
     <string name="text_hash_tag_button">#</string>
+
 
     <!-- Profile -->
     <string name="text_self_intro">Self intro：</string>
     <string name="text_following">Following</string>
     <string name="text_follower">Follower</string>
     <string name="text_status">Status</string>
+    <string name="title_album">Album</string>
+    <string name="title_status_list">Statuses</string>
 
 </resources>
