@@ -15,6 +15,13 @@ import org.jetbrains.anko.verticalLayout
  */
 class TestFieldFragment : BaseFragment() {
 
+    // test id for album
+    private val TEST_ALBUM_UID = "waywardgirl" // 绵子
+    private val TEST_ALBUM_UID_1 = "luobeibei" // 罗贝贝
+
+    // 401 unauthorized
+    private val TEST_ERROR_ID = "~vGIW3w_zPZ4" // 阿丽丽
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return UI {
             verticalLayout {
