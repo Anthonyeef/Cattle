@@ -12,7 +12,7 @@ import java.util.Collections;
 import java.util.List;
 
 import io.github.anthonyeef.cattle.contract.ProfileAlbumContract;
-import io.github.anthonyeef.cattle.data.source.AlbumRepository;
+import io.github.anthonyeef.cattle.data.source.album.AlbumRepository;
 import io.github.anthonyeef.cattle.data.statusData.Status;
 import io.github.anthonyeef.cattle.presenter.ProfileAlbumPresenter;
 import io.reactivex.Flowable;

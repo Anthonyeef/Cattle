@@ -30,5 +30,6 @@
     <string name="text_following">Following</string>
     <string name="text_follower">Follower</string>
     <string name="text_status">Status</string>
+    <string name="title_album">Album</string>
 
 </resources>

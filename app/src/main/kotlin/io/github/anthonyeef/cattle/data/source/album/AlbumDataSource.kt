@@ -1,4 +1,4 @@
-package io.github.anthonyeef.cattle.data.source
+package io.github.anthonyeef.cattle.data.source.album
 
 import io.github.anthonyeef.cattle.data.statusData.Status
 import io.reactivex.Flowable

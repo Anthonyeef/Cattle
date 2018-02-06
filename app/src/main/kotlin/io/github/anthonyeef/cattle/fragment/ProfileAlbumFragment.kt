@@ -5,7 +5,7 @@ import android.support.v7.widget.GridLayoutManager
 import android.view.View
 import io.github.anthonyeef.cattle.R
 import io.github.anthonyeef.cattle.contract.ProfileAlbumContract
-import io.github.anthonyeef.cattle.data.source.AlbumRepository
+import io.github.anthonyeef.cattle.data.source.album.AlbumRepository
 import io.github.anthonyeef.cattle.data.source.remote.AlbumRemoteDataSource
 import io.github.anthonyeef.cattle.data.statusData.Status
 import io.github.anthonyeef.cattle.entity.EmptyHintEntity

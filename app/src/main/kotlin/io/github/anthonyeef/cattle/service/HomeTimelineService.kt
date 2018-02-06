@@ -27,7 +27,14 @@ interface HomeTimelineService {
     ): Observable<List<Status>>
 
     @GET("photos/user_timeline.json")
-    fun getUserGalleryTimeline(
+    fun getUserAlbumPreview(
+            @Query("id") id: String,
+            @Query("count") count: Int = 5,
+            @Query("format") format: String = "html"
+    ): Flowable<List<Status>>
+
+    @GET("photos/user_timeline.json")
+    fun getUserAlbumTimeline(
             @Query("id") id: String,
             @Query("count") count: Int = 20,
             @Query("format") format: String = "html",

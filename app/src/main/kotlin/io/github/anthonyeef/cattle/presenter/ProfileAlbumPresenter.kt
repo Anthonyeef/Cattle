@@ -1,7 +1,7 @@
 package io.github.anthonyeef.cattle.presenter
 
 import io.github.anthonyeef.cattle.contract.ProfileAlbumContract
-import io.github.anthonyeef.cattle.data.source.AlbumRepository
+import io.github.anthonyeef.cattle.data.source.album.AlbumRepository
 import io.github.anthonyeef.cattle.utils.EspressoIdlingResource
 import io.github.anthonyeef.cattle.utils.SimpleCountingIdlingResource
 import io.reactivex.android.schedulers.AndroidSchedulers

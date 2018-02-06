@@ -55,6 +55,23 @@ class ProfilePresenter() : ProfileContract.Presenter {
     }
 
 
+    override fun loadAlbumPreview() {
+        _disposable.add(userTimelineService.getUserAlbumPreview(id = userId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        // onNext
+                        {
+                            profileView.showAlbumPreview(it)
+                        },
+                        // onError
+                        {
+                            // do nothing? or show error? (would be better)
+                        }
+                ))
+    }
+
+
     override fun loadStatuses(clearData: Boolean) {
         notifyStatusLoadingStarted()
         _disposable.add(userTimelineService.getUserTimeline(id = userId, lastId = if (clearData) "" else lastItemId)
@@ -83,7 +100,9 @@ class ProfilePresenter() : ProfileContract.Presenter {
 
     override fun subscribe() {
         loadingCount = AtomicInteger(0)
-        loadProfile(false)
+
+//        loadAlbumPreview()
+//        loadProfile(false)
     }
 
 

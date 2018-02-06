@@ -1,6 +1,6 @@
 package io.github.anthonyeef.cattle.data.source.remote
 
-import io.github.anthonyeef.cattle.data.source.AlbumDataSource
+import io.github.anthonyeef.cattle.data.source.album.AlbumDataSource
 import io.github.anthonyeef.cattle.data.statusData.Status
 import io.github.anthonyeef.cattle.service.HomeTimelineService
 import io.github.anthonyeef.cattle.service.ServiceGenerator
@@ -26,6 +26,6 @@ class AlbumRemoteDataSource : AlbumDataSource {
     private val homeTimelineService = ServiceGenerator.createDefaultService(HomeTimelineService::class.java)
 
     override fun getAlbumPhotos(userId: String, lastId: String): Flowable<List<Status>> {
-        return homeTimelineService.getUserGalleryTimeline(id = userId, lastId = lastId)
+        return homeTimelineService.getUserAlbumTimeline(id = userId, lastId = lastId)
     }
 }

@@ -47,3 +47,15 @@ fun bindStatusPreviewPhoto(view: ImageView, status: Status) {
                 .into(view)
     }
 }
+
+// bind thumbnail size photo to ImageView
+@BindingAdapter("thumbnailPhoto")
+fun bindStatusThumbnailPhoto(view: ImageView, status: Status) {
+    view.goneIf(status.photo == null)
+    if (status.photo != null) {
+        Glide.with(view.context)
+                .asBitmap() // don't animate when as thumbnail
+                .load(status.photo?.thumburl)
+                .into(view)
+    }
+}
