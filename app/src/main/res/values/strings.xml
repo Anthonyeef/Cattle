@@ -31,5 +31,6 @@
     <string name="text_follower">Follower</string>
     <string name="text_status">Status</string>
     <string name="title_album">Album</string>
+    <string name="title_status_list">Statuses</string>
 
 </resources>

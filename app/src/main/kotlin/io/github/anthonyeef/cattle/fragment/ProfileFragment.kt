@@ -19,12 +19,14 @@ import io.github.anthonyeef.cattle.contract.ProfileContract
 import io.github.anthonyeef.cattle.data.statusData.Status
 import io.github.anthonyeef.cattle.data.userData.UserInfo
 import io.github.anthonyeef.cattle.entity.DummyListViewEntity
+import io.github.anthonyeef.cattle.entity.ListHeaderViewEntity
 import io.github.anthonyeef.cattle.entity.PreviewAlbumPhotos
 import io.github.anthonyeef.cattle.entity.UserProfileDataEntity
 import io.github.anthonyeef.cattle.extension.gone
 import io.github.anthonyeef.cattle.utils.LoadMoreDelegate
 import io.github.anthonyeef.cattle.view.ProfileHeaderCountView
 import io.github.anthonyeef.cattle.viewbinder.DummyListViewBinder
+import io.github.anthonyeef.cattle.viewbinder.ListHeaderViewBinder
 import io.github.anthonyeef.cattle.viewbinder.ProfilePreviewAlbumListViewBinder
 import io.github.anthonyeef.cattle.viewbinder.ProfileStatusViewBinder
 import me.drakeet.multitype.Items
@@ -60,6 +62,7 @@ class ProfileFragment : BaseFragment(),
 
     private val adapter: MultiTypeAdapter by lazy { MultiTypeAdapter(items).apply {
         register(DummyListViewEntity::class.java, DummyListViewBinder())
+        register(ListHeaderViewEntity::class.java, ListHeaderViewBinder())
         register(Status::class.java, ProfileStatusViewBinder())
         register(PreviewAlbumPhotos::class.java, ProfilePreviewAlbumListViewBinder())
     } }
@@ -173,9 +176,16 @@ class ProfileFragment : BaseFragment(),
 
 
     override fun showStatuses(statuses: List<Status>) {
-        val tempPosition = items.size
-        items.addAll(statuses)
-        adapter.notifyItemInserted(tempPosition)
+        // only add list title once
+        if (items.any { it is Status }.not()) {
+            items.add(2, ListHeaderViewEntity(getString(R.string.title_status_list)))
+        }
+
+        if (statuses.isNotEmpty()) {
+            val tempPosition = items.size
+            items.addAll(statuses)
+            adapter.notifyItemInserted(tempPosition)
+        }
     }
 
 
