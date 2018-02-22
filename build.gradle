@@ -43,4 +43,5 @@ ext {
     rxAndroidVersion = '2.0.1'
     multiTypeVersion = '3.0.1'
     constraintLayoutVersion = '1.1.0-beta4'
+    ktxVersion = "0.1"
 }
