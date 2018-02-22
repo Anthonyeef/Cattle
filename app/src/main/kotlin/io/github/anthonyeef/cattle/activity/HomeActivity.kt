@@ -20,6 +20,7 @@ import io.github.anthonyeef.cattle.Injection
 import io.github.anthonyeef.cattle.R
 import io.github.anthonyeef.cattle.adapter.ViewpagerAdapter
 import io.github.anthonyeef.cattle.constant.KEY_CURRENT_USER_ID
+import io.github.anthonyeef.cattle.constant.KEY_RETROFIT_LOG_LEVEL
 import io.github.anthonyeef.cattle.contract.HomeActivityContract
 import io.github.anthonyeef.cattle.data.userData.UserInfo
 import io.github.anthonyeef.cattle.extension.addOnTabSelectedListener
@@ -29,6 +30,7 @@ import io.github.anthonyeef.cattle.fragment.HomeFeedListFragment
 import io.github.anthonyeef.cattle.fragment.MentionListFragment
 import io.github.anthonyeef.cattle.livedata.SharedPreferenceStringLiveData
 import io.github.anthonyeef.cattle.presenter.HomeActivityPresenter
+import io.github.anthonyeef.cattle.service.ServiceGenerator
 import io.github.anthonyeef.cattle.utils.PrefUtils
 import io.github.anthonyeef.cattle.utils.bindOptionalView
 import io.github.anthonyeef.cattle.utils.bindView
@@ -72,6 +74,7 @@ class HomeActivity : BaseActivity(), HomeActivityContract.View {
         setupTabLayout()
 
         subscribeToUserInfoChanged()
+        subscribeToRetrofitLogLevelChanged()
 
         composeBtn.onClick {
             homePresenter.composeNewFanfou()
@@ -103,6 +106,12 @@ class HomeActivity : BaseActivity(), HomeActivityContract.View {
              showUserInfoInToolbar()
              showUserInfoInDrawer()
          })
+    }
+
+    private fun subscribeToRetrofitLogLevelChanged() {
+        SharedPreferenceStringLiveData(PrefUtils.getDefaultPref(), KEY_RETROFIT_LOG_LEVEL, "0").observe(this, Observer {
+            ServiceGenerator.notifyLogLevelChanged()
+        })
     }
 
 
@@ -218,6 +227,12 @@ class HomeActivity : BaseActivity(), HomeActivityContract.View {
                 R.id.nav_test_profile -> {
                     bindDrawerAction {
                         startActivity(intentFor<ProfileActivity>(ProfileActivity.EXTRA_USER_ID to "臬兀").newTask())
+                    }
+                }
+
+                R.id.nav_debug_setting -> {
+                    bindDrawerAction {
+                        startActivity(intentFor<DebugSettingActivity>().newTask())
                     }
                 }
 
