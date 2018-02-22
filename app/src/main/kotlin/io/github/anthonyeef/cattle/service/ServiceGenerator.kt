@@ -7,6 +7,7 @@ import io.github.anthonyeef.cattle.BuildConfig
 import io.github.anthonyeef.cattle.constant.FanfouApiBaseUrl
 import io.github.anthonyeef.cattle.constant.KEY_ACCESS_TOKEN
 import io.github.anthonyeef.cattle.constant.KEY_ACCESS_TOKEN_SECRET
+import io.github.anthonyeef.cattle.constant.KEY_RETROFIT_LOG_LEVEL
 import io.github.anthonyeef.cattle.httpInterceptor.Oauth1SigningInterceptor
 import io.github.anthonyeef.cattle.utils.PrefUtils
 import okhttp3.OkHttpClient
@@ -25,7 +26,7 @@ object ServiceGenerator {
             .create()
 
     private var logging = HttpLoggingInterceptor()
-            .setLevel(HttpLoggingInterceptor.Level.BASIC)// default level
+            .setLevel(HttpLoggingInterceptor.Level.NONE)
 
     private var sBuilder = Retrofit.Builder().baseUrl(FanfouApiBaseUrl)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -84,6 +85,24 @@ object ServiceGenerator {
         sBuilder.client(httpClient.build())
         val retrofit = sBuilder.build()
         return retrofit.create(serviceClass)
+    }
+
+    /**
+     * Notify http client log level change
+     */
+    fun notifyLogLevelChanged(){
+        httpClient.networkInterceptors().remove(logging)
+        val currentLogLevel = PrefUtils.getDefaultPref().getString(KEY_RETROFIT_LOG_LEVEL, "0")
+        logging = HttpLoggingInterceptor()
+                .setLevel(
+                        when (currentLogLevel) {
+                            "0" -> HttpLoggingInterceptor.Level.NONE
+                            "1" -> HttpLoggingInterceptor.Level.BASIC
+                            "2" -> HttpLoggingInterceptor.Level.HEADERS
+                            else -> HttpLoggingInterceptor.Level.BODY
+                        }
+                )
+        httpClient.addNetworkInterceptor(logging)
     }
 
     // TODO: create NewBuilder() method for it
