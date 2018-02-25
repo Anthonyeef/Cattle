@@ -60,6 +60,8 @@ class ProfileFragment : BaseFragment(),
     private var followerCount: ProfileHeaderCountView? = null
     private var statusCount: ProfileHeaderCountView? = null
 
+    private var statusTotalCount: Int = 0
+
     private val adapter: MultiTypeAdapter by lazy { MultiTypeAdapter(items).apply {
         register(DummyListViewEntity::class.java, DummyListViewBinder())
         register(ListHeaderViewEntity::class.java, ListHeaderViewBinder())
@@ -159,10 +161,12 @@ class ProfileFragment : BaseFragment(),
                 operation = { info("clicked follower count")
                 })
         statusCount?.userProfileData = UserProfileDataEntity(
-                itemName = getString(R.string.text_status),
-                countNumber = userInfo.statusesCount,
-                operation = { info("clicked status count")
+                itemName = getString(R.string.text_favourite),
+                countNumber = userInfo.favouritesCount,
+                operation = { info("clicked favourite count")
                 })
+
+        statusTotalCount = userInfo.statusesCount
     }
 
 
@@ -178,7 +182,7 @@ class ProfileFragment : BaseFragment(),
     override fun showStatuses(statuses: List<Status>) {
         // only add list title once
         if (items.any { it is Status }.not()) {
-            items.add(2, ListHeaderViewEntity(getString(R.string.title_status_list)))
+            items.add(2, ListHeaderViewEntity(getString(R.string.title_status_list, statusTotalCount)))
         }
 
         if (statuses.isNotEmpty()) {

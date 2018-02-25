@@ -9,6 +9,7 @@ import io.github.anthonyeef.cattle.constant.app
 import io.github.anthonyeef.cattle.data.statusData.Status
 import io.github.anthonyeef.cattle.extension.goneIf
 import io.github.anthonyeef.cattle.utils.StatusParsingUtils
+import io.github.anthonyeef.cattle.utils.TimeUtils
 
 // bind status source to TextView
 @BindingAdapter("statusSource")
@@ -58,4 +59,9 @@ fun bindStatusThumbnailPhoto(view: ImageView, status: Status) {
                 .load(status.photo?.thumburl)
                 .into(view)
     }
+}
+
+@BindingAdapter("prettyTime")
+fun bindPrettyTime(view: TextView, date: String) {
+    view.text = TimeUtils.prettyFormat(date)
 }
