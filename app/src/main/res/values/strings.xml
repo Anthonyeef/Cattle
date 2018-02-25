@@ -30,9 +30,10 @@
     <string name="text_self_intro">Self intro：</string>
     <string name="text_following">Following</string>
     <string name="text_follower">Follower</string>
+    <string name="text_favourite">Favourite</string>
     <string name="text_status">Status</string>
     <string name="title_album">Album</string>
-    <string name="title_status_list">Statuses</string>
+    <string name="title_status_list">All statuses · %1$s</string>
 
     <!-- Debug -->
     <string name="pref_retrofit_log_level">retrofit_log_level</string>
