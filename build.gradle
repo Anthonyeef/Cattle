@@ -44,4 +44,5 @@ ext {
     multiTypeVersion = '3.0.1'
     constraintLayoutVersion = '1.1.0-beta4'
     ktxVersion = "0.1"
+    autoDispose = "0.6.1"
 }

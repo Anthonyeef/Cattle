@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/horizontal_padding_normal"
+        android:paddingTop="@dimen/vertical_padding_normal"
+        android:paddingRight="@dimen/horizontal_padding_normal"
+        android:paddingBottom="@dimen/vertical_padding_normal"
+        >
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@id/avatar"
+            android:layout_width="@dimen/avatar_size_normal"
+            android:layout_height="@dimen/avatar_size_normal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <TextView
+            android:id="@id/user_display_name"
+            style="@style/Widget.Cattle.Text.DisplayName"
+            android:layout_marginStart="@dimen/horizontal_padding_small"
+            app:layout_constraintStart_toEndOf="@id/avatar"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+    </android.support.constraint.ConstraintLayout>
+
+</layout>
