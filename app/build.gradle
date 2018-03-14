@@ -126,6 +126,10 @@ dependencies {
         exclude group: 'com.android.support'
         exclude group: 'org.jetbrains.kotlin'
     }
+    implementation "me.drakeet.multitype:multitype-kotlin:$rootProject.ext.multiTypeVersion", {
+        exclude group: 'com.android.support'
+        exclude group: 'org.jetbrain.kotlin'
+    }
 
     implementation deps.constraintlayout
     implementation deps.prettytime
