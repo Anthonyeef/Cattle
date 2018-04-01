@@ -1,0 +1,85 @@
+ext.deps = [:]
+
+def versions = [:]
+versions.kotlin = "1.2.30"
+versions.gradle = "3.1.0"
+versions.support = "27.0.2"
+versions.arch = "1.0.0"
+versions.ktx = "0.2"
+versions.espresso = "2.2.2"
+versions.espresso_idling = "3.0.1"
+versions.retrofit = "2.3.0"
+versions.rxjava = "2.1.11"
+versions.rxandroid = '2.0.2'
+versions.httplog = '3.8.1'
+versions.rxrelay = "2.0.0"
+versions.rxscalars = "2.1.0"
+versions.multitype = "3.4.4"
+versions.constraintlayout = "1.1.0-beta6"
+versions.prettytime = "4.0.1.Final"
+versions.junit = "4.12"
+versions.mockito = "2.13.0"
+versions.glide = "4.4.0"
+versions.glide_okhttp = "4.3.0"
+versions.circleimage = "2.2.0"
+
+def deps = [:]
+
+def support = [:]
+support.compat_v7 = "com.android.support:appcompat-v7:$versions.support"
+support.design = "com.android.support:design:$versions.support"
+support.preference_v7 = "com.android.support:preference-v7:$versions.support"
+support.preference_v14 = "com.android.support:preference-v14:$versions.support"
+deps.support = support
+
+def arch = [:]
+arch.room = "android.arch.persistence.room:runtime:$versions.arch"
+arch.room_compiler = "android.arch.persistence.room:compiler:$versions.arch"
+arch.room_rx = "android.arch.persistence.room:rxjava2:$versions.arch"
+arch.life_extension = "android.arch.lifecycle:extensions:$versions.arch"
+arch.life_rx = "android.arch.lifecycle:reactivestreams:$versions.arch"
+deps.arch = arch
+
+def espresso = [:]
+espresso.core = "com.android.support.test.espresso:espresso-core:$versions.espresso"
+espresso.contrib = "com.android.support.test.espresso:espresso-contrib:$versions.espresso"
+espresso.intents = "com.android.support.test.espresso:espresso-intents:$versions.espresso"
+espresso.idling = "com.android.support.test.espresso:espresso-idling-resource:$versions.espresso_idling"
+deps.espresso = espresso
+
+def multitype = [:]
+multitype.lib = "me.drakeet.multitype:multitype:$versions.multitype"
+multitype.kotlin = "me.drakeet.multitype:multitype-kotlin:$versions.multitype"
+deps.multitype = multitype
+
+deps.junit = "junit:junit:$versions.junit"
+deps.mockito = "org.mockito:mockito-inline:$versions.mockito"
+
+deps.kotlin = "com.android.tools.build:gradle:$versions.gradle"
+deps.gradle = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
+
+deps.ktx = "androidx.core:core-ktx:$versions.ktx"
+deps.retrofit = "com.squareup.retrofit2:retrofit:$versions.retrofit"
+deps.retrofit_rxjava_adapter = "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit"
+deps.rxjava = "io.reactivex.rxjava2:rxjava:$versions.rxjava"
+deps.rxandroid = "io.reactivex.rxjava2:rxandroid:$versions.rxandroid"
+deps.rxrelay = "com.jakewharton.rxrelay2:rxrelay:$versions.rxrelay"
+deps.rxscalars = "com.squareup.retrofit2:converter-scalars:$versions.rxscalars"
+deps.log = "com.squareup.okhttp3:logging-interceptor:$versions.httplog"
+deps.gson_converter = "com.squareup.retrofit2:converter-gson:$versions.retrofit"
+deps.constraintlayout = "com.android.support.constraint:constraint-layout:$versions.constraintlayout"
+deps.prettytime = "org.ocpsoft.prettytime:prettytime:$versions.prettytime"
+deps.glide = "com.github.bumptech.glide:glide:$versions.glide"
+deps.glide_compiler = "com.github.bumptech.glide:compiler:$versions.glide"
+deps.glide_okhttp = "com.github.bumptech.glide:okhttp3-integration:$versions.glide_okhttp"
+deps.circleimage = "de.hdodenhof:circleimageview:$versions.circleimage"
+
+ext.deps = deps
+
+def addRepos(RepositoryHandler handler) {
+    handler.google()
+    handler.jcenter()
+    handler.maven { url 'https://maven.fabric.io/public' }
+}
+
+ext.addRepos = this.&addRepos
