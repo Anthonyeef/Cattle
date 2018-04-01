@@ -34,13 +34,13 @@ class StatusDetailFragment : BaseListFragment(), StatusDetailContract.View {
         adapter.register(Status::class.java, StatusItemDetailItemViewBinder())
         adapter.register(ConversationStatus::class.java)
                 .to(StatusConversationStartItemViewBinder(), StatusConversationItemViewBinder())
-                .withLinker({
-                    if (it.isStartOfConversation) {
+                .withLinker { _, t ->
+                    if (t.isStartOfConversation) {
                         0
                     } else {
                         1
                     }
-                })
+                }
     }
 
 
