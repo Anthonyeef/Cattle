@@ -1,12 +1,12 @@
 package io.github.anthonyeef.cattle.exception
 
 import android.support.v4.app.Fragment
-import com.jakewharton.retrofit2.adapter.rxjava2.HttpException
 import io.github.anthonyeef.cattle.constant.app
 import io.github.anthonyeef.cattle.utils.CatLogger
 import org.jetbrains.anko.error
 import org.jetbrains.anko.support.v4.toast
 import org.jetbrains.anko.toast
+import retrofit2.HttpException
 
 /**
  *

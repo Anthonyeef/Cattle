@@ -2,10 +2,6 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
-kapt {
-
-}
-
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
@@ -67,63 +63,66 @@ android {
 
 dependencies {
     // Local unit tests
-    testImplementation("com.android.support.test.espresso:espresso-core:$rootProject.ext.espresso", {
+    testImplementation(deps.espresso.core, {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    testImplementation "org.mockito:mockito-inline:$rootProject.ext.mockitoVersion"
-    testImplementation "junit:junit:$rootProject.ext.junitVersion"
+
+    testImplementation deps.mockito
+    testImplementation deps.junit
 
     // Android unit test
-    androidTestImplementation "org.mockito:mockito-inline:$rootProject.ext.mockitoVersion"
-    androidTestImplementation "junit:junit:$rootProject.ext.junitVersion"
+    androidTestImplementation deps.mockito
+    androidTestImplementation deps.junit
 
     // Espresso UI test
-    androidTestImplementation("com.android.support.test.espresso:espresso-core:$rootProject.ext.espresso", {
+    androidTestImplementation(deps.espresso.core, {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    androidTestImplementation "com.android.support.test.espresso:espresso-contrib:$rootProject.ext.espresso"
-    androidTestImplementation "com.android.support.test.espresso:espresso-intents:$rootProject.ext.espresso"
+    androidTestImplementation deps.espresso.contrib
+    androidTestImplementation deps.espresso.intents
 
-    implementation "com.android.support.test.espresso:espresso-idling-resource:$rootProject.ext.espresso"
-    implementation "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
-    implementation "com.android.support:design:$rootProject.ext.supportLibraryVersion"
-    implementation "com.android.support:preference-v7:$rootProject.ext.supportLibraryVersion"
-    implementation "com.android.support:preference-v14:$rootProject.ext.supportLibraryVersion"
+    implementation deps.espresso.idling
+    implementation deps.support.compat_v7
+    implementation deps.support.design
+    implementation deps.support.preference_v7
+    implementation deps.support.preference_v14
 
-    implementation "android.arch.persistence.room:runtime:$rootProject.ext.archLibraryVersion"
-    kapt "android.arch.persistence.room:compiler:$rootProject.ext.archLibraryVersion"
-    implementation "android.arch.persistence.room:rxjava2:$rootProject.ext.archLibraryVersion"
-    implementation "android.arch.lifecycle:extensions:$rootProject.ext.archLibraryVersion"
-    implementation "android.arch.lifecycle:reactivestreams:$rootProject.ext.archLibraryVersion"
+    implementation deps.arch.room
+    kapt deps.arch.room_compiler
+    implementation deps.arch.room_rx
+    implementation deps.arch.life_extension
+    implementation deps.arch.life_rx
 
-    implementation "androidx.core:core-ktx:$rootProject.ext.ktxVersion"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation deps.ktx
+
     implementation "org.jetbrains.anko:anko-sdk25:$rootProject.ext.ankoLibraryVersion"
     implementation "org.jetbrains.anko:anko-sdk25-listeners:$rootProject.ext.ankoLibraryVersion"
     implementation "org.jetbrains.anko:anko-appcompat-v7:$rootProject.ext.ankoLibraryVersion"
     implementation "org.jetbrains.anko:anko-design:$rootProject.ext.ankoLibraryVersion"
 
-    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
-    implementation 'com.squareup.retrofit2:converter-scalars:2.1.0'
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.8.1'
+    implementation deps.retrofit
+    implementation deps.retrofit_rxjava_adapter
+    implementation deps.gson_converter
+    implementation deps.log
+    implementation deps.rxscalars
 
-    implementation "io.reactivex.rxjava2:rxjava:$rootProject.ext.rxjavaVersion"
-    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.ext.rxAndroidVersion"
-    implementation 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
-    implementation 'com.jakewharton.rxrelay2:rxrelay:2.0.0'
+    implementation deps.rxjava
+    implementation deps.rxandroid
+    implementation deps.rxrelay
 
-    implementation 'com.github.bumptech.glide:okhttp3-integration:4.3.0'
-    implementation 'com.github.bumptech.glide:glide:4.4.0'
-    kapt 'com.github.bumptech.glide:compiler:4.4.0'
-    implementation 'de.hdodenhof:circleimageview:2.1.0'
+    implementation deps.glide_okhttp
+    implementation deps.glide
+    kapt deps.glide_compiler
+    implementation deps.circleimage
 
-    implementation "me.drakeet.multitype:multitype:$rootProject.ext.multiTypeVersion", {
+    implementation deps.multitype.lib, { exclude group: 'com.android.support' }
+    implementation deps.multitype.kotlin, {
         exclude group: 'com.android.support'
+        exclude group: 'org.jetbrains.kotlin'
     }
 
-    implementation "com.android.support.constraint:constraint-layout:$rootProject.ext.constraintLayoutVersion"
-    implementation 'org.ocpsoft.prettytime:prettytime:4.0.1.Final'
+    implementation deps.constraintlayout
+    implementation deps.prettytime
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 }
 repositories {

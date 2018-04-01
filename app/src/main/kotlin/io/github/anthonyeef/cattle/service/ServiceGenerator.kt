@@ -2,7 +2,6 @@ package io.github.anthonyeef.cattle.service
 
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
-import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import io.github.anthonyeef.cattle.BuildConfig
 import io.github.anthonyeef.cattle.constant.FanfouApiBaseUrl
 import io.github.anthonyeef.cattle.constant.KEY_ACCESS_TOKEN
@@ -13,6 +12,7 @@ import io.github.anthonyeef.cattle.utils.PrefUtils
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 
