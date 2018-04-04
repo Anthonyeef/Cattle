@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     android:paddingLeft="@dimen/horizontal_padding_normal"
     android:paddingRight="@dimen/horizontal_padding_normal"
-    android:paddingTop="@dimen/vertical_padding_normal">
+    android:paddingTop="@dimen/vertical_padding_normal"
+    >
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@id/avatar"
@@ -40,14 +41,16 @@
             android:id="@+id/margin_above_image"
             android:layout_width="match_parent"
             android:layout_height="@dimen/vertical_padding_small"
-            android:visibility="gone"/>
+            android:visibility="gone"
+            />
 
         <ImageView
             android:id="@+id/status_image_preview"
             android:layout_width="match_parent"
             android:layout_height="168dp"
             android:scaleType="centerCrop"
-            android:visibility="gone"/>
+            android:visibility="gone"
+            />
 
         <View
             style="@style/Widget.Cattle.Divider"

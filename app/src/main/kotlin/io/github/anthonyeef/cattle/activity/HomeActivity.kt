@@ -45,7 +45,7 @@ class HomeActivity : BaseActivity(), HomeActivityContract.View {
     private lateinit var homePresenter: HomeActivityContract.Presenter
     private val drawerLayout: DrawerLayout by bindView(R.id.drawer_layout)
     private val navigation: NavigationView by bindView(R.id.nav_view)
-    private val toolbar: Toolbar? by bindOptionalView(R.id.toolbar)
+    private val toolbar: Toolbar? by bindOptionalView(R.id.home_toolbar)
     private val viewpager: ViewPager by bindView(R.id.viewpager)
     private val tabLayout: TabLayout by bindView(R.id.tabs)
     private val composeBtn: FloatingActionButton by bindView(R.id.fab)
@@ -55,7 +55,7 @@ class HomeActivity : BaseActivity(), HomeActivityContract.View {
     private var navigationHeaderUserName: TextView? = null
 
     private var drawerAction: Any.() -> Unit = { }
-    lateinit private var drawerToggle: ActionBarDrawerToggle
+    private lateinit var drawerToggle: ActionBarDrawerToggle
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

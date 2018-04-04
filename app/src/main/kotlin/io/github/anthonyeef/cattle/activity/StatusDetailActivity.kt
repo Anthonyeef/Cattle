@@ -18,8 +18,6 @@ import org.jetbrains.anko.support.v4.withArguments
  */
 class StatusDetailActivity : BaseActivity() {
 
-    private val toolbar: Toolbar? by lazy { findOptional<Toolbar>(R.id.toolbar) }
-
     companion object {
         const val EXTRA_STATUS_ID = "extra_status_id"
         const val EXTRA_STATUS_HAS_CONVERSATION = "extra_status_has_conversation"
@@ -30,27 +28,19 @@ class StatusDetailActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_status_detail)
-        setupToolbar()
         setupDetailFragment()
 
         window.statusBarColor = ContextCompat.getColor(this, R.color.colorPrimaryDark)
+
+        setToolbarTitle(getString(R.string.page_title_detail))
     }
+
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
     }
 
-    private fun setupToolbar() {
-        toolbar?.let {
-            setSupportActionBar(it)
-
-            supportActionBar?.setDisplayHomeAsUpEnabled(true)
-            supportActionBar?.setDisplayShowTitleEnabled(false)
-            supportActionBar?.elevation = 4.0f
-            it.setTitle(R.string.page_title_detail)
-        }
-    }
 
     private fun setupDetailFragment() {
         val statusId = intent.getStringExtra(EXTRA_STATUS_ID)

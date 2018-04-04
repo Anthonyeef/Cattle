@@ -15,6 +15,8 @@ import android.widget.TextView
 import de.hdodenhof.circleimageview.CircleImageView
 import io.github.anthonyeef.cattle.GlideApp
 import io.github.anthonyeef.cattle.R
+import io.github.anthonyeef.cattle.activity.FollowerListActivity
+import io.github.anthonyeef.cattle.constant.app
 import io.github.anthonyeef.cattle.contract.ProfileContract
 import io.github.anthonyeef.cattle.data.statusData.Status
 import io.github.anthonyeef.cattle.data.userData.UserInfo
@@ -33,6 +35,8 @@ import me.drakeet.multitype.Items
 import me.drakeet.multitype.MultiTypeAdapter
 import org.jetbrains.anko.find
 import org.jetbrains.anko.info
+import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.support.v4.intentFor
 
 /**
  * Personal info fragment. Display personal info, fanfou list, fav fanfou, etc.
@@ -69,7 +73,7 @@ class ProfileFragment : BaseFragment(),
         register(PreviewAlbumPhotos::class.java, ProfilePreviewAlbumListViewBinder())
     } }
 
-    lateinit private var loadMoreDelegate: LoadMoreDelegate
+    private lateinit var loadMoreDelegate: LoadMoreDelegate
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -158,7 +162,8 @@ class ProfileFragment : BaseFragment(),
         followerCount?.userProfileData = UserProfileDataEntity(
                 itemName = getString(R.string.text_follower),
                 countNumber = userInfo.followersCount,
-                operation = { info("clicked follower count")
+                operation = {
+                    startActivity(app.intentFor<FollowerListActivity>(FollowerListActivity.KEY_USER_ID to userInfo.id ))
                 })
         statusCount?.userProfileData = UserProfileDataEntity(
                 itemName = getString(R.string.text_favourite),

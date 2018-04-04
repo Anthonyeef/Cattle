@@ -40,6 +40,16 @@ fun <T: FragmentActivity?> T.showFragment(fragmentToShow: Fragment) {
     }
 }
 
+fun <T: FragmentActivity?> T.showFragment(fragmentToShow: Fragment, tag: String) {
+    if (isFragmentContainer()) {
+        this?.let {
+            supportFragmentManager.beginTransaction()
+                    .add(fragmentToShow, tag)
+                    .commit()
+        }
+    }
+}
+
 /**
  * Method to check whether current activity have the container to hold fragment.
  * Default container with id [CONTAINER_ID]

@@ -1,19 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    >
 
-    <ProgressBar
-        android:id="@+id/bottom_progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"/>
+    <data>
+        <variable
+            name="bottomRefresh"
+            type="io.github.anthonyeef.cattle.entity.BottomRefreshEntity"
+            />
+    </data>
 
-    <TextView
-        android:id="@+id/bottom_error"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:gravity="center_horizontal"/>
-</FrameLayout>
+        >
+
+        <ProgressBar
+            android:id="@+id/bottom_progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            />
+
+        <TextView
+            android:id="@+id/bottom_error"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:gravity="center_horizontal"
+            android:text="@{bottomRefresh.errorHint}"
+            />
+    </FrameLayout>
+</layout>
