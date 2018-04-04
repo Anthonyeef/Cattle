@@ -65,3 +65,10 @@ fun bindStatusThumbnailPhoto(view: ImageView, status: Status) {
 fun bindPrettyTime(view: TextView, date: String) {
     view.text = TimeUtils.prettyFormat(date)
 }
+
+@BindingAdapter("imageUrl")
+fun bindImage(view: ImageView, url: String) {
+    Glide.with(view.context)
+            .load(url)
+            .into(view)
+}

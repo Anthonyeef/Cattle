@@ -33,7 +33,10 @@
     <string name="text_favourite">Favourite</string>
     <string name="text_status">Status</string>
     <string name="title_album">Album</string>
-    <string name="title_status_list">All statuses · %1$s</string>
+    <string name="title_status_list">All statuses · %1$d</string>
+
+    <!-- FollowerList -->
+    <string name="title_follower_list">Follower list</string>
 
     <!-- Debug -->
     <string name="pref_retrofit_log_level">retrofit_log_level</string>

@@ -115,6 +115,12 @@ dependencies {
     kapt deps.glide_compiler
     implementation deps.circleimage
 
+
+    implementation deps.autoDispose
+    implementation deps.autoDispose_android
+    implementation deps.autoDispose_android_arch
+    implementation deps.autoDispose_kotlin
+
     implementation deps.multitype.lib, { exclude group: 'com.android.support' }
     implementation deps.multitype.kotlin, {
         exclude group: 'com.android.support'

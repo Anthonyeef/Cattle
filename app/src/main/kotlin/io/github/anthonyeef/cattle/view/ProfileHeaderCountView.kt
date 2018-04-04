@@ -10,6 +10,7 @@ import io.github.anthonyeef.cattle.R
 import io.github.anthonyeef.cattle.databinding.ViewProfileHeaderCountBinding
 import io.github.anthonyeef.cattle.entity.UserProfileDataEntity
 import org.jetbrains.anko.dimen
+import org.jetbrains.anko.sdk25.listeners.onClick
 import org.jetbrains.anko.verticalPadding
 
 /**
@@ -25,6 +26,9 @@ class ProfileHeaderCountView @JvmOverloads constructor(
         get() = throw UnsupportedOperationException()
         set(v) {
             headerCountBinding?.profileData = v
+            this.onClick {
+                v.operation.invoke()
+            }
         }
 
     private var headerCountBinding: ViewProfileHeaderCountBinding? = null

@@ -12,6 +12,7 @@ import io.github.anthonyeef.cattle.utils.SwipeRefreshDelegate
 import io.github.anthonyeef.cattle.viewbinder.BottomRefreshItemViewBinder
 import io.github.anthonyeef.cattle.viewbinder.StatusItemViewBinder
 import me.drakeet.multitype.Items
+import me.drakeet.multitype.register
 
 /**
  *
@@ -28,8 +29,8 @@ class HomeFeedListFragment : BaseListFragment(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        adapter.register(Status::class.java, StatusItemViewBinder())
-        adapter.register(BottomRefreshEntity::class.java, BottomRefreshItemViewBinder())
+        adapter.register(StatusItemViewBinder())
+        adapter.register(BottomRefreshItemViewBinder())
         refreshDelegate = SwipeRefreshDelegate(this)
         loadMoreDelegate = LoadMoreDelegate(this)
         HomeFeedListPresenter(this)

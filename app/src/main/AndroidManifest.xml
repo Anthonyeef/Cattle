@@ -33,6 +33,10 @@
             />
 
         <activity
+            android:name=".activity.FollowerListActivity"
+            />
+
+        <activity
             android:name=".activity.LoginActivity"
             android:launchMode="singleTask">
             <intent-filter>

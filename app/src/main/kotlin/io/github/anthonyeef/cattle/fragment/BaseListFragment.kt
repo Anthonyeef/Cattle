@@ -19,7 +19,7 @@ import org.jetbrains.anko.findOptional
 abstract class BaseListFragment : BaseFragment() {
     protected lateinit var adapter: MultiTypeAdapter
     protected lateinit var items: Items
-    private var swipeRefreshLayout: SwipeRefreshLayout? = null
+    protected var swipeRefreshLayout: SwipeRefreshLayout? = null
 
     protected var list: RecyclerView? = null
 
@@ -38,14 +38,20 @@ abstract class BaseListFragment : BaseFragment() {
 
         val root = inflater.inflate(R.layout.fragment_list, container, false)
         list = root?.findOptional(android.R.id.list)
+        swipeRefreshLayout = root?.findOptional(R.id.swipe_refresh_layout)
+
+        return root
+    }
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
         list?.adapter = adapter
         list?.layoutManager = LinearLayoutManager(app)
 
         customizeRecyclerView()
-
-        swipeRefreshLayout = root?.findOptional(R.id.swipe_refresh_layout)
-
-        return root
     }
 
 
