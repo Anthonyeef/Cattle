@@ -22,9 +22,9 @@ class HomeFeedListFragment : BaseListFragment(),
         SwipeRefreshDelegate.OnSwipeRefreshListener,
         LoadMoreDelegate.LoadMoreSubject {
 
-    lateinit var homeFeedListPresenter: HomeFeedListContract.Presenter
-    lateinit var refreshDelegate: SwipeRefreshDelegate
-    lateinit var loadMoreDelegate: LoadMoreDelegate
+    private lateinit var homeFeedListPresenter: HomeFeedListContract.Presenter
+    private lateinit var refreshDelegate: SwipeRefreshDelegate
+    private lateinit var loadMoreDelegate: LoadMoreDelegate
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
