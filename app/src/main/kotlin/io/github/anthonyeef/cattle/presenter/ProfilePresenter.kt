@@ -14,109 +14,106 @@ import java.util.concurrent.atomic.AtomicInteger
  */
 class ProfilePresenter() : ProfileContract.Presenter {
 
-    private var firstLoad: Boolean = true
-    private val userInfoService = ServiceGenerator.createDefaultService(UserInfoService::class.java)
-    private val userTimelineService = ServiceGenerator.createDefaultService(HomeTimelineService::class.java)
-    private val _disposable: CompositeDisposable = CompositeDisposable()
-    lateinit private var userId: String
-    lateinit private var profileView: ProfileContract.View
+  private var firstLoad: Boolean = true
+  private val userInfoService = ServiceGenerator.createDefaultService(UserInfoService::class.java)
+  private val userTimelineService = ServiceGenerator.createDefaultService(HomeTimelineService::class.java)
+  private val _disposable: CompositeDisposable = CompositeDisposable()
+  private lateinit var userId: String
+  private lateinit var profileView: ProfileContract.View
 
-    lateinit var loadingCount: AtomicInteger
+  lateinit var loadingCount: AtomicInteger
 
-    private var lastItemId: String = ""
+  private var lastItemId: String = ""
 
-    constructor(view: ProfileContract.View, id: String): this() {
-        userId = id
-        profileView = view
-        profileView.setPresenter(this)
+  constructor(view: ProfileContract.View, id: String): this() {
+    userId = id
+    profileView = view
+    profileView.setPresenter(this)
+  }
+
+
+  override fun loadProfile(forceUpdate: Boolean) {
+    if (forceUpdate.not() && firstLoad.not()) {
+      return
     }
-
-
-    override fun loadProfile(forceUpdate: Boolean) {
-        if (forceUpdate.not() && firstLoad.not()) {
-            return
+    _disposable.add(userInfoService.getUserInfo(userId)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .doOnNext {
+          loadStatuses(clearData = true)
         }
-        _disposable.add(userInfoService.getUserInfo(userId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnNext {
-                    loadStatuses(clearData = true)
-                }
-                .subscribe(
-                        {
-                            profileView.showProfile(it)
-                            firstLoad = false
-                        },
-                        { error ->
-                            // todo
-                        }
-                )
+        .subscribe(
+            {
+              profileView.showProfile(it)
+              firstLoad = false
+            },
+            { error ->
+              // todo
+            }
         )
-    }
+    )
+  }
 
 
-    override fun loadAlbumPreview() {
-        _disposable.add(userTimelineService.getUserAlbumPreview(id = userId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        // onNext
-                        {
-                            profileView.showAlbumPreview(it)
-                        },
-                        // onError
-                        {
-                            // do nothing? or show error? (would be better)
-                        }
-                ))
-    }
+  override fun loadAlbumPreview() {
+    _disposable.add(userTimelineService.getUserAlbumPreview(id = userId)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(
+            // onNext
+            {
+              profileView.showAlbumPreview(it)
+            },
+            // onError
+            {
+              // do nothing? or show error? (would be better)
+            }
+        ))
+  }
 
 
-    override fun loadStatuses(clearData: Boolean) {
-        notifyStatusLoadingStarted()
-        _disposable.add(userTimelineService.getUserTimeline(id = userId, lastId = if (clearData) "" else lastItemId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doFinally {
-                    notifyStatusLoadingFinished()
-                }
-                .subscribe(
-                        { statuses ->
-                            profileView.showStatuses(statuses)
-                            lastItemId = statuses.last().id
-                        },
-                        { error ->
-                            // todo
-                        }
-                )
+  override fun loadStatuses(clearData: Boolean) {
+    notifyStatusLoadingStarted()
+    _disposable.add(userTimelineService.getUserTimeline(id = userId, lastId = if (clearData) "" else lastItemId)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .doFinally {
+          notifyStatusLoadingFinished()
+        }
+        .subscribe(
+            { statuses ->
+              profileView.showStatuses(statuses)
+              lastItemId = statuses.last().id
+            },
+            { error ->
+              profileView.showError(error)
+            }
         )
-    }
+    )
+  }
 
 
-    override fun isStatusLoading(): Boolean {
-        return loadingCount.get() > 0
-    }
+  override fun isStatusLoading(): Boolean {
+    return loadingCount.get() > 0
+  }
 
 
-    override fun subscribe() {
-        loadingCount = AtomicInteger(0)
-
-//        loadAlbumPreview()
-//        loadProfile(false)
-    }
+  override fun subscribe() {
+    loadingCount = AtomicInteger(0)
+  }
 
 
-    override fun unSubscribe() {
-        _disposable.clear()
-    }
+  override fun unSubscribe() {
+    _disposable.clear()
+  }
 
 
-    private fun notifyStatusLoadingStarted() {
-        loadingCount.getAndIncrement()
-    }
+  private fun notifyStatusLoadingStarted() {
+    loadingCount.getAndIncrement()
+  }
 
 
-    private fun notifyStatusLoadingFinished() {
-        loadingCount.decrementAndGet()
-    }
+  private fun notifyStatusLoadingFinished() {
+    loadingCount.decrementAndGet()
+  }
 }

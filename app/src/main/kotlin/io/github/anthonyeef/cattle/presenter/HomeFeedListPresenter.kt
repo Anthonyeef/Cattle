@@ -11,16 +11,14 @@ import io.github.anthonyeef.cattle.utils.PrefUtils
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.info
 import org.jetbrains.anko.uiThread
 import java.util.concurrent.atomic.AtomicInteger
 
 /**
  *
  */
-class HomeFeedListPresenter(): HomeFeedListContract.Presenter, AnkoLogger {
+class HomeFeedListPresenter(): HomeFeedListContract.Presenter {
 
     companion object {
         val TTL = 10 * 60 * 1000

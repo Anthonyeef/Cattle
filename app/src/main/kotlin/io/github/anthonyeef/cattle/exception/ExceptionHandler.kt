@@ -24,6 +24,14 @@ fun showException(e: Throwable) {
     app.toast(error.toString())
 }
 
+fun Throwable.unauthorized(): Boolean {
+    return this is HttpException && this.code() == 401
+}
+
+fun Throwable.forbidden(): Boolean {
+    return this is HttpException && this.code() == 403
+}
+
 private fun tuneException(e: Throwable): Throwable {
     when (e) {
         is HttpException -> {
