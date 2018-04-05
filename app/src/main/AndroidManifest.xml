@@ -26,7 +26,15 @@
 
         <activity
             android:name=".activity.ProfileActivity"
-            />
+            >
+            <intent-filter>
+                <data
+                    android:host="profile"
+                    android:scheme="cat"/>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
 
         <activity
             android:name=".activity.AlbumActivity"

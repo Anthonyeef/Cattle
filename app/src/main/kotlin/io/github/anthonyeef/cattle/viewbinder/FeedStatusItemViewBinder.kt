@@ -36,6 +36,9 @@ class FeedStatusItemViewBinder : ItemViewBinder<Status, FeedStatusItemViewBinder
       statusBinding.root.onClick {
         app.startActivity(app.intentFor<StatusDetailActivity>(EXTRA_STATUS_ID to t.id, EXTRA_STATUS_HAS_CONVERSATION to t.inReplyToStatusId.isNotEmpty()).newTask())
       }
+      statusBinding.content.onClick {
+        app.startActivity(app.intentFor<StatusDetailActivity>(EXTRA_STATUS_ID to t.id, EXTRA_STATUS_HAS_CONVERSATION to t.inReplyToStatusId.isNotEmpty()).newTask())
+      }
       statusBinding.avatar.onClick {
         app.startActivity(app.intentFor<ProfileActivity>(ProfileActivity.EXTRA_USER_ID to t.user?.id).newTask())
       }
