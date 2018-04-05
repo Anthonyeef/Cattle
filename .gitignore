@@ -1,3 +1,8 @@
+.project
+.settings/
+app/.classpath
+app/.project
+app/.settins/
 app/schemas
 *.iml
 .gradle
