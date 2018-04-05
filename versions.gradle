@@ -23,6 +23,7 @@ versions.mockito = "2.13.0"
 versions.glide = "4.4.0"
 versions.glide_okhttp = "4.3.0"
 versions.circleimage = "2.2.0"
+versions.fabric = "1.22.1"
 
 def deps = [:]
 
@@ -58,6 +59,7 @@ deps.mockito = "org.mockito:mockito-inline:$versions.mockito"
 
 deps.kotlin = "com.android.tools.build:gradle:$versions.gradle"
 deps.gradle = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
+deps.fabric = "io.fabric.tools:gradle:$versions.fabric"
 
 deps.ktx = "androidx.core:core-ktx:$versions.ktx"
 deps.retrofit = "com.squareup.retrofit2:retrofit:$versions.retrofit"
