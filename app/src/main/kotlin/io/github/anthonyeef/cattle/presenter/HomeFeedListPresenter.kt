@@ -11,16 +11,14 @@ import io.github.anthonyeef.cattle.utils.PrefUtils
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.info
 import org.jetbrains.anko.uiThread
 import java.util.concurrent.atomic.AtomicInteger
 
 /**
  *
  */
-class HomeFeedListPresenter(): HomeFeedListContract.Presenter, AnkoLogger {
+class HomeFeedListPresenter(): HomeFeedListContract.Presenter {
 
     companion object {
         val TTL = 10 * 60 * 1000
@@ -31,8 +29,8 @@ class HomeFeedListPresenter(): HomeFeedListContract.Presenter, AnkoLogger {
         homeFeedListView.setPresenter(this)
     }
 
-    lateinit private var homeFeedListView: HomeFeedListContract.View
-    lateinit private var loadingCount: AtomicInteger
+    private lateinit var homeFeedListView: HomeFeedListContract.View
+    private lateinit var loadingCount: AtomicInteger
     private var lastUpdateTime: Long = PrefUtils.getLong(KEY_HOME_TIMELINE_LAST_UPDATE_TIME, TIME_GOD_CREAT_LIGHT)
     private var lastItemId: String = ""
     private var isDataLoaded: Boolean = false
@@ -50,7 +48,6 @@ class HomeFeedListPresenter(): HomeFeedListContract.Presenter, AnkoLogger {
         doAsync(exceptionHandler = {
             // todo
         }) {
-            info("load cache")
             val status: List<Status> = Injection.provideStatusDao().getStatus()
             uiThread {
                 if (status.isNotEmpty()) {
@@ -97,7 +94,6 @@ class HomeFeedListPresenter(): HomeFeedListContract.Presenter, AnkoLogger {
                             lastUpdateTime = System.currentTimeMillis()
                             lastItemId = statuses[statuses.size - 1].id
                             PrefUtils.put(KEY_HOME_TIMELINE_LAST_UPDATE_TIME, lastUpdateTime)
-                            info("load from remote")
                         },
                         { error ->
                             if (homeFeedListView.isActivated()) {

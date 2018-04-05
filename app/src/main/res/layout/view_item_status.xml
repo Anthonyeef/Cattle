@@ -1,59 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingLeft="@dimen/horizontal_padding_normal"
-    android:paddingRight="@dimen/horizontal_padding_normal"
-    android:paddingTop="@dimen/vertical_padding_normal"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     >
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@id/avatar"
-        android:layout_width="@dimen/avatar_size_normal"
-        android:layout_height="@dimen/avatar_size_normal"
-        android:layout_alignParentLeft="true"
-        android:layout_marginRight="@dimen/horizontal_padding_normal"
-        tools:ignore="RtlHardcoded"/>
+    <data>
+        <variable
+            name="clickHandler"
+            type="io.github.anthonyeef.cattle.databinding.StatusItemClickEventHandler"
+            />
+        <variable
+            name="status"
+            type="io.github.anthonyeef.cattle.data.statusData.Status"
+            />
+    </data>
 
-    <include
-        android:id="@id/user_info_container"
-        layout="@layout/view_user_info"/>
-
-    <LinearLayout
-        android:id="@+id/status_info"
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/user_info_container"
-        android:layout_below="@id/user_info_container"
-        android:orientation="vertical"
+        android:paddingLeft="@dimen/horizontal_padding_normal"
+        android:paddingRight="@dimen/horizontal_padding_normal"
+        android:paddingTop="@dimen/vertical_padding_normal"
+        android:onClick="@{() -> clickHandler.onClickStatus(status)}"
+        android:background="?android:attr/selectableItemBackground"
         >
 
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@id/avatar"
+            android:layout_width="@dimen/avatar_size_normal"
+            android:layout_height="@dimen/avatar_size_normal"
+            android:onClick="@{() -> clickHandler.openProfile(status)}"
+            app:imageUrl="@{status.user.profileImageUrlLarge}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:civ_border_width="1dp"
+            app:civ_border_color="@color/grey200"
+            />
+
         <TextView
-            android:id="@android:id/content"
-            style="@style/Widget.Cattle.Text.Content"
-            android:layout_width="match_parent"
-            android:paddingTop="@dimen/vertical_padding_small"
+            android:id="@id/user_display_name"
+            style="@style/Widget.Cattle.Text.DisplayName"
+            android:layout_marginStart="@dimen/horizontal_padding_normal"
+            android:text="@{status.user.screenName}"
+            android:onClick="@{() -> clickHandler.openProfile(status)}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/avatar"
             />
 
-        <android.support.v4.widget.Space
-            android:id="@+id/margin_above_image"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/vertical_padding_small"
+        <TextView
+            android:id="@id/username"
+            android:layout_width="0dp"
+            style="@style/Widget.Cattle.Text"
+            android:textColor="@color/grey600"
+            android:textSize="15sp"
+            android:text="@{status.user.id}"
+            android:maxLines="1"
+            android:gravity="start"
             android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/user_display_name"
+            app:layout_constraintEnd_toStartOf="@+id/create_time"
             />
 
-        <ImageView
-            android:id="@+id/status_image_preview"
-            android:layout_width="match_parent"
-            android:layout_height="168dp"
-            android:scaleType="centerCrop"
-            android:visibility="gone"
+        <TextView
+            android:id="@+id/create_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            app:prettyTime="@{status.createdAt}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             />
 
-        <View
-            style="@style/Widget.Cattle.Divider"
-            android:layout_marginTop="@dimen/vertical_padding_normal"/>
-    </LinearLayout>
-</RelativeLayout>
+        <LinearLayout
+            android:id="@+id/status_info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/horizontal_padding_normal"
+            android:orientation="vertical"
+            app:layout_constraintStart_toEndOf="@id/avatar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/user_display_name"
+            >
+
+            <TextView
+                android:id="@android:id/content"
+                style="@style/Widget.Cattle.Text.Content"
+                android:layout_width="match_parent"
+                android:paddingTop="@dimen/vertical_padding_small"
+                android:onClick="@{() -> clickHandler.onClickStatus(status)}"
+                app:status="@{status}"
+                />
+
+            <android.support.v4.widget.Space
+                android:id="@+id/margin_above_image"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/vertical_padding_small"
+                />
+
+            <ImageView
+                android:id="@+id/status_image_preview"
+                android:layout_width="match_parent"
+                android:layout_height="168dp"
+                android:scaleType="centerCrop"
+                android:visibility="gone"
+                app:status="@{status}"
+                />
+
+            <View
+                style="@style/Widget.Cattle.Divider"
+                android:layout_marginTop="@dimen/vertical_padding_normal"
+                />
+        </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
+</layout>

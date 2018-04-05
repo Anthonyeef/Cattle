@@ -17,6 +17,8 @@ interface ProfileContract {
         fun showAlbumPreview(photos: List<Status>)
 
         fun showStatuses(statuses: List<Status>)
+
+        fun showError(error: Throwable)
     }
 
     interface Presenter : BasePresenter {

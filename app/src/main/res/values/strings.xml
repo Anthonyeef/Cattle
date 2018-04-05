@@ -34,6 +34,8 @@
     <string name="text_status">Status</string>
     <string name="title_album">Album</string>
     <string name="title_status_list">All statuses · %1$d</string>
+    <string name="text_locked_profile">This account is locked</string>
+    <string name="text_only_open_to_follower">Only show statuses to followers. \nTap the follow button to send follow request.</string>
 
     <!-- FollowerList -->
     <string name="title_follower_list">Follower list</string>

@@ -10,7 +10,7 @@ import io.github.anthonyeef.cattle.presenter.HomeFeedListPresenter
 import io.github.anthonyeef.cattle.utils.LoadMoreDelegate
 import io.github.anthonyeef.cattle.utils.SwipeRefreshDelegate
 import io.github.anthonyeef.cattle.viewbinder.BottomRefreshItemViewBinder
-import io.github.anthonyeef.cattle.viewbinder.StatusItemViewBinder
+import io.github.anthonyeef.cattle.viewbinder.FeedStatusItemViewBinder
 import me.drakeet.multitype.Items
 import me.drakeet.multitype.register
 
@@ -22,14 +22,14 @@ class HomeFeedListFragment : BaseListFragment(),
         SwipeRefreshDelegate.OnSwipeRefreshListener,
         LoadMoreDelegate.LoadMoreSubject {
 
-    lateinit var homeFeedListPresenter: HomeFeedListContract.Presenter
-    lateinit var refreshDelegate: SwipeRefreshDelegate
-    lateinit var loadMoreDelegate: LoadMoreDelegate
+    private lateinit var homeFeedListPresenter: HomeFeedListContract.Presenter
+    private lateinit var refreshDelegate: SwipeRefreshDelegate
+    private lateinit var loadMoreDelegate: LoadMoreDelegate
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        adapter.register(StatusItemViewBinder())
+        adapter.register(FeedStatusItemViewBinder())
         adapter.register(BottomRefreshItemViewBinder())
         refreshDelegate = SwipeRefreshDelegate(this)
         loadMoreDelegate = LoadMoreDelegate(this)
