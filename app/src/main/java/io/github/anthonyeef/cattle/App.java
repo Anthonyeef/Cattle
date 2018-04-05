@@ -3,6 +3,9 @@ package io.github.anthonyeef.cattle;
 import android.app.Application;
 import android.util.Log;
 
+import com.crashlytics.android.Crashlytics;
+import com.crashlytics.android.answers.Answers;
+import io.fabric.sdk.android.Fabric;
 import io.github.anthonyeef.cattle.event.RxBus;
 
 /**
@@ -17,6 +20,7 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        Fabric.with(this, new Answers(), new Crashlytics());
         sInstance = this;
     }
 

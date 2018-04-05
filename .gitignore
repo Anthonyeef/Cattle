@@ -4,6 +4,7 @@ app/.classpath
 app/.project
 app/.settins/
 app/schemas
+app/fabric.properties
 *.iml
 .gradle
 

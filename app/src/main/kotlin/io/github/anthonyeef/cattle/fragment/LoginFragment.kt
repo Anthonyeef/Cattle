@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import com.crashlytics.android.answers.Answers
+import com.crashlytics.android.answers.LoginEvent
 import io.github.anthonyeef.cattle.constant.bus
 import io.github.anthonyeef.cattle.constant.pageHorizontalPadding
 import io.github.anthonyeef.cattle.constant.verticalPaddingNormal
@@ -73,10 +75,14 @@ class LoginFragment : BaseFragment(), LoginContract.View {
     }
 
     override fun showLoginSuccess() {
+        Answers.getInstance()
+            .logLogin(LoginEvent().putSuccess(true))
         toast("Login success!")
     }
 
     override fun showError(e: Throwable) {
+        Answers.getInstance()
+            .logLogin(LoginEvent().putSuccess(false))
         showException(this, e)
     }
 
