@@ -29,8 +29,8 @@ class HomeFeedListPresenter(): HomeFeedListContract.Presenter {
         homeFeedListView.setPresenter(this)
     }
 
-    lateinit private var homeFeedListView: HomeFeedListContract.View
-    lateinit private var loadingCount: AtomicInteger
+    private lateinit var homeFeedListView: HomeFeedListContract.View
+    private lateinit var loadingCount: AtomicInteger
     private var lastUpdateTime: Long = PrefUtils.getLong(KEY_HOME_TIMELINE_LAST_UPDATE_TIME, TIME_GOD_CREAT_LIGHT)
     private var lastItemId: String = ""
     private var isDataLoaded: Boolean = false
@@ -48,7 +48,6 @@ class HomeFeedListPresenter(): HomeFeedListContract.Presenter {
         doAsync(exceptionHandler = {
             // todo
         }) {
-            info("load cache")
             val status: List<Status> = Injection.provideStatusDao().getStatus()
             uiThread {
                 if (status.isNotEmpty()) {
@@ -95,7 +94,6 @@ class HomeFeedListPresenter(): HomeFeedListContract.Presenter {
                             lastUpdateTime = System.currentTimeMillis()
                             lastItemId = statuses[statuses.size - 1].id
                             PrefUtils.put(KEY_HOME_TIMELINE_LAST_UPDATE_TIME, lastUpdateTime)
-                            info("load from remote")
                         },
                         { error ->
                             if (homeFeedListView.isActivated()) {

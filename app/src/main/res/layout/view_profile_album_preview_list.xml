@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingLeft="@dimen/horizontal_padding_normal"
+    android:paddingTop="@dimen/vertical_padding_small"
     android:paddingRight="@dimen/horizontal_padding_normal"
+    android:paddingBottom="@dimen/vertical_padding_teeny"
     android:background="@android:color/white"
     >
 
