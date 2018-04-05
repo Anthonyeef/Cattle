@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/horizontal_padding_normal"
+        android:paddingTop="@dimen/vertical_padding_small"
+        android:paddingRight="@dimen/horizontal_padding_normal"
+        android:paddingBottom="@dimen/vertical_padding_small"
+        >
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/Widget.Cattle.Text"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_size_small"
+            android:text="@string/text_locked_profile"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="@dimen/text_size_small"
+            android:layout_height="@dimen/text_size_small"
+            android:layout_marginStart="@dimen/horizontal_padding_tiny"
+            app:srcCompat="@drawable/icon_lock"
+            app:layout_constraintStart_toEndOf="@id/title"
+            app:layout_constraintTop_toTopOf="@id/title"
+            app:layout_constraintBottom_toBottomOf="@id/title"
+            />
+
+        <TextView
+            style="@style/Widget.Cattle.Text"
+            android:textSize="@dimen/text_size_small"
+            android:text="@string/text_only_open_to_follower"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>
