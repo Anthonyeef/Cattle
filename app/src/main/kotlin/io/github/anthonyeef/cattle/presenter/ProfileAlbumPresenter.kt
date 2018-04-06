@@ -13,10 +13,10 @@ import io.reactivex.schedulers.Schedulers
  */
 class ProfileAlbumPresenter() : ProfileAlbumContract.Presenter {
 
-    lateinit private var mProfileAlbumView: ProfileAlbumContract.View
-    lateinit private var userId: String
-    lateinit private var albumRepo: AlbumRepository
-    lateinit private var loading: SimpleCountingIdlingResource
+    private lateinit var mProfileAlbumView: ProfileAlbumContract.View
+    private lateinit var userId: String
+    private lateinit var albumRepo: AlbumRepository
+    private lateinit var loading: SimpleCountingIdlingResource
     private var lastStatusId: String = ""
     private val _disposable: CompositeDisposable = CompositeDisposable()
     private var hasMore = true

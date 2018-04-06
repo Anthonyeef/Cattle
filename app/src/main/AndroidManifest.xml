@@ -45,6 +45,11 @@
             />
 
         <activity
+            android:name=".activity.PhotoDisplayActivity"
+            android:theme="@style/AppTheme.Transparent"
+            />
+
+        <activity
             android:name=".activity.LoginActivity"
             android:launchMode="singleTask">
             <intent-filter>

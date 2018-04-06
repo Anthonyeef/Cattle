@@ -78,6 +78,7 @@
             android:layout_marginTop="@dimen/vertical_padding_normal"
             android:scaleType="centerCrop"
             android:visibility="gone"
+            android:onClick="@{() -> clickHandler.openPhotoDisplay(status)}"
             app:status="@{status}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

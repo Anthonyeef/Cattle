@@ -140,14 +140,14 @@ class ProfileFragment : BaseFragment(),
 
   @SuppressLint("SetTextI18n")
   override fun showProfile(userInfo: UserInfo) {
-    GlideApp.with(profileBackground?.context)
+    GlideApp.with(profileBackground?.context!!)
         .asDrawable()
         .load(userInfo.profileBackgroundImageUrl)
-        .into(profileBackground)
+        .into(profileBackground!!)
 
-    GlideApp.with(profileAvatar?.context)
+    GlideApp.with(profileAvatar?.context!!)
         .load(userInfo.profileImageUrlLarge)
-        .into(profileAvatar)
+        .into(profileAvatar!!)
 
     profileUserName?.text = userInfo.screenName
 
