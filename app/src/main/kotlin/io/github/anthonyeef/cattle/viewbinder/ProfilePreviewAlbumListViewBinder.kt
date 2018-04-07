@@ -26,11 +26,16 @@ class ProfilePreviewAlbumListViewBinder : ItemViewBinder<PreviewAlbumPhotos, Pro
     }
 
 
-    inner class ProfilePreviewAlbumListViewHolder : RecyclerView.ViewHolder {
+    inner class ProfilePreviewAlbumListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val previewListAdapter: ProfilePreviewAlbumAdapter by lazy { ProfilePreviewAlbumAdapter() }
         private val previewList: RecyclerView by lazy { itemView.find<RecyclerView>(android.R.id.list) }
 
-        constructor(itemView: View): super(itemView) {
+        fun bindPreviewList(data: PreviewAlbumPhotos) {
+            previewListAdapter.setPreviewPhotos(data.photos)
+            previewListAdapter.notifyDataSetChanged()
+        }
+
+        init {
             val layoutManager = GridLayoutManager(itemView.context, 5)
             val spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                 override fun getSpanSize(position: Int): Int {
@@ -38,14 +43,8 @@ class ProfilePreviewAlbumListViewBinder : ItemViewBinder<PreviewAlbumPhotos, Pro
                 }
             }
             layoutManager.spanSizeLookup = spanSizeLookup
-
             previewList.layoutManager = layoutManager
             previewList.adapter = previewListAdapter
-        }
-
-        fun bindPreviewList(data: PreviewAlbumPhotos) {
-            previewListAdapter.setPreviewPhotos(data.photos)
-            previewListAdapter.notifyDataSetChanged()
         }
     }
 }

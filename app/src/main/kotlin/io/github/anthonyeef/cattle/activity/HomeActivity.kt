@@ -21,6 +21,7 @@ import io.github.anthonyeef.cattle.R
 import io.github.anthonyeef.cattle.adapter.ViewpagerAdapter
 import io.github.anthonyeef.cattle.constant.KEY_CURRENT_USER_ID
 import io.github.anthonyeef.cattle.constant.KEY_RETROFIT_LOG_LEVEL
+import io.github.anthonyeef.cattle.constant.app
 import io.github.anthonyeef.cattle.contract.HomeActivityContract
 import io.github.anthonyeef.cattle.data.userData.UserInfo
 import io.github.anthonyeef.cattle.extension.addOnTabSelectedListener
@@ -123,9 +124,9 @@ class HomeActivity : BaseActivity(), HomeActivityContract.View {
                     .loadUserInfoSync(PrefUtils.getString(KEY_CURRENT_USER_ID))
             activityUiThread {
                 userInfo?.let {
-                    GlideApp.with(toolbarAvatar?.context)
+                    GlideApp.with(app)
                             .load(it.profileImageUrlLarge)
-                            .into(toolbarAvatar)
+                            .into(toolbarAvatar!!)
                 }
             }
         }
@@ -141,9 +142,9 @@ class HomeActivity : BaseActivity(), HomeActivityContract.View {
 
             uiThread {
                 userInfo?.let {
-                    GlideApp.with(navigationHeaderAvatar?.context)
+                    GlideApp.with(navigationHeaderAvatar?.context!!)
                             .load(it.profileImageUrlLarge)
-                            .into(navigationHeaderAvatar)
+                            .into(navigationHeaderAvatar!!)
                     navigationHeaderUserName?.text = it.screenName
                 }
             }
@@ -179,7 +180,7 @@ class HomeActivity : BaseActivity(), HomeActivityContract.View {
             bindDrawerAction { startActivity(intentFor<LoginActivity>()) }
         }
 
-        GlideApp.with(navBg?.context)
+        GlideApp.with(navBg?.context!!)
                 .load(R.raw.drawer_bg_3)
                 .into(navBg)
     }

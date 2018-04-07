@@ -1,7 +1,10 @@
 package io.github.anthonyeef.cattle.fragment
 
 import android.os.Bundle
+import android.support.v4.app.ActivityOptionsCompat
 import android.view.View
+import io.github.anthonyeef.cattle.activity.PhotoDisplayActivity
+import io.github.anthonyeef.cattle.constant.app
 import io.github.anthonyeef.cattle.contract.HomeFeedListContract
 import io.github.anthonyeef.cattle.data.statusData.Status
 import io.github.anthonyeef.cattle.entity.BottomRefreshEntity
@@ -13,6 +16,7 @@ import io.github.anthonyeef.cattle.viewbinder.BottomRefreshItemViewBinder
 import io.github.anthonyeef.cattle.viewbinder.FeedStatusItemViewBinder
 import me.drakeet.multitype.Items
 import me.drakeet.multitype.register
+import org.jetbrains.anko.intentFor
 
 /**
  *
@@ -20,7 +24,7 @@ import me.drakeet.multitype.register
 class HomeFeedListFragment : BaseListFragment(),
         HomeFeedListContract.View,
         SwipeRefreshDelegate.OnSwipeRefreshListener,
-        LoadMoreDelegate.LoadMoreSubject {
+        LoadMoreDelegate.LoadMoreSubject, FeedStatusItemViewBinder.FeedStatusItemCallback {
 
     private lateinit var homeFeedListPresenter: HomeFeedListContract.Presenter
     private lateinit var refreshDelegate: SwipeRefreshDelegate
@@ -29,7 +33,7 @@ class HomeFeedListFragment : BaseListFragment(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        adapter.register(FeedStatusItemViewBinder())
+        adapter.register(FeedStatusItemViewBinder().registerCallback(this))
         adapter.register(BottomRefreshItemViewBinder())
         refreshDelegate = SwipeRefreshDelegate(this)
         loadMoreDelegate = LoadMoreDelegate(this)
@@ -124,6 +128,18 @@ class HomeFeedListFragment : BaseListFragment(),
     override fun onLoadMore() {
         if (!isLoading()) {
             homeFeedListPresenter.loadDataFromRemote(false)
+        }
+    }
+
+
+    override fun onClickedPhoto(status: Status, photoView: View) {
+        val isGif = status.photo?.largeurl?.endsWith("gif", ignoreCase = true) == true
+        val intent = app.intentFor<PhotoDisplayActivity>(PhotoDisplayActivity.KEY_IMAGE_URL to status.photo?.largeurl, PhotoDisplayActivity.KEY_IS_GIF to isGif)
+
+        activity?.let {
+          startActivity(intent)
+            /*val options = ActivityOptionsCompat.makeSceneTransitionAnimation(it, photoView, "photo")
+            startActivity(intent, options.toBundle())*/
         }
     }
 }

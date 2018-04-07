@@ -115,6 +115,7 @@ dependencies {
     implementation deps.glide
     kapt deps.glide_compiler
     implementation deps.circleimage
+//    implementation deps.photoview
 
 
     implementation deps.autoDispose

@@ -1,5 +1,6 @@
 package io.github.anthonyeef.cattle.databinding
 
+import io.github.anthonyeef.cattle.activity.PhotoDisplayActivity
 import io.github.anthonyeef.cattle.activity.ProfileActivity
 import io.github.anthonyeef.cattle.activity.StatusDetailActivity
 import io.github.anthonyeef.cattle.activity.StatusDetailActivity.Companion.EXTRA_STATUS_HAS_CONVERSATION
@@ -19,5 +20,9 @@ object StatusItemClickEventHandler {
 
     fun openProfile(status: Status) {
         app.startActivity(app.intentFor<ProfileActivity>(ProfileActivity.EXTRA_USER_ID to status.user?.id).newTask())
+    }
+
+    fun openPhotoDisplay(status: Status) {
+        app.startActivity(app.intentFor<PhotoDisplayActivity>(PhotoDisplayActivity.KEY_IMAGE_URL to status.photo?.largeurl).newTask())
     }
 }

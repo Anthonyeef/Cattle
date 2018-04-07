@@ -22,7 +22,7 @@ class ProfileAlbumFragment : BaseListFragment(), ProfileAlbumContract.View, Load
 
     private var mAlbumPresenter: ProfileAlbumContract.Presenter? = null
     private val userId: String by lazy { arguments?.getString(KEY_USER_ID, "") ?: "" }
-    lateinit private var loadMoreDelegate: LoadMoreDelegate
+    private lateinit var loadMoreDelegate: LoadMoreDelegate
 
     companion object {
         const val KEY_USER_ID = "key_user_id"
@@ -37,8 +37,8 @@ class ProfileAlbumFragment : BaseListFragment(), ProfileAlbumContract.View, Load
         adapter.register(EmptyHintEntity::class.java, EmptyHintViewBinder())
         loadMoreDelegate = LoadMoreDelegate(this)
         ProfileAlbumPresenter(this,
-                AlbumRepository.getInstance(AlbumRemoteDataSource.getInstance()),
-                userId)
+            AlbumRepository.getInstance(AlbumRemoteDataSource.getInstance()),
+            userId)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -54,11 +54,13 @@ class ProfileAlbumFragment : BaseListFragment(), ProfileAlbumContract.View, Load
         mAlbumPresenter?.subscribe()
     }
 
+
     override fun onPause() {
         super.onPause()
 
         mAlbumPresenter?.unSubscribe()
     }
+
 
     override fun customizeRecyclerView() {
         val spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
