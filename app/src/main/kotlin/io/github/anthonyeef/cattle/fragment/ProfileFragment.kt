@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
 import de.hdodenhof.circleimageview.CircleImageView
@@ -68,6 +69,8 @@ class ProfileFragment : BaseFragment(),
   private var statusTotalCount: Int = 0
 
   private var statusLoadError: Boolean = false
+
+  private var hasSetLayoutAnimation = false
 
   private val adapter: MultiTypeAdapter by lazy { MultiTypeAdapter(items).apply {
     register(DummyListViewEntity::class.java, DummyListViewBinder())
@@ -183,21 +186,23 @@ class ProfileFragment : BaseFragment(),
     if (photos.isNotEmpty()) {
       items.add(0, DummyListViewEntity(showTopDivider = false))
       items.add(1, PreviewAlbumPhotos(photos))
-      adapter.notifyItemInserted(0)
     }
   }
 
 
   override fun showStatuses(statuses: List<Status>) {
     // only add list title once
-    if (items.any { it is Status }.not()) {
+    val isFirstLoad = items.any { it is Status }.not()
+    if (isFirstLoad) {
       items.add(2, ListHeaderViewEntity(getString(R.string.title_status_list, statusTotalCount)))
     }
 
     if (statuses.isNotEmpty()) {
-      val tempPosition = items.size
       items.addAll(statuses)
-      adapter.notifyItemInserted(tempPosition)
+      adapter.notifyDataSetChanged()
+      if (isFirstLoad) {
+        runLayoutAnimation()
+      }
     }
   }
 
@@ -222,5 +227,15 @@ class ProfileFragment : BaseFragment(),
     if (isLoading().not() && statusLoadError.not()) {
       profilePresenter?.loadStatuses()
     }
+  }
+
+
+  private fun runLayoutAnimation() {
+    if (hasSetLayoutAnimation.not()) {
+      val animation = AnimationUtils.loadLayoutAnimation(context, R.anim.layout_animation_from_bottom)
+      userStatusList?.layoutAnimation = animation
+      hasSetLayoutAnimation = true
+    }
+    userStatusList?.scheduleLayoutAnimation()
   }
 }
