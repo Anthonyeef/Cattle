@@ -51,7 +51,7 @@ class HomeFeedListPresenter(): HomeFeedListContract.Presenter {
             val status: List<Status> = Injection.provideStatusDao().getStatus()
             uiThread {
                 if (status.isNotEmpty()) {
-                    homeFeedListView.updateTimeline(clearData = true, data = status)
+                    homeFeedListView.updateTimeline(clearData = true, data = status, showAnimation = true)
                     isDataLoaded = true
                     lastItemId = status[status.size - 1].id
                 }

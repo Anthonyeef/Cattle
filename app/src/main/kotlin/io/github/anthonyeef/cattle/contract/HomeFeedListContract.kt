@@ -13,7 +13,7 @@ interface HomeFeedListContract {
         fun showError(e: Throwable)
         fun setLoadingProgressBar(show: Boolean)
         fun setBottomLoadingProgressBar(show: Boolean)
-        fun updateTimeline(clearData: Boolean, data: List<Status>)
+        fun updateTimeline(clearData: Boolean, data: List<Status>, showAnimation: Boolean = false)
         fun isActivated(): Boolean
         fun scrollToTop()
     }

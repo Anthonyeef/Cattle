@@ -13,6 +13,7 @@
         android:scrollbars="vertical"
         android:scrollbarSize="2dp"
         android:scrollbarStyle="outsideOverlay"
-        android:descendantFocusability="blocksDescendants"/>
+        android:descendantFocusability="blocksDescendants"
+        />
 
 </android.support.v4.widget.SwipeRefreshLayout>
