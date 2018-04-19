@@ -14,10 +14,7 @@ If you want to build the project by yourself, you may need to apply for a fanfou
 
 Here comes some screenshots:
 
-![Home Feed](http://ww1.sinaimg.cn/large/9fbe0bc0ly1fqid3a6234j20k00zkdhn.jpg)
-
-![Profile](http://ww1.sinaimg.cn/large/9fbe0bc0ly1fqid48km96j20k00zkgnu.jpg)
-
-![Compose](http://ww1.sinaimg.cn/large/9fbe0bc0ly1fqid4mdnduj20k00zkgmc.jpg)
-
-![Status Detail](http://ww1.sinaimg.cn/large/9fbe0bc0ly1fqid0nzeplj20k00zkqcl.jpg)
+<img src="http://ww1.sinaimg.cn/large/9fbe0bc0ly1fqid3a6234j20k00zkdhn.jpg" width="300">
+<img src="http://ww1.sinaimg.cn/large/9fbe0bc0ly1fqid48km96j20k00zkgnu.jpg" width="300">
+<img src="http://ww1.sinaimg.cn/large/9fbe0bc0ly1fqid4mdnduj20k00zkgmc.jpg" width="300">
+<img src="http://ww1.sinaimg.cn/large/9fbe0bc0ly1fqid0nzeplj20k00zkqcl.jpg" width="300">
