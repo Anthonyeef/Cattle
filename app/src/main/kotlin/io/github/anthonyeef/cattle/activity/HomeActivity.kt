@@ -17,6 +17,7 @@ import android.widget.TextView
 import de.hdodenhof.circleimageview.CircleImageView
 import io.github.anthonyeef.cattle.GlideApp
 import io.github.anthonyeef.cattle.Injection
+import io.github.anthonyeef.cattle.Injection.userInfoDb
 import io.github.anthonyeef.cattle.R
 import io.github.anthonyeef.cattle.adapter.ViewpagerAdapter
 import io.github.anthonyeef.cattle.constant.KEY_CURRENT_USER_ID
@@ -33,6 +34,7 @@ import io.github.anthonyeef.cattle.livedata.SharedPreferenceStringLiveData
 import io.github.anthonyeef.cattle.presenter.HomeActivityPresenter
 import io.github.anthonyeef.cattle.service.ServiceGenerator
 import io.github.anthonyeef.cattle.utils.PrefUtils
+import io.github.anthonyeef.cattle.utils.PrefUtils.defaultPref
 import io.github.anthonyeef.cattle.utils.bindOptionalView
 import io.github.anthonyeef.cattle.utils.bindView
 import org.jetbrains.anko.*
@@ -103,14 +105,14 @@ class HomeActivity : BaseActivity(), HomeActivityContract.View {
 
 
     private fun subscribeToUserInfoChanged() {
-         SharedPreferenceStringLiveData(PrefUtils.getDefaultPref(), KEY_CURRENT_USER_ID, "").observe(this, Observer {
+         SharedPreferenceStringLiveData(defaultPref, KEY_CURRENT_USER_ID, "").observe(this, Observer {
              showUserInfoInToolbar()
              showUserInfoInDrawer()
          })
     }
 
     private fun subscribeToRetrofitLogLevelChanged() {
-        SharedPreferenceStringLiveData(PrefUtils.getDefaultPref(), KEY_RETROFIT_LOG_LEVEL, "0").observe(this, Observer {
+        SharedPreferenceStringLiveData(defaultPref, KEY_RETROFIT_LOG_LEVEL, "0").observe(this, Observer {
             ServiceGenerator.notifyLogLevelChanged()
         })
     }
@@ -120,8 +122,7 @@ class HomeActivity : BaseActivity(), HomeActivityContract.View {
         doAsync(exceptionHandler = {
             // todo: report to fabric
         }) {
-            val userInfo: UserInfo? = Injection.provideUserInfoDao()
-                    .loadUserInfoSync(PrefUtils.getString(KEY_CURRENT_USER_ID))
+            val userInfo: UserInfo? = userInfoDb.loadUserInfoSync(PrefUtils.getString(KEY_CURRENT_USER_ID))
             activityUiThread {
                 userInfo?.let {
                     GlideApp.with(app)
@@ -137,8 +138,7 @@ class HomeActivity : BaseActivity(), HomeActivityContract.View {
         doAsync(exceptionHandler = {
             // todo: report to fabric
         }) {
-            val userInfo: UserInfo? = Injection.provideUserInfoDao()
-                    .loadUserInfoSync(PrefUtils.getString(KEY_CURRENT_USER_ID))
+            val userInfo: UserInfo? = userInfoDb.loadUserInfoSync(PrefUtils.getString(KEY_CURRENT_USER_ID))
 
             uiThread {
                 userInfo?.let {

@@ -19,6 +19,7 @@ interface LoginContract {
 
     interface Presenter : BasePresenter {
         fun login()
+        fun logout()
         fun getLoginAddress(): Uri?
         fun fetchAccessToken()
         fun checkCredential()

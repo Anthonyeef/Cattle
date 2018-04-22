@@ -6,6 +6,7 @@
     <dimen name="padding_normal">8dp</dimen>
 
     <dimen name="horizontal_padding_large">56dp</dimen>
+    <dimen name="horizontal_padding_medium">32dp</dimen>
     <dimen name="horizontal_padding_normal">16dp</dimen>
     <dimen name="horizontal_padding_small">8dp</dimen>
     <dimen name="horizontal_padding_tiny">4dp</dimen>

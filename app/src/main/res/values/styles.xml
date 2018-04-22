@@ -34,6 +34,13 @@
         <item name="android:maxLines">1</item>
     </style>
 
+    <style name="Widget.Cattle.Text.AppName">
+        <item name="android:textSize">32sp</item>
+        <item name="android:textColor">@color/grey900</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
     <!-- Divider -->
     <style name="Widget.Cattle.Divider">
         <item name="android:layout_width">match_parent</item>
