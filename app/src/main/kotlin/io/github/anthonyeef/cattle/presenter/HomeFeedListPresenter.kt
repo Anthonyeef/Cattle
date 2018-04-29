@@ -1,6 +1,8 @@
 package io.github.anthonyeef.cattle.presenter
 
+import androidx.content.edit
 import io.github.anthonyeef.cattle.Injection
+import io.github.anthonyeef.cattle.Injection.statusDb
 import io.github.anthonyeef.cattle.constant.KEY_HOME_TIMELINE_LAST_UPDATE_TIME
 import io.github.anthonyeef.cattle.constant.TIME_GOD_CREAT_LIGHT
 import io.github.anthonyeef.cattle.contract.HomeFeedListContract
@@ -8,6 +10,7 @@ import io.github.anthonyeef.cattle.data.statusData.Status
 import io.github.anthonyeef.cattle.service.HomeTimelineService
 import io.github.anthonyeef.cattle.service.ServiceGenerator
 import io.github.anthonyeef.cattle.utils.PrefUtils
+import io.github.anthonyeef.cattle.utils.PrefUtils.defaultPref
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -48,7 +51,7 @@ class HomeFeedListPresenter(): HomeFeedListContract.Presenter {
         doAsync(exceptionHandler = {
             // todo
         }) {
-            val status: List<Status> = Injection.provideStatusDao().getStatus()
+            val status: List<Status> = statusDb.getStatus()
             uiThread {
                 if (status.isNotEmpty()) {
                     homeFeedListView.updateTimeline(clearData = true, data = status, showAnimation = true)
@@ -66,13 +69,12 @@ class HomeFeedListPresenter(): HomeFeedListContract.Presenter {
         _disposable.add(timelineService.getHomeTimeline(lastId = if (clearData) "" else lastItemId)
                 .subscribeOn(Schedulers.io())
                 .doOnNext { statuses ->
-                    val statusDao = Injection.provideStatusDao()
-                    statusDao.insertStatuses(statuses)
+                    statusDb.insertStatuses(statuses)
 
                     statuses.forEach { status ->
                         status.repostStatus?.let {
                             it.ownerId = status.rawid
-                            statusDao.insertRepostStatus(it)
+                            statusDb.insertRepostStatus(it)
                         }
                     }
                 }
@@ -93,7 +95,9 @@ class HomeFeedListPresenter(): HomeFeedListContract.Presenter {
                             }
                             lastUpdateTime = System.currentTimeMillis()
                             lastItemId = statuses[statuses.size - 1].id
-                            PrefUtils.put(KEY_HOME_TIMELINE_LAST_UPDATE_TIME, lastUpdateTime)
+                            defaultPref.edit() {
+                              putLong(KEY_HOME_TIMELINE_LAST_UPDATE_TIME, lastUpdateTime)
+                            }
                         },
                         { error ->
                             if (homeFeedListView.isActivated()) {

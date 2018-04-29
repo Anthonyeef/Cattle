@@ -9,6 +9,7 @@ import io.github.anthonyeef.cattle.constant.KEY_ACCESS_TOKEN_SECRET
 import io.github.anthonyeef.cattle.constant.KEY_RETROFIT_LOG_LEVEL
 import io.github.anthonyeef.cattle.httpInterceptor.Oauth1SigningInterceptor
 import io.github.anthonyeef.cattle.utils.PrefUtils
+import io.github.anthonyeef.cattle.utils.PrefUtils.defaultPref
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -26,7 +27,7 @@ object ServiceGenerator {
             .create()
 
     private var logging = HttpLoggingInterceptor()
-            .setLevel(HttpLoggingInterceptor.Level.NONE)
+            .setLevel(HttpLoggingInterceptor.Level.BODY)
 
     private var sBuilder = Retrofit.Builder().baseUrl(FanfouApiBaseUrl)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -92,7 +93,7 @@ object ServiceGenerator {
      */
     fun notifyLogLevelChanged(){
         httpClient.networkInterceptors().remove(logging)
-        val currentLogLevel = PrefUtils.getDefaultPref().getString(KEY_RETROFIT_LOG_LEVEL, "0")
+        val currentLogLevel = defaultPref.getString(KEY_RETROFIT_LOG_LEVEL, "0")
         logging = HttpLoggingInterceptor()
                 .setLevel(
                         when (currentLogLevel) {

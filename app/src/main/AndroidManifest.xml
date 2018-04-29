@@ -15,11 +15,26 @@
             android:name=".activity.BaseActivity"/>
 
         <activity
-            android:name=".activity.HomeActivity">
+            android:name=".activity.LoginActivity"
+            android:launchMode="singleTask">
+            <intent-filter>
+                <data
+                    android:host="oauth.success"
+                    android:scheme="cat"/>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".activity.HomeActivity"
+            android:launchMode="singleTask"
+            >
         </activity>
 
         <activity android:name=".activity.StatusDetailActivity" />
@@ -48,19 +63,6 @@
             android:name=".activity.PhotoDisplayActivity"
             android:theme="@style/AppTheme.Transparent"
             />
-
-        <activity
-            android:name=".activity.LoginActivity"
-            android:launchMode="singleTask">
-            <intent-filter>
-                <data
-                    android:host="oauth.success"
-                    android:scheme="cat"/>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
-        </activity>
 
         <activity
             android:name=".activity.ComposeActivity"

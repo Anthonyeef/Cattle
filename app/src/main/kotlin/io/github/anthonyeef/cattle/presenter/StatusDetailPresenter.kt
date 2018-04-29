@@ -1,6 +1,7 @@
 package io.github.anthonyeef.cattle.presenter
 
 import io.github.anthonyeef.cattle.Injection
+import io.github.anthonyeef.cattle.Injection.statusDb
 import io.github.anthonyeef.cattle.contract.StatusDetailContract
 import io.github.anthonyeef.cattle.data.statusData.ConversationStatus
 import io.github.anthonyeef.cattle.data.statusData.Status
@@ -54,7 +55,7 @@ class StatusDetailPresenter() : StatusDetailContract.Presenter {
 
 
     private fun getStatusById(id: String): Flowable<Status> {
-        return Flowable.concat(Injection.provideStatusDao().getStatusById(id).toFlowable(), statusService.getFanfouById(id))
+        return Flowable.concat(statusDb.getStatusById(id).toFlowable(), statusService.getFanfouById(id))
                 .firstOrError()
                 .toFlowable()
     }
