@@ -9,7 +9,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.crashlytics.android.answers.Answers
 import com.crashlytics.android.answers.LoginEvent
-import com.uber.autodispose.AutoDispose
 import io.github.anthonyeef.cattle.CattleSchedulers.mainThread
 import io.github.anthonyeef.cattle.R
 import io.github.anthonyeef.cattle.activity.HomeActivity
