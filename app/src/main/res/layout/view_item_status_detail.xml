@@ -75,8 +75,8 @@
 
     <TextView
         android:id="@+id/status_content"
+        style="@style/Widget.Cattle.Text.Content"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/vertical_padding_small"
         android:textSize="@dimen/text_size_medium"
         android:textColor="@color/text_color_normal"

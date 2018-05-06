@@ -29,6 +29,7 @@ import io.github.anthonyeef.cattle.exception.forbidden
 import io.github.anthonyeef.cattle.exception.showException
 import io.github.anthonyeef.cattle.exception.unauthorized
 import io.github.anthonyeef.cattle.extension.gone
+import io.github.anthonyeef.cattle.presenter.ProfilePresenter
 import io.github.anthonyeef.cattle.utils.LoadMoreDelegate
 import io.github.anthonyeef.cattle.view.ProfileHeaderCountView
 import io.github.anthonyeef.cattle.viewbinder.*
@@ -38,7 +39,6 @@ import me.drakeet.multitype.register
 import org.jetbrains.anko.find
 import org.jetbrains.anko.info
 import org.jetbrains.anko.intentFor
-import org.jetbrains.anko.support.v4.intentFor
 
 /**
  * Personal info fragment. Display personal info, fanfou list, fav fanfou, etc.
@@ -86,6 +86,11 @@ class ProfileFragment : BaseFragment(),
     super.onCreate(savedInstanceState)
 
     loadMoreDelegate = LoadMoreDelegate(this)
+
+    val uid = arguments?.getString(KEY_USER_ID)
+    uid?.let {
+      ProfilePresenter(this, it)
+    }
   }
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

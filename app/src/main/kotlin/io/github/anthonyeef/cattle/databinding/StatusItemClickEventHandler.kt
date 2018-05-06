@@ -1,14 +1,16 @@
 package io.github.anthonyeef.cattle.databinding
 
 import io.github.anthonyeef.cattle.activity.PhotoDisplayActivity
-import io.github.anthonyeef.cattle.activity.ProfileActivity
 import io.github.anthonyeef.cattle.activity.StatusDetailActivity
 import io.github.anthonyeef.cattle.activity.StatusDetailActivity.Companion.EXTRA_STATUS_HAS_CONVERSATION
 import io.github.anthonyeef.cattle.activity.StatusDetailActivity.Companion.EXTRA_STATUS_ID
 import io.github.anthonyeef.cattle.constant.app
 import io.github.anthonyeef.cattle.data.statusData.Status
+import io.github.anthonyeef.cattle.extension.show
+import io.github.anthonyeef.cattle.fragment.ProfileFragment
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.newTask
+import org.jetbrains.anko.support.v4.withArguments
 
 /**
  *
@@ -19,7 +21,9 @@ object StatusItemClickEventHandler {
     }
 
     fun openProfile(status: Status) {
-        app.startActivity(app.intentFor<ProfileActivity>(ProfileActivity.EXTRA_USER_ID to status.user?.id).newTask())
+        ProfileFragment()
+            .withArguments(ProfileFragment.KEY_USER_ID to status.user?.id)
+            .show()
     }
 
     fun openPhotoDisplay(status: Status) {
