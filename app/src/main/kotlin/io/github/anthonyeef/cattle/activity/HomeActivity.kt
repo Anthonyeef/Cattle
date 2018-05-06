@@ -16,7 +16,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import de.hdodenhof.circleimageview.CircleImageView
 import io.github.anthonyeef.cattle.GlideApp
-import io.github.anthonyeef.cattle.Injection
 import io.github.anthonyeef.cattle.Injection.userInfoDb
 import io.github.anthonyeef.cattle.R
 import io.github.anthonyeef.cattle.adapter.ViewpagerAdapter
@@ -26,10 +25,8 @@ import io.github.anthonyeef.cattle.constant.app
 import io.github.anthonyeef.cattle.contract.HomeActivityContract
 import io.github.anthonyeef.cattle.data.userData.UserInfo
 import io.github.anthonyeef.cattle.extension.addOnTabSelectedListener
-import io.github.anthonyeef.cattle.fragment.BaseListFragment
-import io.github.anthonyeef.cattle.fragment.DirectMessageInboxFragment
-import io.github.anthonyeef.cattle.fragment.HomeFeedListFragment
-import io.github.anthonyeef.cattle.fragment.MentionListFragment
+import io.github.anthonyeef.cattle.extension.show
+import io.github.anthonyeef.cattle.fragment.*
 import io.github.anthonyeef.cattle.livedata.SharedPreferenceStringLiveData
 import io.github.anthonyeef.cattle.presenter.HomeActivityPresenter
 import io.github.anthonyeef.cattle.service.ServiceGenerator
@@ -39,6 +36,7 @@ import io.github.anthonyeef.cattle.utils.bindOptionalView
 import io.github.anthonyeef.cattle.utils.bindView
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.listeners.onClick
+import org.jetbrains.anko.support.v4.withArguments
 
 /**
  * HomeActivity.
@@ -221,19 +219,23 @@ class HomeActivity : BaseActivity(), HomeActivityContract.View {
 
                 R.id.nav_profile -> {
                     bindDrawerAction {
-                        startActivity(intentFor<ProfileActivity>(ProfileActivity.EXTRA_USER_ID to PrefUtils.getString(KEY_CURRENT_USER_ID) ))
+                        ProfileFragment()
+                            .withArguments(ProfileFragment.KEY_USER_ID to PrefUtils.getString(KEY_CURRENT_USER_ID))
+                            .show()
                     }
                 }
 
                 R.id.nav_test_profile -> {
                     bindDrawerAction {
-                        startActivity(intentFor<ProfileActivity>(ProfileActivity.EXTRA_USER_ID to "臬兀").newTask())
+                        ProfileFragment()
+                            .withArguments(ProfileFragment.KEY_USER_ID to "臬兀")
+                            .show()
                     }
                 }
 
                 R.id.nav_debug_setting -> {
                     bindDrawerAction {
-                        startActivity(intentFor<DebugSettingActivity>().newTask())
+                      DebugSettingFragment().show()
                     }
                 }
 
