@@ -1,7 +1,6 @@
 package io.github.anthonyeef.cattle.presenter
 
-import androidx.content.edit
-import io.github.anthonyeef.cattle.Injection
+import androidx.core.content.edit
 import io.github.anthonyeef.cattle.Injection.statusDb
 import io.github.anthonyeef.cattle.constant.KEY_HOME_TIMELINE_LAST_UPDATE_TIME
 import io.github.anthonyeef.cattle.constant.TIME_GOD_CREAT_LIGHT
@@ -95,7 +94,7 @@ class HomeFeedListPresenter(): HomeFeedListContract.Presenter {
                             }
                             lastUpdateTime = System.currentTimeMillis()
                             lastItemId = statuses[statuses.size - 1].id
-                            defaultPref.edit() {
+                            defaultPref.edit {
                               putLong(KEY_HOME_TIMELINE_LAST_UPDATE_TIME, lastUpdateTime)
                             }
                         },

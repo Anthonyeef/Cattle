@@ -2,8 +2,6 @@ package io.github.anthonyeef.cattle.utils
 
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
-import androidx.content.edit
-import io.fabric.sdk.android.services.network.HttpRequest.put
 import io.github.anthonyeef.cattle.constant.app
 import org.jetbrains.anko.AnkoLogger
 
