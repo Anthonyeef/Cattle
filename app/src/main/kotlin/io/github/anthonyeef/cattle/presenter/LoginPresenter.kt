@@ -1,7 +1,7 @@
 package io.github.anthonyeef.cattle.presenter
 
 import android.net.Uri
-import androidx.content.edit
+import androidx.core.content.edit
 import io.github.anthonyeef.cattle.CattleSchedulers.io
 import io.github.anthonyeef.cattle.CattleSchedulers.mainThread
 import io.github.anthonyeef.cattle.Injection.userInfoDb

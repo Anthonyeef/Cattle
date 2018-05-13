@@ -1,16 +1,6 @@
 package io.github.anthonyeef.cattle;
 
-import android.support.test.espresso.core.deps.guava.collect.Lists;
-
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-
-import java.util.Collections;
-import java.util.List;
-
+import android.support.test.espresso.core.internal.deps.guava.collect.Lists;
 import io.github.anthonyeef.cattle.contract.ProfileAlbumContract;
 import io.github.anthonyeef.cattle.data.source.album.AlbumRepository;
 import io.github.anthonyeef.cattle.data.statusData.Status;
@@ -19,6 +9,13 @@ import io.reactivex.Flowable;
 import io.reactivex.android.plugins.RxAndroidPlugins;
 import io.reactivex.plugins.RxJavaPlugins;
 import io.reactivex.schedulers.Schedulers;
+import java.util.Collections;
+import java.util.List;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
