@@ -16,3 +16,6 @@ val KEY_HOME_TIMELINE_LAST_UPDATE_TIME = "home_timeline_last_update_time"
 
 // Key of retrofit network log level
 val KEY_RETROFIT_LOG_LEVEL = "retrofit_log_level"
+
+// Key of language
+val KEY_CURRENT_LANGUAGE = "language"

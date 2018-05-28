@@ -33,11 +33,7 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".activity.HomeActivity"
-            android:launchMode="singleTask"
-            >
-        </activity>
+        <activity android:name=".activity.HomeActivity" />
 
         <activity android:name=".activity.StatusDetailActivity" />
 
@@ -61,8 +57,6 @@
         <activity android:name=".activity.DebugActivity"/>
 
         <activity android:name=".activity.TestFieldActivity"/>
-
-        <activity android:name=".activity.DebugSettingActivity"/>
 
         <meta-data
             android:name="io.fabric.ApiKey"
