@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <data>
+        <variable
+            name="setting"
+            type="io.github.anthonyeef.cattle.entity.SettingItemEntity" />
+    </data>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/vertical_padding_normal"
+        android:paddingBottom="@dimen/vertical_padding_normal"
+        android:paddingStart="@dimen/horizontal_padding_normal"
+        android:paddingLeft="@dimen/horizontal_padding_normal"
+        android:paddingRight="@dimen/horizontal_padding_normal"
+        android:text="@{setting.title}"
+        android:textSize="@dimen/text_size_normal"
+        android:textColor="@color/text_color_normal"
+        />
+
+</layout>

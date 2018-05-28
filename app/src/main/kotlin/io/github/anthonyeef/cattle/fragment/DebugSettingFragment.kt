@@ -11,12 +11,6 @@ import io.github.anthonyeef.cattle.R
 class DebugSettingFragment : PreferenceFragmentCompat() {
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-        addPreferencesFromResource(R.xml.app_preferences)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-
+        addPreferencesFromResource(R.xml.app_debug_preferences)
     }
 }

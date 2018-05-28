@@ -225,6 +225,12 @@ class HomeActivity : BaseActivity(), HomeActivityContract.View {
                     }
                 }
 
+                R.id.nav_setting -> {
+                    bindDrawerAction {
+                        SettingFragment().show()
+                    }
+                }
+
                 R.id.nav_test_profile -> {
                     bindDrawerAction {
                         ProfileFragment()
