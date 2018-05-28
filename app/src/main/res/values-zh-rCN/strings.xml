@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">饭卡</string>
+    <string name="nav_item_profile">个人主页</string>
+    <string name="nav_item_draft">草稿</string>
+    <string name="nav_item_setting">设置</string>
+    <string name="nav_item_about">关于</string>
+    <string name="nav_item_test_field">试验田</string>
+    <string name="nav_item_test_profile">试验主页</string>
+    <string name="nav_item_debug">调试</string>
+
+    <string name="page_title_home">主页</string>
+    <string name="page_title_mention">提到</string>
+    <string name="page_title_direct_message">私信</string>
+    <string name="page_title_detail">详情</string>
+
+    <string name="drawer_open">抽屉打开</string>
+    <string name="drawer_close">抽屉关闭</string>
+
+    <string name="text_photo_only_status">上传了新照片</string>
+
+    <string name="hint_compose_new_fanfou">你在做什么</string>
+    <string name="hint_no_album_photos">暂无相册照片</string>
+    <string name="hint_no_more_album_photos">没有更多照片了</string>
+
+    <string name="text_mention_button">\@</string>
+    <string name="text_hash_tag_button">#</string>
+
+
+    <!-- Profile -->
+    <string name="text_self_intro">自述：</string>
+    <string name="text_following">正在关注</string>
+    <string name="text_follower">关注者</string>
+    <string name="text_favourite">收藏</string>
+    <string name="text_status">消息</string>
+    <string name="title_album">相册</string>
+    <string name="title_status_list">全部消息 · %1$d</string>
+    <string name="text_locked_profile">该帐号已上锁</string>
+    <string name="text_only_open_to_follower">只向关注的人公开消息。 \n点击关注按钮发出关注请求。</string>
+
+    <!-- FollowerList -->
+    <string name="title_follower_list">关注者列表</string>
+
+    <!-- Status Operations -->
+    <string name="text_comment">评论</string>
+    <string name="text_retweet">转发</string>
+    <string name="text_save">收藏</string>
+    <string name="text_share">分享</string>
+
+    <!-- Preference -->
+    <string name="pref_title">设置</string>
+    <string name="pref_title_locale">地区设置</string>
+    <string name="pref_item_language">语言设置</string>
+    <string name="pref_language_default">跟随系统设置</string>
+
+    <string name="text_which_language">选择语言</string>
+    <string name="text_language_default">跟随系统</string>
+    <string name="text_language_english">英语</string>
+    <string name="text_language_chinese_simple">简体中文</string>
+
+    <!-- Debug -->
+    <string name="debug_pref_title_network">网络</string>
+    <string name="pref_retrofit_log_level">网络日志级别</string>
+
+</resources>
