@@ -97,6 +97,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.41"
     implementation deps.ktx
 
+    implementation "org.jetbrains.anko:anko-commons:$rootProject.ext.ankoLibraryVersion"
     implementation "org.jetbrains.anko:anko-sdk25:$rootProject.ext.ankoLibraryVersion"
     implementation "org.jetbrains.anko:anko-sdk25-listeners:$rootProject.ext.ankoLibraryVersion"
     implementation "org.jetbrains.anko:anko-appcompat-v7:$rootProject.ext.ankoLibraryVersion"
