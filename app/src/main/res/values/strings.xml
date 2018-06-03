@@ -46,6 +46,9 @@
     <string name="text_save">Save</string>
     <string name="text_share">Share</string>
 
+    <!-- Status Context -->
+    <string name="text_status_context">Status context</string>
+
     <!-- Preference -->
     <string name="pref_title">Settings</string>
     <string name="pref_title_locale">Locale</string>
