@@ -35,8 +35,6 @@
 
         <activity android:name=".activity.HomeActivity" />
 
-        <activity android:name=".activity.StatusDetailActivity" />
-
         <activity
             android:name=".activity.AlbumActivity"
             />

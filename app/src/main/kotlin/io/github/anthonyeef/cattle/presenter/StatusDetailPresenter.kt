@@ -1,96 +1,69 @@
 package io.github.anthonyeef.cattle.presenter
 
-import io.github.anthonyeef.cattle.Injection
-import io.github.anthonyeef.cattle.Injection.statusDb
+import com.uber.autodispose.AutoDispose.autoDisposable
+import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
+import io.github.anthonyeef.cattle.CattleSchedulers.io
+import io.github.anthonyeef.cattle.CattleSchedulers.mainThread
 import io.github.anthonyeef.cattle.contract.StatusDetailContract
-import io.github.anthonyeef.cattle.data.statusData.ConversationStatus
-import io.github.anthonyeef.cattle.data.statusData.Status
 import io.github.anthonyeef.cattle.service.ServiceGenerator
 import io.github.anthonyeef.cattle.service.StatusService
-import io.reactivex.Flowable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 
-/**
- *
- */
 class StatusDetailPresenter() : StatusDetailContract.Presenter {
 
-    lateinit private var statusDetailView: StatusDetailContract.View
-    lateinit private var statusId: String
-    private val _disposable: CompositeDisposable = CompositeDisposable()
-    private val statusService = ServiceGenerator.createDefaultService(StatusService::class.java)
+  private lateinit var statusDetailView: StatusDetailContract.View
+  private lateinit var lifecycleScopeProvider: AndroidLifecycleScopeProvider
+  private val statusService = ServiceGenerator.createDefaultService(StatusService::class.java)
 
 
-    constructor(view: StatusDetailContract.View, id: String): this() {
-        statusId = id
-        statusDetailView = view
-        statusDetailView.setPresenter(this)
+  constructor(view: StatusDetailContract.View, lifeProvider: AndroidLifecycleScopeProvider): this() {
+    statusDetailView = view
+    statusDetailView.setPresenter(this)
+    lifecycleScopeProvider = lifeProvider
+  }
+
+
+  override fun loadOriginalStatusById(id: String) {
+    if (id.isNotEmpty()) {
+      statusService.getFanfouById(id)
+        .subscribeOn(io)
+        .observeOn(mainThread)
+        .`as`(autoDisposable(lifecycleScopeProvider))
+        .subscribe(
+            {
+              statusDetailView.showOriginalStatus(it)
+            },
+            {
+              // todo
+            }
+        )
     }
+  }
 
 
-    override fun loadStatusById(id: String) {
-        _disposable.add(getStatusById(id)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnNext { status ->
-                    if (status.inReplyToStatusId.isNotEmpty()) {
-                        tryAppendStatus(status.inReplyToStatusId)
-                    }
-                }
-                .subscribe(
-                        { status ->
-                            if (status.inReplyToStatusId.isNotEmpty()) {
-                                statusDetailView.showConversationStatus(ConversationStatus(status, true))
-                            } else {
-                                statusDetailView.showSingleStatus(status)
-                            }
-                        },
-                        { error ->
-                            // todo
-                        }
-                ))
+  override fun loadContextStatus(id: String) {
+    if (id.isNotEmpty()) {
+      statusService.getContextStatus(id)
+          .subscribeOn(io)
+          .observeOn(mainThread)
+          .`as`(autoDisposable(lifecycleScopeProvider))
+          .subscribe(
+              {
+                statusDetailView.showStatusContext(it)
+              },
+              {
+                // todo
+              }
+          )
     }
+  }
 
 
-    private fun getStatusById(id: String): Flowable<Status> {
-        return Flowable.concat(statusDb.getStatusById(id).toFlowable(), statusService.getFanfouById(id))
-                .firstOrError()
-                .toFlowable()
-    }
+  override fun subscribe() {
+
+  }
 
 
-    private fun tryAppendStatus(id: String) {
-        _disposable.add(getStatusById(id)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnNext { status ->
-                    if (status.inReplyToStatusId.isNotEmpty()) {
-                        tryAppendStatus(status.inReplyToStatusId)
-                    }
-                }
-                .subscribe(
-                        { status ->
-                            if (status.inReplyToStatusId.isNotEmpty()) {
-                                statusDetailView.showConversationStatus(ConversationStatus(status))
-                            } else {
-                                statusDetailView.showOriginalStatus(status)
-                            }
-                        },
-                        { error ->
-                            // todo
-                        }
-                ))
-    }
+  override fun unSubscribe() {
 
-
-    override fun subscribe() {
-        loadStatusById(statusId)
-    }
-
-
-    override fun unSubscribe() {
-        _disposable.clear()
-    }
+  }
 }

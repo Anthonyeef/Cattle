@@ -1,92 +1,81 @@
 package io.github.anthonyeef.cattle.fragment
 
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import io.github.anthonyeef.cattle.constant.app
+import io.github.anthonyeef.cattle.R
 import io.github.anthonyeef.cattle.contract.StatusDetailContract
 import io.github.anthonyeef.cattle.data.statusData.ConversationStatus
 import io.github.anthonyeef.cattle.data.statusData.Status
-import io.github.anthonyeef.cattle.viewbinder.StatusConversationItemViewBinder
-import io.github.anthonyeef.cattle.viewbinder.StatusConversationStartItemViewBinder
+import io.github.anthonyeef.cattle.entity.ListHeaderViewEntity
+import io.github.anthonyeef.cattle.presenter.StatusDetailPresenter
+import io.github.anthonyeef.cattle.viewbinder.ContextStatusItemViewBinder
+import io.github.anthonyeef.cattle.viewbinder.ListHeaderViewBinder
 import io.github.anthonyeef.cattle.viewbinder.StatusItemDetailItemViewBinder
+import me.drakeet.multitype.register
+import org.jetbrains.anko.findOptional
 
-/**
- * Detail fragment of one status.
- *
- * Show more info than timeline list.
- */
-class StatusDetailFragment : BaseListFragment(), StatusDetailContract.View {
+class StatusDetailFragment: BaseListFragment(), StatusDetailContract.View {
 
-    companion object {
-        const val KEY_HAS_CONVERSATION = "key_has_conversation"
+  companion object {
+    const val KEY_STATUS_ID = "key_status_id"
+  }
+
+
+  private var statusDetailPresenter: StatusDetailContract.Presenter? = null
+  private val statusId: String by lazy { arguments?.getString(KEY_STATUS_ID) ?: "" }
+
+
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+
+    adapter.register(StatusItemDetailItemViewBinder())
+    adapter.register(ContextStatusItemViewBinder())
+    adapter.register(ListHeaderViewBinder())
+
+    StatusDetailPresenter(this, lifeScope)
+  }
+
+
+  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    val contentView =  inflater.inflate(R.layout.fragment_toolbar_list, container, false)
+
+    list = contentView?.findOptional(android.R.id.list)
+    swipeRefreshLayout = contentView?.findOptional(R.id.swipe_refresh_layout)
+
+    return contentView
+  }
+
+
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+
+    setToolbarTitle(R.string.page_title_detail)
+    statusDetailPresenter?.loadOriginalStatusById(statusId)
+  }
+
+
+  override fun showOriginalStatus(item: Status) {
+    items.add(item)
+    adapter.notifyDataSetChanged()
+
+    if (item.inReplyToStatusId.isNotEmpty()) {
+      statusDetailPresenter?.loadContextStatus(item.id)
     }
-
-    private var statusDetailPresenter: StatusDetailContract.Presenter? = null
-    private val hasConversation: Boolean by lazy { arguments?.getBoolean(KEY_HAS_CONVERSATION, false)?: false }
+  }
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        adapter.register(Status::class.java, StatusItemDetailItemViewBinder())
-        adapter.register(ConversationStatus::class.java)
-                .to(StatusConversationStartItemViewBinder(), StatusConversationItemViewBinder())
-                .withLinker { _, t ->
-                    if (t.isStartOfConversation) {
-                        0
-                    } else {
-                        1
-                    }
-                }
+  override fun showStatusContext(data: List<Status>) {
+    if (data.isNotEmpty()) {
+      items.add(ListHeaderViewEntity(getString(R.string.text_status_context)))
+      items.addAll(data.filterNot { it.id == statusId }.map { ConversationStatus(it) })
+      adapter.notifyDataSetChanged()
     }
+  }
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val contentView =  super.onCreateView(inflater, container, savedInstanceState)
-        disablePullToRefresh()
-
-        return contentView
-    }
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        statusDetailPresenter?.subscribe()
-    }
-
-
-    override fun customizeRecyclerView() {
-        super.customizeRecyclerView()
-
-        list?.layoutManager = LinearLayoutManager(app).apply { reverseLayout = hasConversation }
-    }
-
-
-    override fun setPresenter(presenter: StatusDetailContract.Presenter?) {
-        statusDetailPresenter = presenter
-    }
-
-
-    override fun showSingleStatus(item: Status) {
-        item.isSingle = true
-        items.add(item)
-        adapter.notifyDataSetChanged()
-    }
-
-
-    override fun showOriginalStatus(item: Status) {
-        item.isSingle = false
-        items.add(item)
-        adapter.notifyDataSetChanged()
-    }
-
-
-    override fun showConversationStatus(item: ConversationStatus) {
-        items.add(item)
-        adapter.notifyDataSetChanged()
-    }
+  override fun setPresenter(presenter: StatusDetailContract.Presenter?) {
+    statusDetailPresenter = presenter
+  }
 }
