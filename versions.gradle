@@ -2,7 +2,7 @@ ext.deps = [:]
 
 def versions = [:]
 versions.kotlin = "1.2.40"
-versions.gradle = "3.2.0-alpha14"
+versions.gradle = "3.2.0-alpha15"
 versions.support = "27.1.1"
 versions.arch = "1.1.1"
 versions.room = "1.1.0"

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="clickHandler"
+            type="io.github.anthonyeef.cattle.databinding.StatusItemClickEventHandler"
+            />
+        <variable
+            name="conversation"
+            type="io.github.anthonyeef.cattle.data.statusData.ConversationStatus" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/horizontal_padding_normal"
+        android:paddingRight="@dimen/horizontal_padding_normal"
+        android:paddingTop="@dimen/vertical_padding_normal"
+        >
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@id/avatar"
+            android:layout_width="@dimen/avatar_size_normal"
+            android:layout_height="@dimen/avatar_size_normal"
+            android:onClick="@{() -> clickHandler.openProfile(conversation.status)}"
+            app:imageUrl="@{conversation.status.user.profileImageUrlLarge}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <TextView
+            android:id="@id/user_display_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/horizontal_padding_normal"
+            android:textSize="@dimen/text_size_normal"
+            android:textStyle="bold"
+            android:textColor="@color/text_color_normal"
+            android:gravity="start"
+            android:text="@{conversation.status.user.screenName}"
+            android:onClick="@{() -> clickHandler.openProfile(conversation.status)}"
+            app:layout_constraintStart_toEndOf="@id/avatar"
+            app:layout_constraintTop_toTopOf="@id/avatar"
+            />
+
+        <TextView
+            android:id="@+id/status_content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/vertical_padding_small"
+            android:textSize="@dimen/text_size_normal"
+            android:textColor="@color/text_color_normal"
+            android:lineSpacingMultiplier="1.3"
+            app:status="@{conversation.status}"
+            app:layout_constraintStart_toStartOf="@id/user_display_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/user_display_name"
+            />
+
+        <View
+            style="@style/Widget.Cattle.Divider"
+            android:layout_width="0dp"
+            android:layout_marginTop="@dimen/vertical_padding_normal"
+            app:layout_constraintStart_toStartOf="@id/status_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/status_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+    </android.support.constraint.ConstraintLayout>
+
+</layout>

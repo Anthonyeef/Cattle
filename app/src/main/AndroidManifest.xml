@@ -35,8 +35,6 @@
 
         <activity android:name=".activity.HomeActivity" />
 
-        <activity android:name=".activity.StatusDetailActivity" />
-
         <activity
             android:name=".activity.AlbumActivity"
             />
@@ -55,8 +53,6 @@
             android:windowSoftInputMode="adjustResize"/>
 
         <activity android:name=".activity.DebugActivity"/>
-
-        <activity android:name=".activity.TestFieldActivity"/>
 
         <meta-data
             android:name="io.fabric.ApiKey"

@@ -47,6 +47,9 @@
     <string name="text_save">收藏</string>
     <string name="text_share">分享</string>
 
+    <!-- Status Context -->
+    <string name="text_status_context">消息上下文</string>
+
     <!-- Preference -->
     <string name="pref_title">设置</string>
     <string name="pref_title_locale">地区设置</string>
