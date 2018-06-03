@@ -15,6 +15,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import de.hdodenhof.circleimageview.CircleImageView
+import io.github.anthonyeef.cattle.BuildConfig
 import io.github.anthonyeef.cattle.GlideApp
 import io.github.anthonyeef.cattle.Injection.userInfoDb
 import io.github.anthonyeef.cattle.R
@@ -211,6 +212,10 @@ class HomeActivity : BaseActivity(), HomeActivityContract.View {
 
 
     private fun setupDrawerContent(navigation: NavigationView) {
+        navigation.menu.findItem(R.id.nav_test_field).isVisible = BuildConfig.DEBUG
+        navigation.menu.findItem(R.id.nav_test_profile).isVisible = BuildConfig.DEBUG
+        navigation.menu.findItem(R.id.nav_debug_setting).isVisible = BuildConfig.DEBUG
+
         navigation.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.nav_test_field -> {
