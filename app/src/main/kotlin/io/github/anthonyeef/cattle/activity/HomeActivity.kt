@@ -214,7 +214,9 @@ class HomeActivity : BaseActivity(), HomeActivityContract.View {
         navigation.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.nav_test_field -> {
-                    bindDrawerAction { startActivity(intentFor<TestFieldActivity>()) }
+                    bindDrawerAction {
+                        TestFieldFragment().show()
+                    }
                 }
 
                 R.id.nav_profile -> {

@@ -54,8 +54,6 @@
 
         <activity android:name=".activity.DebugActivity"/>
 
-        <activity android:name=".activity.TestFieldActivity"/>
-
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="aeda6e475b514ffe11d0b3a178280cdc59d66e92"
