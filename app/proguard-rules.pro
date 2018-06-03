@@ -27,6 +27,7 @@
 
 # Retrofit 2
 -dontwarn okio.**
+-dontwarn org.conscrypt.**
 -dontwarn javax.annotation.concurrent.GuardedBy
 -dontwarn javax.annotation.Nullable
 -dontwarn javax.annotation.ParametersAreNonnullByDefault
