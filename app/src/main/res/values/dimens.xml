@@ -27,10 +27,10 @@
 
     <dimen name="fab_margin">12dp</dimen>
 
-    <dimen name="text_size_tiny">12sp</dimen>
-    <dimen name="text_size_small">14sp</dimen>
-    <dimen name="text_size_normal">16sp</dimen>
     <dimen name="text_size_medium">18sp</dimen>
+    <dimen name="text_size_normal">16sp</dimen>
+    <dimen name="text_size_small">14sp</dimen>
+    <dimen name="text_size_tiny">12sp</dimen>
 
     <dimen name="compose_action_size">50dp</dimen>
 
