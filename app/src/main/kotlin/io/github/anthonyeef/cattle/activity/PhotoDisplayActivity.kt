@@ -1,9 +1,13 @@
 package io.github.anthonyeef.cattle.activity
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.MotionEvent
 import android.widget.ImageView
 import io.github.anthonyeef.cattle.GlideApp
 import io.github.anthonyeef.cattle.R
+import org.jetbrains.anko.dip
+import kotlin.math.absoluteValue
 
 
 class PhotoDisplayActivity : BaseActivity() {
@@ -17,6 +21,7 @@ class PhotoDisplayActivity : BaseActivity() {
   private val imageUrl by lazy { intent.extras.getString(KEY_IMAGE_URL) }
   private val isGif by lazy { intent.extras.getBoolean(KEY_IS_GIF, false) }
 
+  @SuppressLint("ClickableViewAccessibility")
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
@@ -33,6 +38,22 @@ class PhotoDisplayActivity : BaseActivity() {
           .load(imageUrl)
           .dontAnimate()
           .into(imageView)
+    }
+
+    var lastY = 0f
+
+    imageView.setOnTouchListener { _, event ->
+      when(event.actionMasked) {
+        MotionEvent.ACTION_MOVE -> {
+          val deltaY = event.y - lastY
+          if (deltaY.absoluteValue > dip(15)) {
+            this@PhotoDisplayActivity.finish()
+          }
+        }
+      }
+
+      lastY = event.y
+      true
     }
   }
 }
