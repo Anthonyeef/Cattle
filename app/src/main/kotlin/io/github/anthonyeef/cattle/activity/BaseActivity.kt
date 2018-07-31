@@ -25,6 +25,7 @@ open class BaseActivity : AppCompatActivity() {
     super.onPostCreate(savedInstanceState)
 
     setupToolbar()
+    setNavigationBarColor()
   }
 
 
@@ -48,4 +49,10 @@ open class BaseActivity : AppCompatActivity() {
     toolbar?.title = toolbarTitle
   }
 
+
+  private fun setNavigationBarColor() {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+      window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
+    }
+  }
 }
