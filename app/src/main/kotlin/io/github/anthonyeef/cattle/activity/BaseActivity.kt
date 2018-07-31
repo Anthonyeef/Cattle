@@ -1,9 +1,11 @@
 package io.github.anthonyeef.cattle.activity
 
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
+import android.view.View
 import io.github.anthonyeef.cattle.R
 import io.github.anthonyeef.cattle.utils.LocaleUtils
 import org.jetbrains.anko.findOptional

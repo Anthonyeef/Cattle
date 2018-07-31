@@ -3,6 +3,7 @@ package io.github.anthonyeef.cattle.activity
 import android.os.Build
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
+import android.view.View
 import io.github.anthonyeef.cattle.R
 import io.github.anthonyeef.cattle.constant.CONTAINER_ID
 import io.github.anthonyeef.cattle.extension.bindFragment
@@ -41,12 +42,20 @@ class GeneralActivity : BaseActivity() {
     super.onPostCreate(savedInstanceState)
 
     setupStatusBarColor()
+    setNavigationBarColor()
   }
 
 
   private fun setupStatusBarColor() {
     doFromSdk(Build.VERSION_CODES.LOLLIPOP) {
       window.statusBarColor = ContextCompat.getColor(this, R.color.colorPrimaryDark)
+    }
+  }
+
+
+  private fun setNavigationBarColor() {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+      window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
     }
   }
 }
