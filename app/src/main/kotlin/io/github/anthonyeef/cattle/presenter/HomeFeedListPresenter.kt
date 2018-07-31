@@ -38,13 +38,6 @@ class HomeFeedListPresenter(): HomeFeedListContract.Presenter {
     private var isDataLoaded: Boolean = false
     private var _disposable: CompositeDisposable = CompositeDisposable()
 
-    var isDataOld: Boolean
-        get() {
-            val currentTime = System.currentTimeMillis()
-            return (currentTime - lastUpdateTime) > TTL
-        }
-        set(v) = throw UnsupportedOperationException("Set method for isDataOld is not supported")
-
 
     override fun loadDataFromCache() {
         doAsync(exceptionHandler = {
@@ -87,11 +80,6 @@ class HomeFeedListPresenter(): HomeFeedListContract.Presenter {
                             homeFeedListView.updateTimeline(clearData = clearData, data = statuses)
 
                             isDataLoaded = true
-
-                            // FIXME
-                            if (isDataOld) {
-                                homeFeedListView.scrollToTop()
-                            }
                             lastUpdateTime = System.currentTimeMillis()
                             lastItemId = statuses[statuses.size - 1].id
                             defaultPref.edit {
@@ -112,9 +100,6 @@ class HomeFeedListPresenter(): HomeFeedListContract.Presenter {
 
         if (!isDataLoaded) {
             loadDataFromCache()
-        }
-        if (isDataOld) {
-            loadDataFromRemote(clearData = true)
         }
     }
 
