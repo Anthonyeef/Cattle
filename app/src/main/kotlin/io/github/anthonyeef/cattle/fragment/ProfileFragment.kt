@@ -67,16 +67,14 @@ class ProfileFragment : BaseFragment(),
   private var statusCount: ProfileHeaderCountView? = null
 
   private var statusTotalCount: Int = 0
-
   private var statusLoadError: Boolean = false
-
   private var hasSetLayoutAnimation = false
 
   private val adapter: MultiTypeAdapter by lazy { MultiTypeAdapter(items).apply {
-    register(DummyListViewEntity::class.java, DummyListViewBinder())
-    register(ListHeaderViewEntity::class.java, ListHeaderViewBinder())
-    register(Status::class.java, ProfileStatusViewBinder())
-    register(PreviewAlbumPhotos::class.java, ProfilePreviewAlbumListViewBinder())
+    register(DummyListViewBinder())
+    register(ListHeaderViewBinder())
+    register(ProfileStatusViewBinder())
+    register(ProfilePreviewAlbumListViewBinder())
     register(ProfileLockedViewBinder())
   } }
 
