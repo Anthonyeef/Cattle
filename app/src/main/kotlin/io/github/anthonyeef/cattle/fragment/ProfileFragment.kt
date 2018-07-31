@@ -201,11 +201,9 @@ class ProfileFragment : BaseFragment(),
     }
 
     if (statuses.isNotEmpty()) {
+      val insertedPosition = items.size
       items.addAll(statuses)
-      adapter.notifyDataSetChanged()
-      if (isFirstLoad) {
-        runLayoutAnimation()
-      }
+      adapter.notifyItemInserted(insertedPosition)
     }
   }
 
