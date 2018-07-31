@@ -94,7 +94,7 @@ dependencies {
     implementation deps.arch.life_extension
     implementation deps.arch.life_rx
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.41"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.51"
     implementation deps.ktx
 
     implementation "org.jetbrains.anko:anko-commons:$rootProject.ext.ankoLibraryVersion"

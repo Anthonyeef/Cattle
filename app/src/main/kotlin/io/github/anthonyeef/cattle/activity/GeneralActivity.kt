@@ -6,7 +6,6 @@ import android.support.v4.content.ContextCompat
 import io.github.anthonyeef.cattle.R
 import io.github.anthonyeef.cattle.constant.CONTAINER_ID
 import io.github.anthonyeef.cattle.extension.bindFragment
-import io.github.anthonyeef.cattle.fragment.BaseFragment
 import io.github.anthonyeef.cattle.fragment.FragmentInstanceCache
 import org.jetbrains.anko.design.coordinatorLayout
 import org.jetbrains.anko.doFromSdk

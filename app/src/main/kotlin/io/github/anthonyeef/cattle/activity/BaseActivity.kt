@@ -1,9 +1,11 @@
 package io.github.anthonyeef.cattle.activity
 
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
+import android.view.View
 import io.github.anthonyeef.cattle.R
 import io.github.anthonyeef.cattle.utils.LocaleUtils
 import org.jetbrains.anko.findOptional
@@ -23,6 +25,7 @@ open class BaseActivity : AppCompatActivity() {
     super.onPostCreate(savedInstanceState)
 
     setupToolbar()
+    setNavigationBarColor()
   }
 
 
@@ -46,4 +49,10 @@ open class BaseActivity : AppCompatActivity() {
     toolbar?.title = toolbarTitle
   }
 
+
+  private fun setNavigationBarColor() {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+      window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
+    }
+  }
 }
