@@ -23,7 +23,7 @@ object StatusItemClickEventHandler {
     fun openProfile(status: Status) {
         ProfileFragment()
             .withArguments(ProfileFragment.KEY_USER_ID to status.user?.id)
-            .show()
+            .show(tintStatusBar = false)
     }
 
     fun openPhotoDisplay(status: Status) {

@@ -23,9 +23,9 @@ inline fun <reified T : Activity> Fragment.navigateTo() {
     startActivity(intentFor<T>())
 }
 
-fun Fragment.show() {
+fun Fragment.show(tintStatusBar: Boolean = true) {
   FragmentInstanceCache.put(this)
-  app.startActivity(app.intentFor<GeneralActivity>(GeneralActivity.KEY_FRAG to this.getKey()).newTask())
+  app.startActivity(app.intentFor<GeneralActivity>(GeneralActivity.KEY_FRAG to this.getKey(), GeneralActivity.KEY_TINT_STATUS_BAR to tintStatusBar).newTask())
 }
 
 fun Fragment.getKey(): String {
