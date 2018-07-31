@@ -1,14 +1,10 @@
 package io.github.anthonyeef.cattle.activity
 
-import android.os.Build
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
-import io.github.anthonyeef.cattle.R
 import io.github.anthonyeef.cattle.constant.CONTAINER_ID
 import io.github.anthonyeef.cattle.extension.bindFragment
 import io.github.anthonyeef.cattle.fragment.FragmentInstanceCache
 import org.jetbrains.anko.design.coordinatorLayout
-import org.jetbrains.anko.doFromSdk
 import org.jetbrains.anko.matchParent
 
 class GeneralActivity : BaseActivity() {
@@ -32,20 +28,6 @@ class GeneralActivity : BaseActivity() {
 
     fragment?.let {
       bindFragment(fragmentToShow = it)
-    }
-  }
-
-
-  override fun onPostCreate(savedInstanceState: Bundle?) {
-    super.onPostCreate(savedInstanceState)
-
-    setupStatusBarColor()
-  }
-
-
-  private fun setupStatusBarColor() {
-    doFromSdk(Build.VERSION_CODES.LOLLIPOP) {
-      window.statusBarColor = ContextCompat.getColor(this, R.color.colorPrimaryDark)
     }
   }
 }
