@@ -64,4 +64,6 @@
     <string name="debug_pref_title_network">Network</string>
     <string name="pref_retrofit_log_level">retrofit_log_level</string>
 
+    <string name="label_shortcut_compose">Compose</string>
+
 </resources>
