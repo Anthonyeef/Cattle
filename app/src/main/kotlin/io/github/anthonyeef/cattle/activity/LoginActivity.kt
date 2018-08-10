@@ -3,6 +3,7 @@ package io.github.anthonyeef.cattle.activity
 import android.content.Intent
 import android.os.Bundle
 import io.github.anthonyeef.cattle.R
+import io.github.anthonyeef.cattle.constant.CATTLE_COMPOSE
 import io.github.anthonyeef.cattle.constant.CONTAINER_ID
 import io.github.anthonyeef.cattle.constant.KEY_CURRENT_USER_ID
 import io.github.anthonyeef.cattle.constant.bus
@@ -26,6 +27,10 @@ class LoginActivity : BaseActivity() {
     if (defaultPref.getString(KEY_CURRENT_USER_ID, "").isNotEmpty()) {
       startActivity(intentFor<HomeActivity>())
       finish()
+
+      if (intent?.action == CATTLE_COMPOSE) {
+        startActivity(intentFor<ComposeActivity>())
+      }
     } else {
       setContentView(R.layout.activity_general)
       bindFragment(LoginFragment())

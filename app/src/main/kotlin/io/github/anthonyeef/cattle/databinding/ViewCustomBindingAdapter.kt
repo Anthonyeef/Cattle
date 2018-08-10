@@ -1,9 +1,12 @@
 package io.github.anthonyeef.cattle.databinding
 
 import android.databinding.BindingAdapter
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import io.github.anthonyeef.cattle.GlideApp
 import io.github.anthonyeef.cattle.R
 import io.github.anthonyeef.cattle.constant.app
 import io.github.anthonyeef.cattle.data.statusData.Status
@@ -32,9 +35,10 @@ fun bindStatusContent(view: TextView, status: Status) {
 fun bindStatusPhoto(view: ImageView, status: Status) {
     view.goneIf(status.photo == null)
     if (status.photo != null) {
-        Glide.with(view.context)
-                .load(status.photo?.largeurl)
-                .into(view)
+        GlideApp.with(view.context)
+            .load(status.photo?.largeurl)
+            .placeholder(ColorDrawable(Color.LTGRAY))
+            .into(view)
     }
 }
 
