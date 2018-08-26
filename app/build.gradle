@@ -131,7 +131,7 @@ dependencies {
         exclude group: 'org.jetbrains.kotlin'
     }
 
-    implementation deps.constraintlayout
+    implementation deps.constraintlayout, { exclude group: 'com.android.support' }
     implementation deps.prettytime
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
