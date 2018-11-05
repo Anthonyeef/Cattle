@@ -53,10 +53,6 @@
             android:theme="@style/AppTheme.Transparent"
             />
 
-        <activity
-            android:name=".activity.ComposeActivity"
-            android:windowSoftInputMode="adjustResize"/>
-
         <activity android:name=".activity.DebugActivity"/>
 
         <meta-data

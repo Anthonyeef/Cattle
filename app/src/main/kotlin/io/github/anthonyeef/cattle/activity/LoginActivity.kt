@@ -9,6 +9,8 @@ import io.github.anthonyeef.cattle.constant.KEY_CURRENT_USER_ID
 import io.github.anthonyeef.cattle.constant.bus
 import io.github.anthonyeef.cattle.event.LoginSuccessEvent
 import io.github.anthonyeef.cattle.extension.bindFragment
+import io.github.anthonyeef.cattle.extension.show
+import io.github.anthonyeef.cattle.fragment.ComposeFragment
 import io.github.anthonyeef.cattle.fragment.LoginFragment
 import io.github.anthonyeef.cattle.utils.PrefUtils.defaultPref
 import org.jetbrains.anko.info
@@ -29,7 +31,7 @@ class LoginActivity : BaseActivity() {
       finish()
 
       if (intent?.action == CATTLE_COMPOSE) {
-        startActivity(intentFor<ComposeActivity>())
+        ComposeFragment().show()
       }
     } else {
       setContentView(R.layout.activity_general)

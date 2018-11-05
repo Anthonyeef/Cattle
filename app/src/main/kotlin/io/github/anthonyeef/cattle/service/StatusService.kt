@@ -16,6 +16,13 @@ interface StatusService {
       @Part("status") status: String
   ): Observable<Status>
 
+  @Multipart
+  @POST("statuses/update.json")
+  fun repostFanfou(
+      @Part("status") status: String,
+      @Part("repost_status_id") repostStatusId: String
+  ): Observable<Status>
+
   @GET("statuses/show.json")
   fun getFanfouById(@Query("id") id: String): Flowable<Status>
 

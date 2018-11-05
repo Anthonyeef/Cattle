@@ -63,4 +63,8 @@ data class Status(
 
     @Ignore
     var isSingle: Boolean = true
-)
+) {
+    override fun toString(): String {
+      return "@" + user?.screenName + ":" + text
+    }
+}
