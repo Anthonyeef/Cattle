@@ -20,5 +20,7 @@ val verticalPaddingLarge = dip(20)
 
 val paddingMedium = dip(16)
 
+val OPERATION_BTN_SIZE_SMALL = dip(16)
+
 /*------ private method ---------*/
 private fun dip(value: Int) = app.dip(value)

@@ -3,6 +3,7 @@ package io.github.anthonyeef.cattle.utils;
 import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.text.Html;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -13,7 +14,6 @@ import android.text.style.ForegroundColorSpan;
 import android.text.style.URLSpan;
 import android.text.util.Linkify;
 import android.widget.TextView;
-
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -30,7 +30,7 @@ public class StatusParsingUtils {
     private static final Pattern PATTERN_USER = Pattern.compile("(@.+?)\\s+", Pattern.MULTILINE);
     private static final Pattern PATTERN_USERLINK = Pattern.compile("<a href=\"http://fanfou\\.com/(.*?)\" class=\"former\">(.*?)</a>");
 
-    public static void setStatus(TextView textView, String status) {
+    public static void setStatus(@NonNull TextView textView, String status) {
         final HashMap<String, String> mentions = findMentions(status);
 
         @SuppressWarnings("deprecation")
@@ -46,7 +46,7 @@ public class StatusParsingUtils {
         textView.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
-    public static void setSource(TextView textView, String source) {
+    public static void setSource(@NonNull TextView textView, String source) {
         source = "来自" + source;
         @SuppressWarnings("deprecation")
         String plainText = Build.VERSION.SDK_INT > 24 ?
@@ -58,7 +58,7 @@ public class StatusParsingUtils {
         textView.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
-    private static void removeUnderLines(final SpannableString spannable) {
+    private static void removeUnderLines(@NonNull final SpannableString spannable) {
         URLSpan[] spans = spannable.getSpans(0, spannable.length(), URLSpan.class);
         for (final URLSpan span : spans) {
             int start = spannable.getSpanStart(span);

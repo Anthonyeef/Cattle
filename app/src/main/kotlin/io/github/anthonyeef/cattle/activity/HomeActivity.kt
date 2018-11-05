@@ -99,7 +99,7 @@ class HomeActivity : BaseActivity(), HomeActivityContract.View {
 
 
     override fun showComposeActivity() {
-        startActivity(intentFor<ComposeActivity>())
+        ComposeFragment().show()
     }
 
 

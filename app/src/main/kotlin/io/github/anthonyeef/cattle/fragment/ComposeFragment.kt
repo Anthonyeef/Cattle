@@ -9,18 +9,21 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
-import de.hdodenhof.circleimageview.CircleImageView
+import com.uber.autodispose.AutoDispose.autoDisposable
+import io.github.anthonyeef.cattle.CattleSchedulers.io
+import io.github.anthonyeef.cattle.CattleSchedulers.mainThread
+import io.github.anthonyeef.cattle.Injection.statusDb
 import io.github.anthonyeef.cattle.R
 import io.github.anthonyeef.cattle.constant.horizontalPaddingMedium
 import io.github.anthonyeef.cattle.contract.ComposeContract
 import io.github.anthonyeef.cattle.presenter.ComposePresenter
 import io.github.anthonyeef.cattle.utils.bindOptionalView
 import io.github.anthonyeef.cattle.utils.bindView
-import org.jetbrains.anko.findOptional
 import org.jetbrains.anko.sdk25.listeners.onClick
 import org.jetbrains.anko.wrapContent
 
@@ -29,14 +32,16 @@ import org.jetbrains.anko.wrapContent
  */
 class ComposeFragment : BaseFragment(), ComposeContract.View {
     companion object {
-        val INPUT_LIMIT = 140
+        const val INPUT_LIMIT = 140
+        const val KEY_REPOST_ID = "key_repost_id"
     }
 
-    lateinit var composePresenter: ComposeContract.Presenter
-    val sendBtn: Button by bindView<Button>(R.id.send)
-    val editContent: EditText by bindView<EditText>(android.R.id.content)
-    val toolbar: Toolbar? by bindOptionalView<Toolbar>(R.id.toolbar)
-    val inputLimit: TextView? by bindOptionalView<TextView>(R.id.title)
+    private lateinit var composePresenter: ComposeContract.Presenter
+    private val sendBtn: Button by bindView(R.id.send)
+    private val editContent: EditText by bindView(android.R.id.content)
+    private val toolbar: Toolbar? by bindOptionalView(R.id.toolbar)
+    private val inputLimit: TextView? by bindOptionalView(R.id.title)
+    private val repostFanfouId: String by lazy { arguments?.getString(KEY_REPOST_ID) ?: "" }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +52,7 @@ class ComposeFragment : BaseFragment(), ComposeContract.View {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater?.inflate(R.layout.fragment_compose, container, false)
+        return inflater.inflate(R.layout.fragment_compose, container, false)
     }
 
 
@@ -55,7 +60,11 @@ class ComposeFragment : BaseFragment(), ComposeContract.View {
         super.onViewCreated(view, savedInstanceState)
 
         sendBtn.onClick {
-            composePresenter.sendFanfou()
+            if (repostFanfouId.isNotEmpty()) {
+                composePresenter.repostFanfou()
+            } else {
+                composePresenter.sendFanfou()
+            }
         }
 
         setupToolbar()
@@ -85,6 +94,9 @@ class ComposeFragment : BaseFragment(), ComposeContract.View {
     }
 
 
+    override fun getRepostStatusId(): String = repostFanfouId
+
+
     override fun sendFinish(success: Boolean) {
         if (success) {
             activity?.finish()
@@ -95,17 +107,6 @@ class ComposeFragment : BaseFragment(), ComposeContract.View {
     private fun setupToolbar() {
         toolbar?.let {
             (activity as AppCompatActivity).setSupportActionBar(it)
-            val homeAvatar = it.findOptional<CircleImageView>(R.id.toolbar_avatar)
-            homeAvatar?.let {
-                // fixme: get rid of DB
-                /*val userInfo: UserInfo? = (select
-                        from UserInfo::class
-                        where (UserInfo_Table.id.eq(SharedPreferenceUtils.getString(KEY_CURRENT_USER_ID)))
-                        ).list.firstOrNull()
-                Glide.with(it.context)
-                        .load(userInfo?.profileImageUrlLarge)
-                        .into(it)*/
-            }
 
             with(activity as AppCompatActivity) {
                 supportActionBar?.setDisplayShowTitleEnabled(false)
@@ -113,7 +114,7 @@ class ComposeFragment : BaseFragment(), ComposeContract.View {
                 supportActionBar?.setDisplayShowHomeEnabled(true)
             }
 
-            it.setNavigationOnClickListener {
+            it.setNavigationOnClickListener { _ ->
                 activity?.onBackPressed()
             }
         }
@@ -141,6 +142,16 @@ class ComposeFragment : BaseFragment(), ComposeContract.View {
                 updateInputCount(INPUT_LIMIT - s.toString().length)
             }
         })
+        if (repostFanfouId.isNotEmpty()) {
+          statusDb.getStatusById(repostFanfouId)
+              .subscribeOn(io)
+              .observeOn(mainThread)
+              .`as`(autoDisposable(lifeScope))
+              .subscribe {
+                editContent.setText(it.toString(), TextView.BufferType.EDITABLE)
+              }
+        }
+        activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
     }
 
 

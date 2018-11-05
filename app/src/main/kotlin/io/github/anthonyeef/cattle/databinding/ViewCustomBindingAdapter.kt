@@ -13,6 +13,8 @@ import io.github.anthonyeef.cattle.data.statusData.Status
 import io.github.anthonyeef.cattle.extension.goneIf
 import io.github.anthonyeef.cattle.utils.StatusParsingUtils
 import io.github.anthonyeef.cattle.utils.TimeUtils
+import io.github.anthonyeef.cattle.view.FanOperationView
+import io.github.anthonyeef.cattle.view.FanOperationViewGroup
 
 // bind status source to TextView
 @BindingAdapter("statusSource")
@@ -40,6 +42,11 @@ fun bindStatusPhoto(view: ImageView, status: Status) {
             .placeholder(ColorDrawable(Color.LTGRAY))
             .into(view)
     }
+}
+
+@BindingAdapter("status")
+fun bindStatusOperation(view: FanOperationViewGroup, status: Status) {
+    view.status = status
 }
 
 // bind normal size photo to ImageView
@@ -75,4 +82,9 @@ fun bindImage(view: ImageView, url: String) {
     Glide.with(view.context)
             .load(url)
             .into(view)
+}
+
+@BindingAdapter("layout_height")
+fun bindHeight(view: FanOperationView, btnSize: Int) {
+    view.layoutParams = view.layoutParams.apply { height = btnSize }
 }

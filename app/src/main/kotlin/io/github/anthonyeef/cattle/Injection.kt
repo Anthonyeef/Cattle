@@ -1,8 +1,6 @@
 package io.github.anthonyeef.cattle
 
 import io.github.anthonyeef.cattle.data.AppDatabase
-import io.github.anthonyeef.cattle.data.statusData.StatusDao
-import io.github.anthonyeef.cattle.data.userData.UserInfoDao
 
 /**
  *
