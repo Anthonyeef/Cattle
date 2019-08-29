@@ -1,15 +1,14 @@
 package io.github.anthonyeef.cattle.utils
 
-import android.support.v4.widget.SwipeRefreshLayout
-import android.support.v7.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import androidx.recyclerview.widget.RecyclerView
 import io.github.anthonyeef.cattle.R
 import io.github.anthonyeef.cattle.fragment.BaseFragment
-import org.jetbrains.anko.support.v4.findOptional
 
 /**
  *
  */
-class SwipeRefreshDelegate : CatLogger {
+class SwipeRefreshDelegate {
 
     private var swipeRefreshLayout: SwipeRefreshLayout? = null
     private var refreshListener: OnSwipeRefreshListener? = null
@@ -24,10 +23,10 @@ class SwipeRefreshDelegate : CatLogger {
     }
 
     fun attach(fragment: BaseFragment) {
-        swipeRefreshLayout = fragment.findOptional<SwipeRefreshLayout>(R.id.swipe_refresh_layout)
+        swipeRefreshLayout = fragment.view?.findViewById<SwipeRefreshLayout>(R.id.swipe_refresh_layout)
         initSwipeRefreshLayout()
 
-        list = fragment.findOptional<RecyclerView>(android.R.id.list)
+        list = fragment.view?.findViewById<RecyclerView>(android.R.id.list)
     }
 
     private fun initSwipeRefreshLayout() {

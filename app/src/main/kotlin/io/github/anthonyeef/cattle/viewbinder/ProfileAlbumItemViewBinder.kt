@@ -1,7 +1,7 @@
 package io.github.anthonyeef.cattle.viewbinder
 
-import android.databinding.DataBindingUtil
-import android.support.v7.widget.RecyclerView
+import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import io.github.anthonyeef.cattle.R
@@ -25,7 +25,7 @@ class ProfileAlbumItemViewBinder : ItemViewBinder<Status, ProfileAlbumItemViewBi
     }
 
 
-    inner class ProfileAlbumItemViewHolder(itemViewBinding: ViewItemProfileAlbumBinding): RecyclerView.ViewHolder(itemViewBinding.root) {
+    inner class ProfileAlbumItemViewHolder(itemViewBinding: ViewItemProfileAlbumBinding): androidx.recyclerview.widget.RecyclerView.ViewHolder(itemViewBinding.root) {
         private val binding = itemViewBinding
 
         fun bindPhotoData(data: Status) {

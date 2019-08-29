@@ -1,12 +1,11 @@
 package io.github.anthonyeef.cattle.viewbinder
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import io.github.anthonyeef.cattle.databinding.ViewSettingItemBinding
 import io.github.anthonyeef.cattle.entity.SettingItemEntity
 import me.drakeet.multitype.ItemViewBinder
-import org.jetbrains.anko.sdk25.listeners.onClick
 
 class SettingItemViewBinder : ItemViewBinder<SettingItemEntity, SettingItemViewBinder.SettingItemViewHolder>() {
 
@@ -40,7 +39,7 @@ class SettingItemViewBinder : ItemViewBinder<SettingItemEntity, SettingItemViewB
 
     fun bindSettingItem(t: SettingItemEntity) {
       settingBinding.setting = t
-      settingBinding.root.onClick {
+      settingBinding.root.setOnClickListener {
         settingItemCallback?.onSettingItemClicked(t)
       }
       settingBinding.executePendingBindings()

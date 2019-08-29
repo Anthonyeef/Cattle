@@ -1,7 +1,8 @@
 package io.github.anthonyeef.cattle.fragment
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import android.support.design.widget.FloatingActionButton
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.crashlytics.android.answers.Answers
 import com.crashlytics.android.answers.LoginEvent
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import io.github.anthonyeef.cattle.CattleSchedulers.mainThread
 import io.github.anthonyeef.cattle.R
 import io.github.anthonyeef.cattle.activity.HomeActivity
@@ -18,12 +20,6 @@ import io.github.anthonyeef.cattle.event.LoginSuccessEvent
 import io.github.anthonyeef.cattle.exception.showException
 import io.github.anthonyeef.cattle.presenter.LoginPresenter
 import io.reactivex.disposables.CompositeDisposable
-import org.jetbrains.anko.info
-import org.jetbrains.anko.sdk25.listeners.onClick
-import org.jetbrains.anko.support.v4.browse
-import org.jetbrains.anko.support.v4.find
-import org.jetbrains.anko.support.v4.intentFor
-import org.jetbrains.anko.support.v4.toast
 
 /**
  * User login and authorized.
@@ -31,9 +27,9 @@ import org.jetbrains.anko.support.v4.toast
 class LoginFragment : BaseFragment(), LoginContract.View {
   private lateinit var mLoginPresenter: LoginContract.Presenter
 
-  private val loginBtn: FloatingActionButton by lazy { find<FloatingActionButton>(R.id.login_btn) }
-  private val name: TextView by lazy { find<TextView>(R.id.name_text) }
-  private val cat: ImageView by lazy { find<ImageView>(R.id.cat) }
+  private val loginBtn: FloatingActionButton? = view?.findViewById(R.id.login_btn)
+  private val name: TextView? = view?.findViewById(R.id.name_text)
+  private val cat: ImageView? = view?.findViewById(R.id.cat)
   private lateinit var _disposables: CompositeDisposable
 
   override fun isActive(): Boolean {
@@ -54,15 +50,15 @@ class LoginFragment : BaseFragment(), LoginContract.View {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    name.onClick {
+    name?.setOnClickListener {
       mLoginPresenter.checkCredential()
     }
 
-    loginBtn.onClick {
+    loginBtn?.setOnClickListener {
       mLoginPresenter.login()
     }
 
-    cat.onClick {
+    cat?.setOnClickListener {
       mLoginPresenter.fetchAccessToken()
     }
   }
@@ -79,7 +75,6 @@ class LoginFragment : BaseFragment(), LoginContract.View {
         .observeOn(mainThread)
         .subscribe { event ->
           if (event is LoginSuccessEvent) {
-            info("do fetch accessToken")
             mLoginPresenter.fetchAccessToken()
           }
         })
@@ -106,11 +101,13 @@ class LoginFragment : BaseFragment(), LoginContract.View {
   override fun showLoginSuccess() {
     Answers.getInstance()
         .logLogin(LoginEvent().putSuccess(true))
-    toast("Login success!")
+      // fixme
+//    toast("Login success!")
 
     activity?.finish()
 
-    startActivity(intentFor<HomeActivity>())
+    val intent = Intent(context, HomeActivity::class.java)
+    startActivity(intent)
   }
 
   override fun showError(e: Throwable) {
@@ -120,8 +117,10 @@ class LoginFragment : BaseFragment(), LoginContract.View {
   }
 
   override fun goAuthorizeRequestToken() {
-    mLoginPresenter.getLoginAddress()?.let {
-      browse(it.toString(), false)
+    mLoginPresenter.getLoginAddress()?.let { uri ->
+      val intent = Intent(Intent.ACTION_VIEW)
+      intent.data = Uri.parse(uri.toString())
+      startActivity(intent)
     }
   }
 }

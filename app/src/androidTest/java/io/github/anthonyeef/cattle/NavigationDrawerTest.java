@@ -1,8 +1,8 @@
 package io.github.anthonyeef.cattle;
 
-import android.support.test.filters.LargeTest;
-import android.support.test.rule.ActivityTestRule;
-import android.support.test.runner.AndroidJUnit4;
+import androidx.test.filters.LargeTest;
+import androidx.test.rule.ActivityTestRule;
+import androidx.test.runner.AndroidJUnit4;
 import android.view.Gravity;
 
 import org.junit.Rule;
@@ -11,13 +11,13 @@ import org.junit.runner.RunWith;
 
 import io.github.anthonyeef.cattle.activity.HomeActivity;
 
-import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.contrib.DrawerActions.open;
-import static android.support.test.espresso.contrib.DrawerMatchers.isClosed;
-import static android.support.test.espresso.contrib.NavigationViewActions.navigateTo;
-import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.contrib.DrawerActions.open;
+import static androidx.test.espresso.contrib.DrawerMatchers.isClosed;
+import static androidx.test.espresso.contrib.NavigationViewActions.navigateTo;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
 
 /**
  *

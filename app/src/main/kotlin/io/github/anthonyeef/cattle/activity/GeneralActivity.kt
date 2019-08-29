@@ -2,13 +2,10 @@ package io.github.anthonyeef.cattle.activity
 
 import android.os.Build
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
+import androidx.core.content.ContextCompat
 import io.github.anthonyeef.cattle.R
-import io.github.anthonyeef.cattle.constant.CONTAINER_ID
 import io.github.anthonyeef.cattle.extension.bindFragment
 import io.github.anthonyeef.cattle.fragment.FragmentInstanceCache
-import org.jetbrains.anko.design.coordinatorLayout
-import org.jetbrains.anko.matchParent
 
 class GeneralActivity : BaseActivity() {
 
@@ -23,13 +20,7 @@ class GeneralActivity : BaseActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-
-    coordinatorLayout {
-      id = CONTAINER_ID
-      lparams(width = matchParent, height = matchParent)
-      fitsSystemWindows = true
-    }
-
+    setContentView(R.layout.activity_general)
 
     val fragment = FragmentInstanceCache.get(intent.extras.getString(KEY_FRAG))
 
@@ -37,7 +28,6 @@ class GeneralActivity : BaseActivity() {
       bindFragment(fragmentToShow = it)
     }
   }
-
 
   override fun onPostCreate(savedInstanceState: Bundle?) {
     super.onPostCreate(savedInstanceState)

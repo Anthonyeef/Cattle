@@ -1,9 +1,8 @@
 package io.github.anthonyeef.cattle.utils
 
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import org.jetbrains.anko.support.v4.findOptional
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 /**
  *
@@ -18,7 +17,7 @@ class LoadMoreDelegate(lt: LoadMoreSubject) {
     }
 
     fun attach(fragment: Fragment) {
-        list = fragment.findOptional<RecyclerView>(android.R.id.list)
+        list = fragment.view?.findViewById(android.R.id.list)
         val listener = EndlessScrollListener(list?.layoutManager as LinearLayoutManager, loadMoreSubject)
         list?.addOnScrollListener(listener)
     }
@@ -28,7 +27,7 @@ class LoadMoreDelegate(lt: LoadMoreSubject) {
         val layoutManager: LinearLayoutManager = lm
         val loadMoreSubject: LoadMoreSubject = lt
 
-        override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
             if (dy < 0 || loadMoreSubject.isLoading()) return
 
             val itemCount = layoutManager.itemCount

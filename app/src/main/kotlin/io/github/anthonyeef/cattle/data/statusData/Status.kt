@@ -1,6 +1,6 @@
 package io.github.anthonyeef.cattle.data.statusData
 
-import android.arch.persistence.room.*
+import androidx.room.*
 import io.github.anthonyeef.cattle.data.userData.UserInfo
 import io.github.anthonyeef.cattle.entity.Photo
 

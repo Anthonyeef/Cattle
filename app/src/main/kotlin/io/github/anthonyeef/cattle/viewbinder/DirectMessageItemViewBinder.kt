@@ -1,7 +1,7 @@
 package io.github.anthonyeef.cattle.viewbinder
 
 import android.annotation.SuppressLint
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,11 +33,11 @@ class DirectMessageItemViewBinder : ItemViewBinder<DirectMessage, DirectMessageI
     }
 
     inner class DirectMessageViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        val avatar: CircleImageView by bindView<CircleImageView>(R.id.avatar)
-        val displayName: TextView by bindView<TextView>(R.id.user_display_name)
-        val userName: TextView by bindView<TextView>(R.id.username)
-        val createTime: TextView by bindView<TextView>(R.id.create_time)
-        val content: TextView by bindView<TextView>(android.R.id.content)
+        val avatar: CircleImageView by bindView(R.id.avatar)
+        val displayName: TextView by bindView(R.id.user_display_name)
+        val userName: TextView by bindView(R.id.username)
+        val createTime: TextView by bindView(R.id.create_time)
+        val content: TextView by bindView(android.R.id.content)
 
         @SuppressLint("SetTextI18n")
         fun bindData(data: DirectMessage) {

@@ -1,7 +1,7 @@
 package io.github.anthonyeef.cattle.viewbinder
 
-import android.support.constraint.ConstraintLayout
-import android.support.v7.widget.RecyclerView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +14,6 @@ import io.github.anthonyeef.cattle.data.statusData.ConversationStatus
 import io.github.anthonyeef.cattle.extension.goneIf
 import io.github.anthonyeef.cattle.utils.StatusParsingUtils
 import me.drakeet.multitype.ItemViewBinder
-import org.jetbrains.anko.find
 
 /**
  *
@@ -32,10 +31,10 @@ class StatusConversationItemViewBinder : ItemViewBinder<ConversationStatus, Stat
 
 
     inner class StatusConversationItemViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        private val avatar: CircleImageView by lazy { itemView.find<CircleImageView>(R.id.avatar) }
-        private val userName: TextView by lazy { itemView.find<TextView>(R.id.user_display_name) }
-        private val statusContent: TextView by lazy { itemView.find<TextView>(R.id.status_content) }
-        private val statusPhoto: ImageView by lazy { itemView.find<ImageView>(R.id.status_photo) }
+        private val avatar: CircleImageView by lazy { itemView.findViewById<CircleImageView>(R.id.avatar) }
+        private val userName: TextView by lazy { itemView.findViewById<TextView>(R.id.user_display_name) }
+        private val statusContent: TextView by lazy { itemView.findViewById<TextView>(R.id.status_content) }
+        private val statusPhoto: ImageView by lazy { itemView.findViewById<ImageView>(R.id.status_photo) }
 
         fun bindStatusData(item: ConversationStatus) {
             if (item.isStartOfConversation) {

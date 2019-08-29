@@ -2,8 +2,6 @@ package io.github.anthonyeef.cattle.fragment
 
 import android.graphics.Typeface
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -14,6 +12,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import com.uber.autodispose.AutoDispose.autoDisposable
 import io.github.anthonyeef.cattle.CattleSchedulers.io
 import io.github.anthonyeef.cattle.CattleSchedulers.mainThread
@@ -24,8 +24,6 @@ import io.github.anthonyeef.cattle.contract.ComposeContract
 import io.github.anthonyeef.cattle.presenter.ComposePresenter
 import io.github.anthonyeef.cattle.utils.bindOptionalView
 import io.github.anthonyeef.cattle.utils.bindView
-import org.jetbrains.anko.sdk25.listeners.onClick
-import org.jetbrains.anko.wrapContent
 
 /**
  * ComposeFragment, where to create and edit fanfou.
@@ -59,7 +57,7 @@ class ComposeFragment : BaseFragment(), ComposeContract.View {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        sendBtn.onClick {
+        sendBtn.setOnClickListener {
             if (repostFanfouId.isNotEmpty()) {
                 composePresenter.repostFanfou()
             } else {
@@ -120,7 +118,7 @@ class ComposeFragment : BaseFragment(), ComposeContract.View {
         }
 
         // move to left little bit
-        val layoutParams = LinearLayout.LayoutParams(wrapContent, wrapContent)
+        val layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
         layoutParams.leftMargin = horizontalPaddingMedium
         inputLimit?.layoutParams = layoutParams
 

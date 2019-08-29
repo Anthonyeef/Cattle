@@ -1,9 +1,9 @@
 package io.github.anthonyeef.cattle.fragment
 
 import android.os.Bundle
-import android.support.v4.widget.SwipeRefreshLayout
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +12,6 @@ import io.github.anthonyeef.cattle.R
 import io.github.anthonyeef.cattle.constant.app
 import me.drakeet.multitype.Items
 import me.drakeet.multitype.MultiTypeAdapter
-import org.jetbrains.anko.findOptional
 
 /**
  *
@@ -39,9 +38,9 @@ abstract class BaseListFragment : BaseFragment() {
     super.onCreateView(inflater, container, savedInstanceState)
 
     val root = inflater.inflate(R.layout.fragment_list, container, false)
-    list = root?.findOptional(android.R.id.list)
+    list = root?.findViewById(android.R.id.list)
 
-    swipeRefreshLayout = root?.findOptional(R.id.swipe_refresh_layout)
+    swipeRefreshLayout = root?.findViewById(R.id.swipe_refresh_layout)
 
     return root
   }

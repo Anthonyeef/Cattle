@@ -15,7 +15,7 @@
             />
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="@dimen/horizontal_padding_normal"
@@ -92,7 +92,7 @@
                 app:status="@{status}"
                 />
 
-            <android.support.v4.widget.Space
+            <androidx.legacy.widget.Space
                 android:id="@+id/margin_above_image"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/vertical_padding_small"
@@ -112,5 +112,5 @@
                 android:layout_marginTop="@dimen/vertical_padding_normal"
                 />
         </LinearLayout>
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

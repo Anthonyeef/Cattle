@@ -3,20 +3,13 @@ package io.github.anthonyeef.cattle.activity
 import android.content.Intent
 import android.os.Bundle
 import io.github.anthonyeef.cattle.R
-import io.github.anthonyeef.cattle.constant.CATTLE_COMPOSE
-import io.github.anthonyeef.cattle.constant.CONTAINER_ID
-import io.github.anthonyeef.cattle.constant.KEY_CURRENT_USER_ID
-import io.github.anthonyeef.cattle.constant.bus
+import io.github.anthonyeef.cattle.constant.*
 import io.github.anthonyeef.cattle.event.LoginSuccessEvent
 import io.github.anthonyeef.cattle.extension.bindFragment
 import io.github.anthonyeef.cattle.extension.show
 import io.github.anthonyeef.cattle.fragment.ComposeFragment
 import io.github.anthonyeef.cattle.fragment.LoginFragment
 import io.github.anthonyeef.cattle.utils.PrefUtils.defaultPref
-import org.jetbrains.anko.info
-import org.jetbrains.anko.intentFor
-import org.jetbrains.anko.matchParent
-import org.jetbrains.anko.verticalLayout
 
 /**
  *
@@ -27,7 +20,7 @@ class LoginActivity : BaseActivity() {
     super.onCreate(savedInstanceState)
 
     if (defaultPref.getString(KEY_CURRENT_USER_ID, "").isNotEmpty()) {
-      startActivity(intentFor<HomeActivity>())
+      startActivity(Intent(app, HomeActivity::class.java))
       finish()
 
       if (intent?.action == CATTLE_COMPOSE) {

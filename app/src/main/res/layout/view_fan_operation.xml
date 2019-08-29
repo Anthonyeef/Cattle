@@ -8,7 +8,7 @@
         android:layout_height="wrap_content"
         >
 
-        <android.support.v7.widget.AppCompatImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:scaleType="fitCenter"

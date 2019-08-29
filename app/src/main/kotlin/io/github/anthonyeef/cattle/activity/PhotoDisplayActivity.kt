@@ -6,7 +6,8 @@ import android.view.MotionEvent
 import android.widget.ImageView
 import io.github.anthonyeef.cattle.GlideApp
 import io.github.anthonyeef.cattle.R
-import org.jetbrains.anko.dip
+import io.github.anthonyeef.cattle.constant.app
+import io.github.anthonyeef.cattle.utils.dp2px
 import kotlin.math.absoluteValue
 
 
@@ -46,7 +47,7 @@ class PhotoDisplayActivity : BaseActivity() {
       when(event.actionMasked) {
         MotionEvent.ACTION_MOVE -> {
           val deltaY = event.y - lastY
-          if (deltaY.absoluteValue > dip(15)) {
+          if (deltaY.absoluteValue > dp2px(app,15)) {
             this@PhotoDisplayActivity.finish()
           }
         }

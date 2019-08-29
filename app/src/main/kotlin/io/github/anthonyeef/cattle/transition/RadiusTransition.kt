@@ -4,7 +4,7 @@ import android.animation.Animator
 import android.animation.ObjectAnimator
 import android.annotation.TargetApi
 import android.os.Build
-import android.support.v4.graphics.drawable.RoundedBitmapDrawable
+import androidx.core.graphics.drawable.RoundedBitmapDrawable
 import android.transition.Transition
 import android.transition.TransitionValues
 import android.util.FloatProperty

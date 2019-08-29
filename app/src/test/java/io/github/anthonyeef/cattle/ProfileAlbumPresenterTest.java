@@ -1,6 +1,6 @@
 package io.github.anthonyeef.cattle;
 
-import android.support.test.espresso.core.internal.deps.guava.collect.Lists;
+import androidx.test.espresso.core.internal.deps.guava.collect.Lists;
 import io.github.anthonyeef.cattle.contract.ProfileAlbumContract;
 import io.github.anthonyeef.cattle.data.source.album.AlbumRepository;
 import io.github.anthonyeef.cattle.data.statusData.Status;

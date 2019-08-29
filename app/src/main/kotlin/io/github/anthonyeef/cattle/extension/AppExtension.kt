@@ -15,7 +15,7 @@ val <T: Activity> T.TAG : String
 val <T: Fragment> T.TAG : String
     get() = javaClass.simpleName
 
-val <T: android.support.v4.app.Fragment> T.TAG : String
+val <T: androidx.fragment.app.Fragment> T.TAG : String
     get() = javaClass.simpleName
 
 val <T: View> T.TAG : String

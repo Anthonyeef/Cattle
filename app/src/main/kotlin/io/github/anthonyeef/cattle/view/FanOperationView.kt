@@ -1,7 +1,7 @@
 package io.github.anthonyeef.cattle.view
 
 import android.content.Context
-import android.support.constraint.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintLayout
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import io.github.anthonyeef.cattle.databinding.ViewFanOperationBinding

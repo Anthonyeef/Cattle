@@ -1,17 +1,16 @@
 package io.github.anthonyeef.cattle.view
 
 import android.content.Context
-import android.databinding.DataBindingUtil
+import androidx.databinding.DataBindingUtil
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.widget.LinearLayout
+import androidx.core.view.updatePadding
 import io.github.anthonyeef.cattle.R
 import io.github.anthonyeef.cattle.databinding.ViewProfileHeaderCountBinding
 import io.github.anthonyeef.cattle.entity.UserProfileDataEntity
-import org.jetbrains.anko.dimen
-import org.jetbrains.anko.sdk25.listeners.onClick
-import org.jetbrains.anko.verticalPadding
+import io.github.anthonyeef.cattle.utils.dp2px
 
 /**
  *
@@ -26,7 +25,7 @@ class ProfileHeaderCountView @JvmOverloads constructor(
         get() = throw UnsupportedOperationException()
         set(v) {
             headerCountBinding?.profileData = v
-            this.onClick {
+            this.setOnClickListener {
                 v.operation.invoke()
             }
         }
@@ -39,6 +38,7 @@ class ProfileHeaderCountView @JvmOverloads constructor(
         orientation = VERTICAL
         gravity = Gravity.LEFT
         layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
-        verticalPadding = dimen(R.dimen.vertical_padding_small)
+
+        updatePadding(top = dp2px(context, 8), bottom = dp2px(context, 8))
     }
 }

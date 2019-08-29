@@ -1,6 +1,6 @@
 package io.github.anthonyeef.cattle.utils;
 
-import android.support.test.espresso.IdlingResource;
+import androidx.test.espresso.IdlingResource;
 
 /**
  *

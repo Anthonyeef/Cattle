@@ -1,6 +1,6 @@
 package io.github.anthonyeef.cattle.entity
 
-import android.support.annotation.StringRes
+import androidx.annotation.StringRes
 
 /**
  *

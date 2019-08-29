@@ -1,6 +1,6 @@
 package io.github.anthonyeef.cattle.entity
 
-import android.arch.persistence.room.Ignore
+import androidx.room.Ignore
 
 /**
  * Photo entity within a [io.github.anthonyeef.cattle.data.statusData.Status] .

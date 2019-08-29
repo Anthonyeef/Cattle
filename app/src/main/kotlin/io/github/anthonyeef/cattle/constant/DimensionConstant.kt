@@ -1,6 +1,6 @@
 package io.github.anthonyeef.cattle.constant
 
-import org.jetbrains.anko.dip
+import io.github.anthonyeef.cattle.utils.dp2px
 
 /**
  * Some constants for Dimension: size, padding and margin.
@@ -23,4 +23,4 @@ val paddingMedium = dip(16)
 val OPERATION_BTN_SIZE_SMALL = dip(16)
 
 /*------ private method ---------*/
-private fun dip(value: Int) = app.dip(value)
+fun dip(value: Int) = dp2px(app, value)

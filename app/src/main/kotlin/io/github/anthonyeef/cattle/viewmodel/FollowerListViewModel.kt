@@ -1,6 +1,6 @@
 package io.github.anthonyeef.cattle.viewmodel
 
-import android.databinding.BaseObservable
+import androidx.databinding.BaseObservable
 import io.github.anthonyeef.cattle.data.source.follower.FollowerRepository
 import io.github.anthonyeef.cattle.data.userData.UserInfo
 import io.reactivex.Flowable

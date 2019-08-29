@@ -1,6 +1,6 @@
 package io.github.anthonyeef.cattle.databinding
 
-import android.databinding.BindingAdapter
+import androidx.databinding.BindingAdapter
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.widget.ImageView

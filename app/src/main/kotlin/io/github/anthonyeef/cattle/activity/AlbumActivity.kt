@@ -1,12 +1,9 @@
 package io.github.anthonyeef.cattle.activity
 
 import android.os.Bundle
-import io.github.anthonyeef.cattle.constant.CONTAINER_ID
 import io.github.anthonyeef.cattle.extension.bindFragment
+import io.github.anthonyeef.cattle.extension.withArguments
 import io.github.anthonyeef.cattle.fragment.ProfileAlbumFragment
-import org.jetbrains.anko.matchParent
-import org.jetbrains.anko.support.v4.withArguments
-import org.jetbrains.anko.verticalLayout
 
 /**
  *
@@ -21,10 +18,10 @@ class AlbumActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        verticalLayout {
+        /*verticalLayout {
             id = CONTAINER_ID
             lparams(width = matchParent, height = matchParent)
-        }
+        }*/
 
 
         setupAlbumFragment()
