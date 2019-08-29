@@ -1,20 +1,19 @@
 package io.github.anthonyeef.cattle.presenter
 
+import android.annotation.SuppressLint
 import androidx.core.content.edit
 import io.github.anthonyeef.cattle.Injection.statusDb
 import io.github.anthonyeef.cattle.constant.KEY_HOME_TIMELINE_LAST_UPDATE_TIME
 import io.github.anthonyeef.cattle.constant.TIME_GOD_CREAT_LIGHT
 import io.github.anthonyeef.cattle.contract.HomeFeedListContract
-import io.github.anthonyeef.cattle.data.statusData.Status
 import io.github.anthonyeef.cattle.service.HomeTimelineService
 import io.github.anthonyeef.cattle.service.ServiceGenerator
 import io.github.anthonyeef.cattle.utils.PrefUtils
 import io.github.anthonyeef.cattle.utils.PrefUtils.defaultPref
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
 import java.util.concurrent.atomic.AtomicInteger
 
 /**
@@ -39,19 +38,18 @@ class HomeFeedListPresenter(): HomeFeedListContract.Presenter {
     private var _disposable: CompositeDisposable = CompositeDisposable()
 
 
+    @SuppressLint("CheckResult")
     override fun loadDataFromCache() {
-        doAsync(exceptionHandler = {
-            // todo
-        }) {
-            val status: List<Status> = statusDb.getStatus()
-            uiThread {
-                if (status.isNotEmpty()) {
-                    homeFeedListView.updateTimeline(clearData = true, data = status, showAnimation = true)
-                    isDataLoaded = true
-                    lastItemId = status[status.size - 1].id
-                }
-            }
-        }
+        Single.fromCallable { statusDb.getStatus() }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ status ->
+                    if (status.isNotEmpty()) {
+                        homeFeedListView.updateTimeline(clearData = true, data = status, showAnimation = true)
+                        isDataLoaded = true
+                        lastItemId = status[status.size - 1].id
+                    }
+                }, {})
     }
 
 

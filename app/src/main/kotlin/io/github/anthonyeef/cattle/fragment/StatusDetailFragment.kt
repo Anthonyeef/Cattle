@@ -14,7 +14,6 @@ import io.github.anthonyeef.cattle.viewbinder.ContextStatusItemViewBinder
 import io.github.anthonyeef.cattle.viewbinder.ListHeaderViewBinder
 import io.github.anthonyeef.cattle.viewbinder.StatusItemDetailItemViewBinder
 import me.drakeet.multitype.register
-import org.jetbrains.anko.findOptional
 
 class StatusDetailFragment: BaseListFragment(), StatusDetailContract.View {
 
@@ -41,8 +40,8 @@ class StatusDetailFragment: BaseListFragment(), StatusDetailContract.View {
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     val contentView =  inflater.inflate(R.layout.fragment_toolbar_list, container, false)
 
-    list = contentView?.findOptional(android.R.id.list)
-    swipeRefreshLayout = contentView?.findOptional(R.id.swipe_refresh_layout)
+    list = contentView?.findViewById(android.R.id.list)
+    swipeRefreshLayout = contentView?.findViewById(R.id.swipe_refresh_layout)
 
     return contentView
   }

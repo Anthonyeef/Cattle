@@ -1,14 +1,13 @@
 package io.github.anthonyeef.cattle.databinding
 
+import android.content.Intent
 import io.github.anthonyeef.cattle.activity.PhotoDisplayActivity
 import io.github.anthonyeef.cattle.constant.app
 import io.github.anthonyeef.cattle.data.statusData.Status
 import io.github.anthonyeef.cattle.extension.show
+import io.github.anthonyeef.cattle.extension.withArguments
 import io.github.anthonyeef.cattle.fragment.ProfileFragment
 import io.github.anthonyeef.cattle.fragment.StatusDetailFragment
-import org.jetbrains.anko.intentFor
-import org.jetbrains.anko.newTask
-import org.jetbrains.anko.support.v4.withArguments
 
 /**
  *
@@ -27,6 +26,9 @@ object StatusItemClickEventHandler {
     }
 
     fun openPhotoDisplay(status: Status) {
-        app.startActivity(app.intentFor<PhotoDisplayActivity>(PhotoDisplayActivity.KEY_IMAGE_URL to status.photo?.largeurl).newTask())
+        val intent = Intent(app, PhotoDisplayActivity::class.java)
+        intent.putExtra(PhotoDisplayActivity.KEY_IMAGE_URL, status.photo?.largeurl)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        app.startActivity(intent)
     }
 }

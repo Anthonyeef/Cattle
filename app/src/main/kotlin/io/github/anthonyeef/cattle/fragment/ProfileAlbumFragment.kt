@@ -1,7 +1,7 @@
 package io.github.anthonyeef.cattle.fragment
 
 import android.os.Bundle
-import android.support.v7.widget.GridLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import android.view.View
 import io.github.anthonyeef.cattle.R
 import io.github.anthonyeef.cattle.contract.ProfileAlbumContract
@@ -63,7 +63,7 @@ class ProfileAlbumFragment : BaseListFragment(), ProfileAlbumContract.View, Load
 
 
     override fun customizeRecyclerView() {
-        val spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+        val spanSizeLookup = object : androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
                 return when (items[position]) {
                     is Status -> 1
@@ -72,7 +72,7 @@ class ProfileAlbumFragment : BaseListFragment(), ProfileAlbumContract.View, Load
             }
         }
 
-        val layoutManager = GridLayoutManager(context, SPAN_SIZE)
+        val layoutManager = androidx.recyclerview.widget.GridLayoutManager(context, SPAN_SIZE)
         layoutManager.spanSizeLookup = spanSizeLookup
 
         list?.layoutManager = layoutManager

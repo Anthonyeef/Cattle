@@ -1,6 +1,6 @@
 package io.github.anthonyeef.cattle.viewbinder
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import io.github.anthonyeef.cattle.data.statusData.ConversationStatus

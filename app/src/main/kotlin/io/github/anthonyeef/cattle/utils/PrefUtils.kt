@@ -3,12 +3,11 @@ package io.github.anthonyeef.cattle.utils
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import io.github.anthonyeef.cattle.constant.app
-import org.jetbrains.anko.AnkoLogger
 
 /**
  * A utils class for easy SharePreference operation.
  */
-object PrefUtils : AnkoLogger {
+object PrefUtils {
   val defaultPref: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(app)
 
   fun getString(key: String): String {

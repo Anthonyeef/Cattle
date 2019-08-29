@@ -1,9 +1,9 @@
 package io.github.anthonyeef.cattle.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import io.github.anthonyeef.cattle.activity.PhotoDisplayActivity
-import io.github.anthonyeef.cattle.constant.app
 import io.github.anthonyeef.cattle.contract.HomeFeedListContract
 import io.github.anthonyeef.cattle.data.statusData.Status
 import io.github.anthonyeef.cattle.entity.BottomRefreshEntity
@@ -15,7 +15,6 @@ import io.github.anthonyeef.cattle.viewbinder.BottomRefreshItemViewBinder
 import io.github.anthonyeef.cattle.viewbinder.FeedStatusItemViewBinder
 import me.drakeet.multitype.Items
 import me.drakeet.multitype.register
-import org.jetbrains.anko.intentFor
 
 /**
  *
@@ -136,7 +135,9 @@ class HomeFeedListFragment : BaseListFragment(),
 
   override fun onClickedPhoto(status: Status, photoView: View) {
     val isGif = status.photo?.largeurl?.endsWith("gif", ignoreCase = true) == true
-    val intent = app.intentFor<PhotoDisplayActivity>(PhotoDisplayActivity.KEY_IMAGE_URL to status.photo?.largeurl, PhotoDisplayActivity.KEY_IS_GIF to isGif)
+    val intent = Intent(context, PhotoDisplayActivity::class.java)
+    intent.putExtra(PhotoDisplayActivity.KEY_IMAGE_URL, status.photo?.largeurl)
+    intent.putExtra(PhotoDisplayActivity.KEY_IS_GIF, isGif)
 
     activity?.let {
       startActivity(intent)

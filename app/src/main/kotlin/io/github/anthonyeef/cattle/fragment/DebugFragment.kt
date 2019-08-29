@@ -11,9 +11,6 @@ import io.github.anthonyeef.cattle.contract.DebugContract
 import io.github.anthonyeef.cattle.extension.navigateTo
 import io.github.anthonyeef.cattle.extension.show
 import io.github.anthonyeef.cattle.presenter.DebugPresenter
-import org.jetbrains.anko.*
-import org.jetbrains.anko.sdk25.listeners.onClick
-import org.jetbrains.anko.support.v4.UI
 
 /**
  * DebugFragment for easy debug or test usage.
@@ -42,7 +39,7 @@ class DebugFragment : BaseFragment(), DebugContract.View {
         HomeFeedListFragment().show(this)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    /*override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return UI {
             verticalLayout {
                 horizontalPadding = pageHorizontalPadding
@@ -65,5 +62,5 @@ class DebugFragment : BaseFragment(), DebugContract.View {
                 }
             }
         }.view
-    }
+    }*/
 }

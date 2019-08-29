@@ -12,7 +12,7 @@
             />
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/grey200"
@@ -27,7 +27,7 @@
             app:layout_constraintTop_toTopOf="parent"
             />
 
-        <android.support.v4.widget.Space
+        <androidx.legacy.widget.Space
             android:layout_width="match_parent"
             android:layout_height="@dimen/vertical_padding_normal"
             app:layout_constraintStart_toStartOf="parent"
@@ -45,6 +45,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             />
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

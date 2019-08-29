@@ -1,15 +1,14 @@
 package io.github.anthonyeef.cattle.livedata
 
-import android.arch.lifecycle.LiveData
+import androidx.lifecycle.LiveData
 import android.content.SharedPreferences
-import org.jetbrains.anko.AnkoLogger
 
 /**
  * livedata to observe sharedPreference value
  */
 abstract class SharedPreferenceLiveData<T>(val sharedPref: SharedPreferences,
                                            private val key: String,
-                                           private val defValue: T) : LiveData<T>(), AnkoLogger {
+                                           private val defValue: T) : LiveData<T>() {
 
     abstract fun getValueFromPreferences(key: String, defValue: T): T
 

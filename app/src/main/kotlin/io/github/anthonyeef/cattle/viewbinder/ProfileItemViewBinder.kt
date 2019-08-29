@@ -1,7 +1,7 @@
 package io.github.anthonyeef.cattle.viewbinder
 
 import android.annotation.SuppressLint
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +13,6 @@ import io.github.anthonyeef.cattle.R
 import io.github.anthonyeef.cattle.constant.app
 import io.github.anthonyeef.cattle.data.userData.UserInfo
 import me.drakeet.multitype.ItemViewBinder
-import org.jetbrains.anko.find
 
 /**
  * Personal info item in the [io.github.anthonyeef.cattle.fragment.ProfileFragment]
@@ -31,10 +30,10 @@ class ProfileItemViewBinder : ItemViewBinder<UserInfo, ProfileItemViewBinder.Pro
 
 
     inner class ProfileItemViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        private val profileBackground: ImageView by lazy { itemView.find<ImageView>(R.id.profile_bg) }
-        private val profileAvatar: CircleImageView by lazy { itemView.find<CircleImageView>(R.id.avatar) }
-        private val profileDisplayName: TextView by lazy { itemView.find<TextView>(R.id.user_display_name) }
-        private val profileDescription: TextView by lazy { itemView.find<TextView>(R.id.description) }
+        private val profileBackground: ImageView by lazy { itemView.findViewById<ImageView>(R.id.profile_bg) }
+        private val profileAvatar: CircleImageView by lazy { itemView.findViewById<CircleImageView>(R.id.avatar) }
+        private val profileDisplayName: TextView by lazy { itemView.findViewById<TextView>(R.id.user_display_name) }
+        private val profileDescription: TextView by lazy { itemView.findViewById<TextView>(R.id.description) }
 
         @SuppressLint("SetTextI18n")
         fun bindUserInfo(item: UserInfo) {

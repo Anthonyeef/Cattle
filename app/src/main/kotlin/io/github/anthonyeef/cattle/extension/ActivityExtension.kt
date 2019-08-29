@@ -1,10 +1,9 @@
 package io.github.anthonyeef.cattle.extension
 
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import android.view.ViewGroup
 import io.github.anthonyeef.cattle.constant.CONTAINER_ID
-import org.jetbrains.anko.findOptional
 
 /**
  * Extension methods for Activity
@@ -17,7 +16,7 @@ import org.jetbrains.anko.findOptional
  * @param containerId    container id to hold fragment
  * @param fragmentToShow fragment ready to show
  */
-fun <T: FragmentActivity> T.showFragment(containerId: Int, fragmentToShow: Fragment) {
+fun <T: androidx.fragment.app.FragmentActivity> T.showFragment(containerId: Int, fragmentToShow: androidx.fragment.app.Fragment) {
     supportFragmentManager.beginTransaction().replace(containerId, fragmentToShow)
             .addToBackStack(fragmentToShow.TAG)
             .commit()
@@ -30,7 +29,7 @@ fun <T: FragmentActivity> T.showFragment(containerId: Int, fragmentToShow: Fragm
  *
  * @param fragmentToShow fragment ready to show
  */
-fun <T: FragmentActivity?> T.showFragment(fragmentToShow: Fragment) {
+fun <T: androidx.fragment.app.FragmentActivity?> T.showFragment(fragmentToShow: androidx.fragment.app.Fragment) {
     if (isFragmentContainer()) {
         this?.let {
             supportFragmentManager.beginTransaction().replace(CONTAINER_ID, fragmentToShow)
@@ -40,7 +39,7 @@ fun <T: FragmentActivity?> T.showFragment(fragmentToShow: Fragment) {
     }
 }
 
-fun <T: FragmentActivity?> T.showFragment(fragmentToShow: Fragment, tag: String) {
+fun <T: androidx.fragment.app.FragmentActivity?> T.showFragment(fragmentToShow: androidx.fragment.app.Fragment, tag: String) {
     if (isFragmentContainer()) {
         this?.let {
             supportFragmentManager.beginTransaction()
@@ -54,15 +53,15 @@ fun <T: FragmentActivity?> T.showFragment(fragmentToShow: Fragment, tag: String)
  * Method to check whether current activity have the container to hold fragment.
  * Default container with id [CONTAINER_ID]
  */
-fun <T: FragmentActivity?> T.isFragmentContainer(): Boolean {
-    return this?.findOptional<ViewGroup>(CONTAINER_ID) != null
+fun <T: androidx.fragment.app.FragmentActivity?> T.isFragmentContainer(): Boolean {
+    return this?.findViewById<ViewGroup>(CONTAINER_ID) != null
 }
 
 /**
  * Method to bind fragment to activity.
  * This activity will be bind with it, without add to back stack.
  */
-fun <T: FragmentActivity> T.bindFragment(fragmentToShow: Fragment) {
+fun <T: androidx.fragment.app.FragmentActivity> T.bindFragment(fragmentToShow: androidx.fragment.app.Fragment) {
     if (isFragmentContainer()) {
         supportFragmentManager.beginTransaction()
                 .add(CONTAINER_ID, fragmentToShow)

@@ -1,7 +1,7 @@
 package io.github.anthonyeef.cattle.viewbinder
 
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +9,6 @@ import io.github.anthonyeef.cattle.R
 import io.github.anthonyeef.cattle.adapter.ProfilePreviewAlbumAdapter
 import io.github.anthonyeef.cattle.entity.PreviewAlbumPhotos
 import me.drakeet.multitype.ItemViewBinder
-import org.jetbrains.anko.find
 
 /**
  *
@@ -28,7 +27,7 @@ class ProfilePreviewAlbumListViewBinder : ItemViewBinder<PreviewAlbumPhotos, Pro
 
     inner class ProfilePreviewAlbumListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val previewListAdapter: ProfilePreviewAlbumAdapter by lazy { ProfilePreviewAlbumAdapter() }
-        private val previewList: RecyclerView by lazy { itemView.find<RecyclerView>(android.R.id.list) }
+        private val previewList: RecyclerView by lazy { itemView.findViewById<RecyclerView>(android.R.id.list) }
 
         fun bindPreviewList(data: PreviewAlbumPhotos) {
             previewListAdapter.setPreviewPhotos(data.photos)

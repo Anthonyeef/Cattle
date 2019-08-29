@@ -2,14 +2,13 @@ package io.github.anthonyeef.cattle.activity
 
 import android.os.Build
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
+import androidx.core.content.ContextCompat
 import io.github.anthonyeef.cattle.R
 import io.github.anthonyeef.cattle.data.source.follower.FollowerRemoteDataSource
 import io.github.anthonyeef.cattle.data.source.follower.FollowerRepository
 import io.github.anthonyeef.cattle.extension.bindFragment
 import io.github.anthonyeef.cattle.fragment.FollowerListFragment
 import io.github.anthonyeef.cattle.viewmodel.FollowerListViewModel
-import org.jetbrains.anko.doFromSdk
 
 /**
  * Created by wuyifen on 04/03/2018.
@@ -36,7 +35,7 @@ class FollowerListActivity : BaseActivity() {
             followerListFragment?.setViewModel(it)
         }
 
-        doFromSdk(Build.VERSION_CODES.LOLLIPOP) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.statusBarColor = ContextCompat.getColor(this, R.color.colorPrimaryDark)
         }
 

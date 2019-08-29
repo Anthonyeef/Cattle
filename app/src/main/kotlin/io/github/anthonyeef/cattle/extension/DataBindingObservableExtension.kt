@@ -1,11 +1,11 @@
 package io.github.anthonyeef.cattle.extension
 
-import android.databinding.Observable.OnPropertyChangedCallback
-import android.databinding.ObservableField
-import android.databinding.ObservableInt
+import androidx.databinding.Observable.OnPropertyChangedCallback
+import androidx.databinding.ObservableField
+import androidx.databinding.ObservableInt
 import io.reactivex.Observable
 import io.reactivex.Observable.create
-import android.databinding.Observable as DataBindingObservable
+import androidx.databinding.Observable as DataBindingObservable
 
 /**
  * Created by wuyifen on 04/03/2018.

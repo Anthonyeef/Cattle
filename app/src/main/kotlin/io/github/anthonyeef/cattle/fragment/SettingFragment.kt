@@ -1,23 +1,14 @@
 package io.github.anthonyeef.cattle.fragment
 
-import android.content.res.Resources
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import io.github.anthonyeef.cattle.R
-import io.github.anthonyeef.cattle.activity.HomeActivity
 import io.github.anthonyeef.cattle.data.SettingCenter
 import io.github.anthonyeef.cattle.entity.SettingItemEntity
-import io.github.anthonyeef.cattle.utils.LocaleUtils
 import io.github.anthonyeef.cattle.viewbinder.SettingItemViewBinder
 import me.drakeet.multitype.register
-import org.jetbrains.anko.clearTop
-import org.jetbrains.anko.findOptional
-import org.jetbrains.anko.intentFor
-import org.jetbrains.anko.support.v4.selector
-import java.util.*
 
 class SettingFragment : BaseListFragment(), SettingItemViewBinder.SettingItemClickCallback {
 
@@ -25,7 +16,7 @@ class SettingFragment : BaseListFragment(), SettingItemViewBinder.SettingItemCli
     super.onCreateView(inflater, container, savedInstanceState)
 
     val root = inflater.inflate(R.layout.frag_setting, container, false)
-    list = root?.findOptional(android.R.id.list)
+    list = root?.findViewById(android.R.id.list)
 
     return root
   }
@@ -61,7 +52,8 @@ class SettingFragment : BaseListFragment(), SettingItemViewBinder.SettingItemCli
 
   private fun openLanguageSelector() {
     val languages = listOf(getString(R.string.text_language_default), getString(R.string.text_language_english), getString(R.string.text_language_chinese_simple))
-    selector(getString(R.string.text_which_language), languages, { _, i ->
+      // fixme
+    /*selector(getString(R.string.text_which_language), languages, { _, i ->
       var locale = Locale.getDefault().language
       when (i) {
         0 -> {
@@ -83,6 +75,6 @@ class SettingFragment : BaseListFragment(), SettingItemViewBinder.SettingItemCli
         val newContext = LocaleUtils.setLocale(it, locale)
         newContext.startActivity(newContext.intentFor<HomeActivity>().clearTop())
       }
-    })
+    })*/
   }
 }

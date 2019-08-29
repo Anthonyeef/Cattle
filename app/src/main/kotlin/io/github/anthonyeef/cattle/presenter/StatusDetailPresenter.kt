@@ -1,5 +1,6 @@
 package io.github.anthonyeef.cattle.presenter
 
+import android.util.Log
 import com.uber.autodispose.AutoDispose.autoDisposable
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider
 import io.github.anthonyeef.cattle.CattleSchedulers.io
@@ -13,6 +14,7 @@ class StatusDetailPresenter() : StatusDetailContract.Presenter {
   private lateinit var statusDetailView: StatusDetailContract.View
   private lateinit var lifecycleScopeProvider: AndroidLifecycleScopeProvider
   private val statusService = ServiceGenerator.createDefaultService(StatusService::class.java)
+    private val TAG = StatusDetailPresenter::class.java.simpleName
 
 
   constructor(view: StatusDetailContract.View, lifeProvider: AndroidLifecycleScopeProvider): this() {
@@ -33,7 +35,7 @@ class StatusDetailPresenter() : StatusDetailContract.Presenter {
               statusDetailView.showOriginalStatus(it)
             },
             {
-              // todo
+                Log.d(TAG, it.toString())
             }
         )
     }

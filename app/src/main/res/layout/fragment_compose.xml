@@ -30,7 +30,7 @@
             android:textCursorDrawable="@drawable/edit_text_cursor"
             android:hint="@string/hint_compose_new_fanfou"/>
 
-        <android.support.v4.widget.Space
+        <androidx.legacy.widget.Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"/>
@@ -91,7 +91,7 @@
                 android:background="?android:selectableItemBackground"
                 android:text="@string/text_hash_tag_button"/>
 
-            <android.support.v4.widget.Space
+            <androidx.legacy.widget.Space
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"/>

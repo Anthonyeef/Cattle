@@ -1,7 +1,7 @@
 package io.github.anthonyeef.cattle.viewbinder
 
-import android.databinding.DataBindingUtil
-import android.support.v7.widget.RecyclerView
+import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import io.github.anthonyeef.cattle.R
@@ -23,7 +23,7 @@ class ListHeaderViewBinder : ItemViewBinder<ListHeaderViewEntity, ListHeaderView
         holder.bindHeaderData(item)
     }
 
-    inner class ListHeaderViewHolder(binding: ViewListHeaderBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class ListHeaderViewHolder(binding: ViewListHeaderBinding): androidx.recyclerview.widget.RecyclerView.ViewHolder(binding.root) {
         private val headerBinding = binding
 
         fun bindHeaderData(data: ListHeaderViewEntity) {

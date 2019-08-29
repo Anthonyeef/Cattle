@@ -1,13 +1,13 @@
 package io.github.anthonyeef.cattle.viewbinder
 
 import android.annotation.SuppressLint
-import android.support.v4.widget.Space
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Space
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import de.hdodenhof.circleimageview.CircleImageView
 import io.github.anthonyeef.cattle.R
@@ -16,7 +16,6 @@ import io.github.anthonyeef.cattle.extension.goneIf
 import io.github.anthonyeef.cattle.utils.StatusParsingUtils
 import io.github.anthonyeef.cattle.utils.TimeUtils
 import me.drakeet.multitype.ItemViewBinder
-import org.jetbrains.anko.find
 
 /**
  *
@@ -34,14 +33,14 @@ class StatusItemDetailItemViewBinder : ItemViewBinder<Status, StatusItemDetailIt
 
 
     inner class StatusItemDetailViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        private val avatar: CircleImageView by lazy { itemView.find<CircleImageView>(R.id.avatar) }
-        private val userName: TextView by lazy { itemView.find<TextView>(R.id.user_display_name) }
-        private val userId: TextView by lazy { itemView.find<TextView>(R.id.user_id) }
-        private val statusCreateTime: TextView by lazy { itemView.find<TextView>(R.id.status_create_time) }
-        private val statusLeftSpacing: Space by lazy { itemView.find<Space>(R.id.left_spacing) }
-        private val statusConnector: View by lazy { itemView.find<View>(R.id.connector) }
-        private val statusContent: TextView by lazy { itemView.find<TextView>(R.id.status_content) }
-        private val statusPhoto: ImageView by lazy { itemView.find<ImageView>(R.id.status_photo) }
+        private val avatar: CircleImageView by lazy { itemView.findViewById<CircleImageView>(R.id.avatar) }
+        private val userName: TextView by lazy { itemView.findViewById<TextView>(R.id.user_display_name) }
+        private val userId: TextView by lazy { itemView.findViewById<TextView>(R.id.user_id) }
+        private val statusCreateTime: TextView by lazy { itemView.findViewById<TextView>(R.id.status_create_time) }
+        private val statusLeftSpacing: Space by lazy { itemView.findViewById<Space>(R.id.left_spacing) }
+        private val statusConnector: View by lazy { itemView.findViewById<View>(R.id.connector) }
+        private val statusContent: TextView by lazy { itemView.findViewById<TextView>(R.id.status_content) }
+        private val statusPhoto: ImageView by lazy { itemView.findViewById<ImageView>(R.id.status_photo) }
 
         @SuppressLint("SetTextI18n")
         fun bindStatusData(item: Status) {

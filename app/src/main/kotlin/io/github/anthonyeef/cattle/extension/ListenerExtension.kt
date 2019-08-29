@@ -1,6 +1,6 @@
 package io.github.anthonyeef.cattle.extension
 
-import android.support.design.widget.TabLayout
+import com.google.android.material.tabs.TabLayout
 
 class _OnTabSelectedListener : TabLayout.OnTabSelectedListener {
     private var _onTabSelected: ((tab: TabLayout.Tab) -> Unit)? = null

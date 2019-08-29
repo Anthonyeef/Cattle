@@ -24,6 +24,7 @@ allprojects {
     repositories {
         jcenter()
         maven { url "https://www.jitpack.io" }
+        google()
     }
 }
 
@@ -33,7 +34,7 @@ task clean(type: Delete) {
 
 ext {
     minSdkVersion = 19
-    targetSdkVersion = 27
-    compileSdkVersion = 27
+    targetSdkVersion = 28
+    compileSdkVersion = 28
     ankoLibraryVersion = '0.10.5'
 }

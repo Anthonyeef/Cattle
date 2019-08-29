@@ -1,12 +1,13 @@
 package io.github.anthonyeef.cattle.fragment
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.AppBarLayout
-import android.support.design.widget.CollapsingToolbarLayout
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.Toolbar
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.appbar.CollapsingToolbarLayout
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.RecyclerView
+import androidx.appcompat.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +18,6 @@ import de.hdodenhof.circleimageview.CircleImageView
 import io.github.anthonyeef.cattle.GlideApp
 import io.github.anthonyeef.cattle.R
 import io.github.anthonyeef.cattle.activity.FollowerListActivity
-import io.github.anthonyeef.cattle.constant.app
 import io.github.anthonyeef.cattle.contract.ProfileContract
 import io.github.anthonyeef.cattle.data.statusData.Status
 import io.github.anthonyeef.cattle.data.userData.UserInfo
@@ -36,9 +36,6 @@ import io.github.anthonyeef.cattle.viewbinder.*
 import me.drakeet.multitype.Items
 import me.drakeet.multitype.MultiTypeAdapter
 import me.drakeet.multitype.register
-import org.jetbrains.anko.find
-import org.jetbrains.anko.info
-import org.jetbrains.anko.intentFor
 
 /**
  * Personal info fragment. Display personal info, fanfou list, fav fanfou, etc.
@@ -93,17 +90,17 @@ class ProfileFragment : BaseFragment(),
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     val contentView = inflater.inflate(R.layout.frag_profile, container, false)
-    profileBackground = contentView?.find(R.id.profile_bg)
-    profileAvatar = contentView?.find(R.id.avatar)
-    profileUserName = contentView?.find(R.id.user_display_name)
-    profileDescription = contentView?.find(R.id.description)
-    profileAppbar = contentView?.find(R.id.appbar)
-    profileToolbarLayout = contentView?.find(R.id.toolbar_layout)
-    profileToolbar = contentView?.find(R.id.toolbar)
-    followingCount = contentView?.find(R.id.following_count)
-    followerCount = contentView?.find(R.id.follower_count)
-    statusCount = contentView?.find(R.id.status_count)
-    userStatusList = contentView?.find(android.R.id.list)
+    profileBackground = contentView?.findViewById(R.id.profile_bg)
+    profileAvatar = contentView?.findViewById(R.id.avatar)
+    profileUserName = contentView?.findViewById(R.id.user_display_name)
+    profileDescription = contentView?.findViewById(R.id.description)
+    profileAppbar = contentView?.findViewById(R.id.appbar)
+    profileToolbarLayout = contentView?.findViewById(R.id.toolbar_layout)
+    profileToolbar = contentView?.findViewById(R.id.toolbar)
+    followingCount = contentView?.findViewById(R.id.following_count)
+    followerCount = contentView?.findViewById(R.id.follower_count)
+    statusCount = contentView?.findViewById(R.id.status_count)
+    userStatusList = contentView?.findViewById(android.R.id.list)
 
     return contentView
   }
@@ -167,19 +164,19 @@ class ProfileFragment : BaseFragment(),
     followingCount?.userProfileData = UserProfileDataEntity(
         itemName = getString(R.string.text_following),
         countNumber = userInfo.friendsCount,
-        operation = { info("clicked following count")
-        })
+        operation = {})
     followerCount?.userProfileData = UserProfileDataEntity(
         itemName = getString(R.string.text_follower),
         countNumber = userInfo.followersCount,
         operation = {
-          startActivity(app.intentFor<FollowerListActivity>(FollowerListActivity.KEY_USER_ID to userInfo.id ))
+          val intent = Intent(context, FollowerListActivity::class.java)
+          intent.putExtra(FollowerListActivity.KEY_USER_ID, userInfo.id)
+          startActivity(intent)
         })
     statusCount?.userProfileData = UserProfileDataEntity(
         itemName = getString(R.string.text_favourite),
         countNumber = userInfo.favouritesCount,
-        operation = { info("clicked favourite count")
-        })
+        operation = { })
 
     statusTotalCount = userInfo.statusesCount
   }

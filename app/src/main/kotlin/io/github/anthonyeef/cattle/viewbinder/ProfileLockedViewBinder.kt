@@ -1,6 +1,6 @@
 package io.github.anthonyeef.cattle.viewbinder
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import io.github.anthonyeef.cattle.databinding.ViewProfileLockedBinding
@@ -17,7 +17,7 @@ class ProfileLockedViewBinder : ItemViewBinder<ProfileLockedViewBinder.ProfileLo
   }
 
 
-  inner class ProfileLockedViewHolder(binding: ViewProfileLockedBinding): RecyclerView.ViewHolder(binding.root)
+  inner class ProfileLockedViewHolder(binding: ViewProfileLockedBinding): androidx.recyclerview.widget.RecyclerView.ViewHolder(binding.root)
 
 
   class ProfileLockedDummyEntity

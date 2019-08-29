@@ -1,15 +1,17 @@
 package io.github.anthonyeef.cattle.activity
 
-import android.arch.lifecycle.Observer
+import android.annotation.SuppressLint
+import android.content.Intent
+import androidx.lifecycle.Observer
 import android.os.Bundle
-import android.support.annotation.StringRes
-import android.support.design.widget.FloatingActionButton
-import android.support.design.widget.NavigationView
-import android.support.design.widget.TabLayout
-import android.support.v4.view.ViewPager
-import android.support.v4.widget.DrawerLayout
-import android.support.v7.app.ActionBarDrawerToggle
-import android.support.v7.widget.Toolbar
+import androidx.annotation.StringRes
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.navigation.NavigationView
+import com.google.android.material.tabs.TabLayout
+import androidx.viewpager.widget.ViewPager
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.widget.Toolbar
 import android.view.Gravity
 import android.view.View
 import android.widget.ImageView
@@ -24,9 +26,9 @@ import io.github.anthonyeef.cattle.constant.KEY_CURRENT_USER_ID
 import io.github.anthonyeef.cattle.constant.KEY_RETROFIT_LOG_LEVEL
 import io.github.anthonyeef.cattle.constant.app
 import io.github.anthonyeef.cattle.contract.HomeActivityContract
-import io.github.anthonyeef.cattle.data.userData.UserInfo
 import io.github.anthonyeef.cattle.extension.addOnTabSelectedListener
 import io.github.anthonyeef.cattle.extension.show
+import io.github.anthonyeef.cattle.extension.withArguments
 import io.github.anthonyeef.cattle.fragment.*
 import io.github.anthonyeef.cattle.livedata.SharedPreferenceStringLiveData
 import io.github.anthonyeef.cattle.presenter.HomeActivityPresenter
@@ -35,9 +37,9 @@ import io.github.anthonyeef.cattle.utils.PrefUtils
 import io.github.anthonyeef.cattle.utils.PrefUtils.defaultPref
 import io.github.anthonyeef.cattle.utils.bindOptionalView
 import io.github.anthonyeef.cattle.utils.bindView
-import org.jetbrains.anko.*
-import org.jetbrains.anko.sdk25.listeners.onClick
-import org.jetbrains.anko.support.v4.withArguments
+import io.reactivex.Single
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 /**
  * HomeActivity.
@@ -78,7 +80,7 @@ class HomeActivity : BaseActivity(), HomeActivityContract.View {
         subscribeToUserInfoChanged()
         subscribeToRetrofitLogLevelChanged()
 
-        composeBtn.onClick {
+        composeBtn.setOnClickListener {
             homePresenter.composeNewFanfou()
         }
     }
@@ -117,37 +119,32 @@ class HomeActivity : BaseActivity(), HomeActivityContract.View {
     }
 
 
+    @SuppressLint("CheckResult")
     private fun showUserInfoInToolbar() {
-        doAsync(exceptionHandler = {
-            // todo: report to fabric
-        }) {
-            val userInfo: UserInfo? = userInfoDb.loadUserInfoSync(PrefUtils.getString(KEY_CURRENT_USER_ID))
-            activityUiThread {
-                userInfo?.let {
-                    GlideApp.with(app)
-                            .load(it.profileImageUrlLarge)
-                            .into(toolbarAvatar!!)
-                }
-            }
-        }
+        Single.fromCallable { userInfoDb.loadUserInfoSync(PrefUtils.getString(KEY_CURRENT_USER_ID)) }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ userInfo ->
+                    userInfo?.let {
+                        GlideApp.with(app)
+                                .load(it.profileImageUrlLarge)
+                                .into(toolbarAvatar!!)
+                    }
+                }, {})
     }
 
 
+    @SuppressLint("CheckResult")
     private fun showUserInfoInDrawer() {
-        doAsync(exceptionHandler = {
-            // todo: report to fabric
-        }) {
-            val userInfo: UserInfo? = userInfoDb.loadUserInfoSync(PrefUtils.getString(KEY_CURRENT_USER_ID))
-
-            uiThread {
-                userInfo?.let {
+        Single.fromCallable { userInfoDb.loadUserInfoSync(PrefUtils.getString(KEY_CURRENT_USER_ID)) }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
                     GlideApp.with(navigationHeaderAvatar?.context!!)
                             .load(it.profileImageUrlLarge)
                             .into(navigationHeaderAvatar!!)
                     navigationHeaderUserName?.text = it.screenName
-                }
-            }
-        }
+                }, {})
     }
 
 
@@ -155,8 +152,8 @@ class HomeActivity : BaseActivity(), HomeActivityContract.View {
         toolbar?.let {
             setSupportActionBar(it)
 
-            toolbarAvatar = it.findOptional(R.id.toolbar_avatar)
-            toolbarAvatar?.onClick {
+            toolbarAvatar = it.findViewById(R.id.toolbar_avatar)
+            toolbarAvatar?.setOnClickListener {
                 if (!drawerLayout.isDrawerOpen(Gravity.START)) {
                     drawerLayout.openDrawer(Gravity.START)
                 }
@@ -169,14 +166,17 @@ class HomeActivity : BaseActivity(), HomeActivityContract.View {
 
     private fun setupProfileInDrawer() {
         val navHeader = navigation.getHeaderView(0)
-        val navBg = navHeader?.findOptional<ImageView>(R.id.nav_header_bg)
-        navigationHeaderAvatar = navHeader?.findOptional(R.id.nav_avatar)
-        navigationHeaderUserName = navHeader?.findOptional(R.id.nav_user_name)
+        val navBg = navHeader?.findViewById<ImageView>(R.id.nav_header_bg)
+        navigationHeaderAvatar = navHeader?.findViewById(R.id.nav_avatar)
+        navigationHeaderUserName = navHeader?.findViewById(R.id.nav_user_name)
 
         showUserInfoInDrawer()
 
-        navigationHeaderAvatar?.onClick {
-            bindDrawerAction { startActivity(intentFor<LoginActivity>()) }
+        navigationHeaderAvatar?.setOnClickListener { view ->
+            bindDrawerAction {
+                val intent = Intent(view.context, LoginActivity::class.java)
+                startActivity(intent)
+            }
         }
 
         GlideApp.with(navBg?.context!!)
@@ -296,7 +296,7 @@ class HomeActivity : BaseActivity(), HomeActivityContract.View {
 
 
     private fun updateTitle(@StringRes pageName: Int) {
-        val title = toolbar?.findOptional<TextView>(R.id.title)
+        val title = toolbar?.findViewById<TextView>(R.id.title)
         title?.text = getString(pageName)
     }
 

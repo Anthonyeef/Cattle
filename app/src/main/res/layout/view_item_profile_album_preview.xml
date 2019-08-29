@@ -11,7 +11,7 @@
             />
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="2dp"
@@ -28,5 +28,5 @@
             app:layout_constraintTop_toTopOf="parent"
             app:thumbnailPhoto="@{status}"
             />
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
