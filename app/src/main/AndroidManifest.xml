@@ -50,10 +50,7 @@
             android:name=".activity.FollowerListActivity"
             />
 
-        <activity
-            android:name=".activity.PhotoDisplayActivity"
-            android:theme="@style/AppTheme.Transparent"
-            />
+        <activity android:name=".activity.PhotoDisplayActivity" />
 
         <activity android:name=".activity.DebugActivity"/>
 
