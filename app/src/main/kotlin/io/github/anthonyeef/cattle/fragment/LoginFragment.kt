@@ -27,9 +27,9 @@ import io.reactivex.disposables.CompositeDisposable
 class LoginFragment : BaseFragment(), LoginContract.View {
   private lateinit var mLoginPresenter: LoginContract.Presenter
 
-  private val loginBtn: FloatingActionButton? = view?.findViewById(R.id.login_btn)
-  private val name: TextView? = view?.findViewById(R.id.name_text)
-  private val cat: ImageView? = view?.findViewById(R.id.cat)
+  private var loginBtn: FloatingActionButton? = null
+  private var name: TextView? = null
+  private var cat: ImageView? = null
   private lateinit var _disposables: CompositeDisposable
 
   override fun isActive(): Boolean {
@@ -49,6 +49,10 @@ class LoginFragment : BaseFragment(), LoginContract.View {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+
+    loginBtn = view.findViewById(R.id.login_btn)
+    name = view.findViewById(R.id.name_text)
+    cat = view.findViewById(R.id.cat)
 
     name?.setOnClickListener {
       mLoginPresenter.checkCredential()
