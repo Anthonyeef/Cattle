@@ -33,7 +33,7 @@ task clean(type: Delete) {
 }
 
 ext {
-    minSdkVersion = 19
+    minSdkVersion = 21
     targetSdkVersion = 28
     compileSdkVersion = 28
     ankoLibraryVersion = '0.10.5'

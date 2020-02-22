@@ -1,11 +1,9 @@
 package io.github.anthonyeef.cattle.activity
 
 import android.content.Context
-import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import android.view.View
 import io.github.anthonyeef.cattle.R
 import io.github.anthonyeef.cattle.utils.LocaleUtils
 
@@ -24,7 +22,6 @@ open class BaseActivity : AppCompatActivity() {
     super.onPostCreate(savedInstanceState)
 
     setupToolbar()
-    setNavigationBarColor()
   }
 
 
@@ -46,12 +43,5 @@ open class BaseActivity : AppCompatActivity() {
   fun setToolbarTitle(title: CharSequence) {
     toolbarTitle = title
     toolbar?.title = toolbarTitle
-  }
-
-
-  private fun setNavigationBarColor() {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-      window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
-    }
   }
 }

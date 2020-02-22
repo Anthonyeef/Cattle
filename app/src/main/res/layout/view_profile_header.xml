@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:fitsSystemWindows="true"
     >
 
     <androidx.constraintlayout.widget.Guideline
@@ -28,7 +27,6 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_profile_background_max"
         android:scaleType="centerCrop"
-        android:fitsSystemWindows="true"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -56,6 +54,7 @@
         android:textSize="@dimen/text_size_medium"
         android:textStyle="bold"
         android:textColor="@color/text_color_normal"
+        tools:text="yifen"
         app:layout_constraintBottom_toBottomOf="@id/avatar"
         app:layout_constraintStart_toEndOf="@id/avatar"
         />
@@ -88,6 +87,7 @@
         android:textColor="@color/text_color_normal"
         android:lineSpacingMultiplier="1.2"
         android:maxLines="5"
+        tools:text="self introduction \n lalala"
         app:layout_constraintTop_toBottomOf="@id/profile_count_group"
         app:layout_constraintBottom_toTopOf="@+id/bottom_divider"
         app:layout_constraintStart_toStartOf="@id/left_guideline"
